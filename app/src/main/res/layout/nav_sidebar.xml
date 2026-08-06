@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/sidebar_bg">
+
+    <!-- Logo Sidebar -->
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="24dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/sindesa_black_transparant" />
+
+    <!-- Info Profil (Klik untuk Edit Profil) -->
+    <LinearLayout
+        android:id="@+id/navHeaderProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/profile_bg_transparent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/navImgProfile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/circle_avatar_bg"
+            app:shapeAppearanceOverlay="@style/CircleImage" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNavNamaUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Warga"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvNavNik"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NIK: 12345678..."
+                android:textColor="#B3FFFFFF"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Menu Links -->
+            <TextView
+                android:id="@+id/navBeranda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="12dp"
+                android:text="Beranda"
+                android:textColor="#cfa03f"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"/>
+
+            <TextView
+                android:id="@+id/navRiwayat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="12dp"
+                android:text="Riwayat Surat"
+                android:textColor="#E0E0E0"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="BUAT SURAT BARU"
+                android:textColor="#B3FFFFFF"
+                android:textSize="11sp" />
+
+            <!-- Collapsible Categories -->
+            <TextView
+                android:id="@+id/navKependudukan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="12dp"
+                android:text="Adm. Kependudukan"
+                android:textColor="#E0E0E0"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"/>
+
+            <LinearLayout
+                android:id="@+id/layoutKependudukan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:visibility="gone">
+
+                <TextView android:id="@+id/navKtp" style="@style/SidebarSubMenu" android:text="• Pengantar KTP" />
+                <TextView android:id="@+id/navKk" style="@style/SidebarSubMenu" android:text="• Pengantar KK" />
+                <TextView android:id="@+id/navAkta" style="@style/SidebarSubMenu" android:text="• Akta Kelahiran" />
+                <TextView android:id="@+id/navPindah" style="@style/SidebarSubMenu" android:text="• Keterangan Pindah" />
+                <TextView android:id="@+id/navKematian" style="@style/SidebarSubMenu" android:text="• Keterangan Kematian" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/navUmum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="12dp"
+                android:text="Keterangan Umum"
+                android:textColor="#E0E0E0"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"/>
+
+            <LinearLayout
+                android:id="@+id/layoutUmum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:visibility="gone">
+
+                <TextView android:id="@+id/navDomisili" style="@style/SidebarSubMenu" android:text="• Keterangan Domisili" />
+                <TextView android:id="@+id/navBedaNama" style="@style/SidebarSubMenu" android:text="• Keterangan Beda Nama" />
+                <TextView android:id="@+id/navBelumMenikah" style="@style/SidebarSubMenu" android:text="• Belum Pernah Menikah" />
+                <TextView android:id="@+id/navJandaDuda" style="@style/SidebarSubMenu" android:text="• Keterangan Janda/Duda" />
+                <TextView android:id="@+id/navSkck" style="@style/SidebarSubMenu" android:text="• Pengantar SKCK" />
+                <TextView android:id="@+id/navKehilangan" style="@style/SidebarSubMenu" android:text="• Keterangan Kehilangan" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/navPerizinan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="12dp"
+                android:text="Layanan Perizinan"
+                android:textColor="#E0E0E0"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"/>
+
+            <LinearLayout
+                android:id="@+id/layoutPerizinan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:visibility="gone">
+
+                <TextView android:id="@+id/navIzinKeramaian" style="@style/SidebarSubMenu" android:text="• Izin Keramaian" />
+                <TextView android:id="@+id/navUsaha" style="@style/SidebarSubMenu" android:text="• Keterangan Usaha" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/navSosial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="12dp"
+                android:text="Sosial &amp; Ekonomi"
+                android:textColor="#E0E0E0"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"/>
+
+            <LinearLayout
+                android:id="@+id/layoutSosial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:visibility="gone">
+
+                <TextView android:id="@+id/navSktm" style="@style/SidebarSubMenu" android:text="• Ket. Tidak Mampu (SKTM)" />
+                <TextView android:id="@+id/navPenghasilan" style="@style/SidebarSubMenu" android:text="• Keterangan Penghasilan" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Tombol Keluar -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Keluar"
+        android:textColor="#FFCDD2"
+        app:backgroundTint="#33F44336"
+        app:strokeColor="#F44336"
+        app:strokeWidth="1dp" />
+
+</LinearLayout>

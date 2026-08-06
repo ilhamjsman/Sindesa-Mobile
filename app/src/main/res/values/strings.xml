@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Sindesa</string>
+    <string name="surat_selesai_ttd">Surat Selesai &amp; TTD</string>
+    <string name="surat_selesai_desc">Dokumen yang telah ditandatangani digital dan siap diunduh.</string>
+    <string name="cari_surat_hint">Cari surat...</string>
+    <string name="pengantar_ktp">Pengantar KTP</string>
+    <string name="selesai_date_1">Selesai: 14 Mei 2026, 10:30</string>
+    <string name="selesai_status">Selesai</string>
+    <string name="cetak">Cetak</string>
+    <string name="unduh_pdf">Unduh PDF</string>
+    <string name="keterangan_domisili">Keterangan Domisili</string>
+    <string name="selesai_date_2">Selesai: 10 Mei 2026, 14:00</string>
+    <string name="icon_surat_selesai">Ikon Surat Selesai</string>
+    <string name="icon_filter">Ikon Filter</string>
+    <string name="desc_fast_service">Layanan Cepat</string>
+    <string name="desc_transparent_service">Layanan Transparan</string>
+    <string name="desc_village_photo">Foto Kantor Desa</string>
+    <string name="desc_info">Informasi</string>
+    <string name="pengantar_kk">Pengantar KK</string>
+    <string name="ket_tidak_mampu">Keterangan Tidak Mampu</string>
+    <string name="ket_pindah">Keterangan Pindah</string>
+    <string name="ket_kehilangan">Keterangan Kehilangan</string>
+    <string name="ket_usaha">Keterangan Usaha</string>
+    <string name="nav_kependudukan">Administrasi Kependudukan</string>
+    <string name="nav_perizinan">Layanan Perizinan Desa</string>
+    <string name="nav_umum">Surat Keterangan Umum</string>
+    <string name="nav_sosial">Layanan Sosial Desa</string>
+</resources>

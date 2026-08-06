@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- OWASP M3 (Insecure Communication): Tolak semua koneksi HTTP (Clear Text) secara default -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Konfigurasi Akses Server API Laragon Lokal (D:\Programs\laragon\www\sindesa_api) -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <domain includeSubdomains="true">10.12.12.117</domain>
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+    </domain-config>
+
+    <!-- Konfigurasi Produksi dengan SSL Pinning -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">your-api-domain.com</domain>
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+        <!-- OWASP M3: Certificate Pinning Aktif -->
+        <pin-set expiration="2027-01-01">
+            <pin digest="SHA-256">1Z4mX0TdED4PQo2JeD4TrRuBB9WAv0g1bYS4b0OFENg=</pin>
+        </pin-set>
+    </domain-config>
+</network-security-config>

@@ -1,0 +1,35 @@
+# Android Build Outputs & Gradle
+*.iml
+.gradle
+.kotlin/
+/local.properties
+local.properties
+/.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+*.apk
+*.aar
+
+# Security & Private Credentials
+*.jks
+*.keystore
+key.properties
+*.pem
+
+# Database & PHP Backend Files (Penting: Mencegah Kebocoran Database & API Server)
+*.sql
+db_config.php
+backend_api/
+sindesa-api/
+
+# Document Dumps, Temporary & Scratch Scripts
+scratch/
+*.py
+*.docx
+*.pdf
+*.txt
+*.bat
+refactor_all.php
