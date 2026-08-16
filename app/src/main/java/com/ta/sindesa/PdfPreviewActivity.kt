@@ -144,10 +144,33 @@ class PdfPreviewActivity : AppCompatActivity() {
      * OkHttp, di-encode ke Base64, lalu ditampilkan menggunakan PDF.js 
      * (via CDN) di dalam WebView.
      */
+    private fun isAuthorizedHost(urlStr: String): Boolean {
+        return try {
+            val uri = java.net.URI(urlStr)
+            val host = uri.host?.lowercase() ?: return false
+            val allowedHosts = listOf(
+                com.ta.sindesa.api.RetrofitClient.HOSTNAME.lowercase(),
+                "api.sindesa-buttusawe.com",
+                "sindesa.buttusawe.desa.id",
+                "10.0.2.2",
+                "127.0.0.1",
+                "localhost"
+            )
+            allowedHosts.any { host == it || host.endsWith(".$it") }
+        } catch (e: Exception) {
+            false
+        }
+    }
+
     private fun loadPdfPreview() {
         layoutLoading.visibility = android.view.View.VISIBLE
         layoutError.visibility = android.view.View.GONE
         webView.visibility = android.view.View.GONE
+
+        if (!isAuthorizedHost(pdfUrl)) {
+            showError("Host URL tidak diizinkan: $pdfUrl. Hanya domain resmi Sindesa yang diperbolehkan.")
+            return
+        }
 
         // Download PDF in background thread, then render in WebView
         Thread {

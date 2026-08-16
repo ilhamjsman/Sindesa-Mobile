@@ -17,7 +17,8 @@
 
     <!-- Konfigurasi Produksi dengan SSL Pinning -->
     <domain-config cleartextTrafficPermitted="false">
-        <domain includeSubdomains="true">your-api-domain.com</domain>
+        <domain includeSubdomains="true">api.sindesa-buttusawe.com</domain>
+        <domain includeSubdomains="true">sindesa.buttusawe.desa.id</domain>
         <trust-anchors>
             <certificates src="system" />
         </trust-anchors>

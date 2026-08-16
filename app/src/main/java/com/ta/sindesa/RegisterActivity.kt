@@ -195,7 +195,7 @@ class RegisterActivity : AppCompatActivity() {
             </html>
         """.trimIndent()
 
-        webViewCaptcha.loadDataWithBaseURL("https://your-api-domain.com", htmlContent, "text/html", "UTF-8", null)
+        webViewCaptcha.loadDataWithBaseURL("https://sindesa-buttusawe.com", htmlContent, "text/html", "UTF-8", null)
 
         // Setup Spinners
         val agamaList = arrayOf("Islam", "Kristen", "Katolik", "Hindu", "Buddha", "Konghucu")

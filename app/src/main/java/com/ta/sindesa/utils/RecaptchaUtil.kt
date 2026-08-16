@@ -114,7 +114,7 @@ object RecaptchaUtil {
             }
         }
 
-        webView.loadDataWithBaseURL("https://your-api-domain.com", htmlContent, "text/html", "UTF-8", null)
+        webView.loadDataWithBaseURL("https://sindesa-buttusawe.com", htmlContent, "text/html", "UTF-8", null)
 
         dialog = AlertDialog.Builder(context)
             .setTitle("Verifikasi Keamanan Google")

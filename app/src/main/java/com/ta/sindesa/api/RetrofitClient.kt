@@ -13,9 +13,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
-    // Placeholder URL untuk repository publik (Silakan sesuaikan dengan URL server API Anda)
-    const val HOSTNAME = "your-api-domain.com"
-    const val BASE_URL = "https://your-api-domain.com/"
+    const val HOSTNAME = "api.sindesa-buttusawe.com"
+    // URL API Server Hosting Online Resmi Sindesa
+    const val BASE_URL = "https://api.sindesa-buttusawe.com/"
 
     fun getProfileImageUrl(fotoPath: String?): String? {
         if (fotoPath.isNullOrEmpty()) return null
