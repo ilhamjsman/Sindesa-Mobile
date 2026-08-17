@@ -286,7 +286,7 @@ class ProfileActivity : AppCompatActivity() {
         // via web dashboard tetap muncul di aplikasi mobile.
         val nik = sessionManager.getNikUser()
         if (!nik.isNullOrEmpty()) {
-            com.ta.sindesa.api.RetrofitClient.getInstance(this).getProfil(nik).enqueue(
+            com.ta.sindesa.api.RetrofitClient.getInstance(this).getProfil().enqueue(
                 object : retrofit2.Callback<com.ta.sindesa.models.LoginResponse> {
                     override fun onResponse(
                         call: retrofit2.Call<com.ta.sindesa.models.LoginResponse>,
@@ -332,6 +332,7 @@ class ProfileActivity : AppCompatActivity() {
                             // Update session juga agar konsisten
                             sessionManager.setLoggedIn(
                                 true,
+                                userId = user.id,
                                 nama = user.nama,
                                 nik = user.nik,
                                 email = user.email,
@@ -455,7 +456,7 @@ class ProfileActivity : AppCompatActivity() {
             }
 
             com.ta.sindesa.api.RetrofitClient.getInstance(this).updateProfil(
-                rbNik, rbNewNik, rbNoKk, rbNama, rbEmail, rbNoHp, rbTempatLahir, rbTanggalLahir, rbJenisKelamin, rbAgama,
+                rbNewNik, rbNoKk, rbNama, rbEmail, rbNoHp, rbTempatLahir, rbTanggalLahir, rbJenisKelamin, rbAgama,
                 rbStatusPerkawinan, rbPekerjaan, rbKewarganegaraan, rbAlamatLengkap, rbRtRw,
                 rbProvinsi, rbKota, rbKecamatan, rbKelurahanDesa, rbPassword, partFotoProfil
             ).enqueue(object : retrofit2.Callback<com.ta.sindesa.models.LoginResponse> {
@@ -467,10 +468,33 @@ class ProfileActivity : AppCompatActivity() {
                         val newFotoProfil = response.body()?.fotoProfilUpdate ?: sessionManager.getFotoProfil()
                         
                         sessionManager.setLoggedIn(
-                            true, nama, newNik, email, sessionManager.getToken(), noKk,
-                            agama, jenisKelamin, tempatLahir, tanggalLahir, statusPerkawinan,
-                            pekerjaan, kewarganegaraan, alamatLengkap, rtRw, provinsi, kota,
-                            kecamatan, kelurahanDesa, selectedProvinceCode, selectedCityCode, selectedDistrictCode, selectedVillageCode, noHp, newFotoProfil, sessionManager.getStatus()
+                            isLoggedIn = true,
+                            userId = sessionManager.getUserId(),
+                            nama = nama,
+                            nik = newNik,
+                            email = email,
+                            token = sessionManager.getToken(),
+                            noKk = noKk,
+                            agama = agama,
+                            jenisKelamin = jenisKelamin,
+                            tempatLahir = tempatLahir,
+                            tanggalLahir = tanggalLahir,
+                            statusPerkawinan = statusPerkawinan,
+                            pekerjaan = pekerjaan,
+                            kewarganegaraan = kewarganegaraan,
+                            alamatLengkap = alamatLengkap,
+                            rtRw = rtRw,
+                            provinsi = provinsi,
+                            kota = kota,
+                            kecamatan = kecamatan,
+                            kelurahanDesa = kelurahanDesa,
+                            provinsiCode = selectedProvinceCode,
+                            kotaCode = selectedCityCode,
+                            kecamatanCode = selectedDistrictCode,
+                            kelurahanDesaCode = selectedVillageCode,
+                            noHp = noHp,
+                            fotoProfil = newFotoProfil,
+                            status = sessionManager.getStatus()
                         )
                         tvNamaProfil.text = nama
                         tvEmailProfil.text = email

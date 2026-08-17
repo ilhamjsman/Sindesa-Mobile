@@ -165,7 +165,25 @@ class PdfPreviewActivity : AppCompatActivity() {
     private fun loadPdfPreview() {
         layoutLoading.visibility = android.view.View.VISIBLE
         layoutError.visibility = android.view.View.GONE
-        webView.visibility = android.view.View.GONE
+        // Validasi Hostname (Guideline §3: Pencegahan SSRF / Remote Asset Injection)
+        val uri = try { Uri.parse(pdfUrl) } catch (_: Exception) { null }
+        val host = uri?.host?.lowercase() ?: ""
+        val isAllowedHost = host == "api.sindesa-buttusawe.com" ||
+                host == "sindesa-buttusawe.com" ||
+                host == "www.sindesa-buttusawe.com" ||
+                host == "sindesa.buttusawe.desa.id" ||
+                host == "localhost" ||
+                host == "127.0.0.1" ||
+                host.startsWith("192.168.") ||
+                host.startsWith("10.")
+
+        if (!isAllowedHost) {
+            showError("Akses Ditolak: Domain PDF ($host) tidak terdaftar dalam whitelist resmi SINDESA.")
+            return
+        }
+
+        val sessionManager = SessionManager(this)
+        val token = sessionManager.getToken()
 
         if (!isAuthorizedHost(pdfUrl)) {
             showError("Host URL tidak diizinkan: $pdfUrl. Hanya domain resmi Sindesa yang diperbolehkan.")
@@ -180,9 +198,11 @@ class PdfPreviewActivity : AppCompatActivity() {
                     .readTimeout(60, TimeUnit.SECONDS)
                     .build()
 
-                val request = Request.Builder()
-                    .url(pdfUrl)
-                    .build()
+                val requestBuilder = Request.Builder().url(pdfUrl)
+                if (!token.isNullOrEmpty()) {
+                    requestBuilder.addHeader("Authorization", "Bearer $token")
+                }
+                val request = requestBuilder.build()
 
                 val response = client.newCall(request).execute()
 
@@ -350,6 +370,9 @@ class PdfPreviewActivity : AppCompatActivity() {
 
     private fun downloadPdf() {
         try {
+            val sessionManager = SessionManager(this)
+            val token = sessionManager.getToken()
+
             val request = DownloadManager.Request(Uri.parse(pdfUrl))
                 .setTitle("Surat - $suratTitle")
                 .setDescription("Mengunduh surat...")
@@ -360,6 +383,10 @@ class PdfPreviewActivity : AppCompatActivity() {
                 )
                 .setAllowedOverMetered(true)
                 .setAllowedOverRoaming(true)
+
+            if (!token.isNullOrEmpty()) {
+                request.addRequestHeader("Authorization", "Bearer $token")
+            }
 
             val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             downloadManager.enqueue(request)

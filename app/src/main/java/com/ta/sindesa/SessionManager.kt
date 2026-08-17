@@ -20,6 +20,7 @@ class SessionManager(context: Context) {
 
     fun setLoggedIn(
         isLoggedIn: Boolean, 
+        userId: Int? = null,
         nama: String? = null, 
         nik: String? = null, 
         email: String? = null, 
@@ -48,6 +49,7 @@ class SessionManager(context: Context) {
     ) {
         sharedPref.edit().apply {
             putBoolean("is_logged_in", isLoggedIn)
+            if (userId != null && userId > 0) putInt("user_id", userId)
             putString("nama_user", nama)
             putString("nik_user", nik)
             putString("email_user", email)
@@ -79,6 +81,7 @@ class SessionManager(context: Context) {
 
     fun isLoggedIn(): Boolean = sharedPref.getBoolean("is_logged_in", false)
 
+    fun getUserId(): Int = sharedPref.getInt("user_id", 0)
     fun getNamaUser(): String? = sharedPref.getString("nama_user", "Warga")
     fun getNikUser(): String? = sharedPref.getString("nik_user", null)
     fun getEmailUser(): String? = sharedPref.getString("email_user", null)

@@ -410,10 +410,9 @@ interface ApiService {
     , @Part("edit_id") editId: RequestBody? = null
     ): Call<com.ta.sindesa.models.LoginResponse>
 
+    // SECURITY: User diidentifikasi dari Bearer token, bukan NIK di query string
     @GET("get_riwayat.php")
-    fun getRiwayat(
-        @Query("nik") nik: String
-    ): Call<com.ta.sindesa.models.RiwayatResponse>
+    fun getRiwayat(): Call<com.ta.sindesa.models.RiwayatResponse>
 
     @GET("get_detail_pengajuan.php")
     fun getDetailPengajuan(
@@ -426,15 +425,13 @@ interface ApiService {
         @Field("id") id: Int
     ): Call<com.ta.sindesa.models.LoginResponse>
 
+    // SECURITY: User diidentifikasi dari Bearer token, bukan NIK di query string
     @GET("get_profil.php")
-    fun getProfil(
-        @Query("nik") nik: String
-    ): Call<com.ta.sindesa.models.LoginResponse>
+    fun getProfil(): Call<com.ta.sindesa.models.LoginResponse>
 
     @Multipart
     @POST("update_profil.php")
     fun updateProfil(
-        @Part("nik") nik: RequestBody, // Old NIK for identifying user
         @Part("new_nik") newNik: RequestBody,
         @Part("no_kk") noKk: RequestBody,
         @Part("nama") nama: RequestBody,
@@ -471,8 +468,7 @@ interface ApiService {
     @GET("get_villages.php")
     fun getVillages(@Query("district_id") districtCode: String): Call<List<com.ta.sindesa.models.Region>>
 
+    // SECURITY: User diidentifikasi dari Bearer token, bukan NIK di query string
     @GET("dashboard_stats.php")
-    fun getDashboardStats(
-        @Query("nik") nik: String
-    ): Call<com.ta.sindesa.models.DashboardStatsResponse>
+    fun getDashboardStats(): Call<com.ta.sindesa.models.DashboardStatsResponse>
 }

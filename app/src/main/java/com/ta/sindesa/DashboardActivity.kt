@@ -139,7 +139,7 @@ class DashboardActivity : AppCompatActivity() {
         val nik = sessionManager.getNikUser()
         if (nik.isNullOrEmpty()) return
 
-        com.ta.sindesa.api.RetrofitClient.getInstance(this).getDashboardStats(nik)
+        com.ta.sindesa.api.RetrofitClient.getInstance(this).getDashboardStats()
             .enqueue(object : retrofit2.Callback<com.ta.sindesa.models.DashboardStatsResponse> {
                 override fun onResponse(
                     call: retrofit2.Call<com.ta.sindesa.models.DashboardStatsResponse>,
@@ -223,7 +223,7 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun syncUserProfile() {
         val nik = sessionManager.getNikUser() ?: return
-        com.ta.sindesa.api.RetrofitClient.getInstance(this).getProfil(nik).enqueue(
+        com.ta.sindesa.api.RetrofitClient.getInstance(this).getProfil().enqueue(
             object : retrofit2.Callback<com.ta.sindesa.models.LoginResponse> {
                 override fun onResponse(
                     call: retrofit2.Call<com.ta.sindesa.models.LoginResponse>,
@@ -233,7 +233,8 @@ class DashboardActivity : AppCompatActivity() {
                         val user = response.body()?.data?.user ?: return
                         sessionManager.setLoggedIn(
                             true,
-                            nama = user.nama,
+                            userId = user.id,
+                            nama = user.nama, 
                             nik = user.nik,
                             email = user.email,
                             token = sessionManager.getToken(),

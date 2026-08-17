@@ -131,7 +131,7 @@ class RiwayatActivity : AppCompatActivity() {
         recyclerView.visibility = android.view.View.GONE
         tvEmpty.visibility = android.view.View.GONE
 
-        RetrofitClient.getInstance(this).getRiwayat(nik).enqueue(object : Callback<RiwayatResponse> {
+        RetrofitClient.getInstance(this).getRiwayat().enqueue(object : Callback<RiwayatResponse> {
             override fun onResponse(
                 call: Call<RiwayatResponse>,
                 response: Response<RiwayatResponse>
@@ -382,94 +382,29 @@ class RiwayatActivity : AppCompatActivity() {
 
     private fun executeDeletePengajuan(id: Int) {
         val progressBar = findViewById<android.widget.ProgressBar>(R.id.progressBar)
-        if (progressBar != null) progressBar.visibility = android.view.View.VISIBLE
+        progressBar?.visibility = android.view.View.VISIBLE
 
-        // Gunakan hapus_surat.php — file standalone tanpa dependency
-        val baseUrl = com.ta.sindesa.api.RetrofitClient.BASE_URL
-
-        Thread {
-            var success = false
-            var message = "Gagal menghapus pengajuan"
-
-            try {
-                val client = okhttp3.OkHttpClient.Builder()
-                    .connectTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
-                    .readTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
-                    .followRedirects(true)
-                    .followSslRedirects(true)
-                    .build()
-
-                // Cara 1: POST ke hapus_surat.php
-                try {
-                    val formBody = okhttp3.FormBody.Builder()
-                        .add("id", id.toString())
-                        .build()
-                    val request = okhttp3.Request.Builder()
-                        .url(baseUrl + "hapus_surat.php")
-                        .post(formBody)
-                        .build()
-                    val response = client.newCall(request).execute()
-                    val body = response.body?.string() ?: ""
-                    android.util.Log.d("DELETE_SURAT", "POST hapus_surat.php response: $body")
-
-                    if (body.contains("\"success\":true") || body.contains("berhasil")) {
-                        success = true
-                        message = "Pengajuan surat berhasil dibatalkan"
-                    } else {
-                        try {
-                            val json = org.json.JSONObject(body)
-                            message = json.optString("message", body)
-                        } catch (_: Exception) {
-                            message = body.take(200)
-                        }
-                    }
-                } catch (e: Exception) {
-                    android.util.Log.e("DELETE_SURAT", "POST failed: ${e.message}")
-                    message = "POST gagal: ${e.message}"
-                }
-
-                // Cara 2: GET ke hapus_surat.php?id=X (fallback)
-                if (!success) {
-                    try {
-                        val request = okhttp3.Request.Builder()
-                            .url(baseUrl + "hapus_surat.php?id=$id")
-                            .get()
-                            .build()
-                        val response = client.newCall(request).execute()
-                        val body = response.body?.string() ?: ""
-                        android.util.Log.d("DELETE_SURAT", "GET hapus_surat.php response: $body")
-
-                        if (body.contains("\"success\":true") || body.contains("berhasil")) {
-                            success = true
-                            message = "Pengajuan surat berhasil dibatalkan"
-                        } else {
-                            try {
-                                val json = org.json.JSONObject(body)
-                                message = json.optString("message", body)
-                            } catch (_: Exception) {
-                                message = body.take(200)
-                            }
-                        }
-                    } catch (e: Exception) {
-                        android.util.Log.e("DELETE_SURAT", "GET failed: ${e.message}")
-                        message = "Gagal terhubung ke server: ${e.message}"
-                    }
-                }
-
-            } catch (e: Exception) {
-                message = "Error: ${e.message}"
-            }
-
-            val finalSuccess = success
-            val finalMessage = message
-            runOnUiThread {
-                if (progressBar != null) progressBar.visibility = android.view.View.GONE
-                Toast.makeText(this@RiwayatActivity, finalMessage, Toast.LENGTH_LONG).show()
-                if (finalSuccess) {
+        RetrofitClient.getInstance(this).deletePengajuan(id).enqueue(object : retrofit2.Callback<com.ta.sindesa.models.LoginResponse> {
+            override fun onResponse(
+                call: retrofit2.Call<com.ta.sindesa.models.LoginResponse>,
+                response: retrofit2.Response<com.ta.sindesa.models.LoginResponse>
+            ) {
+                progressBar?.visibility = android.view.View.GONE
+                if (response.isSuccessful && response.body()?.success == true) {
+                    val msg = response.body()?.message ?: "Pengajuan surat berhasil dibatalkan"
+                    Toast.makeText(this@RiwayatActivity, msg, Toast.LENGTH_LONG).show()
                     loadRiwayatData()
+                } else {
+                    val errorMsg = response.body()?.message ?: "Gagal membatalkan pengajuan (HTTP ${response.code()})"
+                    Toast.makeText(this@RiwayatActivity, errorMsg, Toast.LENGTH_LONG).show()
                 }
             }
-        }.start()
+
+            override fun onFailure(call: retrofit2.Call<com.ta.sindesa.models.LoginResponse>, t: Throwable) {
+                progressBar?.visibility = android.view.View.GONE
+                Toast.makeText(this@RiwayatActivity, "Koneksi gagal: ${t.localizedMessage}", Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     /**

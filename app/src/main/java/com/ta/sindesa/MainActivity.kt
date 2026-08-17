@@ -103,9 +103,10 @@ class MainActivity : AppCompatActivity() {
                             val user = loginResponse.data?.user
                             val token = loginResponse.data?.token
                             
-                            // SECURE BY DESIGN: Simpan Sesi (Encrypted) termasuk Token
+                            // SECURE BY DESIGN: Simpan Sesi (Encrypted) termasuk Token & User ID
                             sessionManager.setLoggedIn(
                                 isLoggedIn = true, 
+                                userId = user?.id,
                                 nama = user?.nama, 
                                 nik = user?.nik, 
                                 email = user?.email, 
