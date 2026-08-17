@@ -15,9 +15,10 @@
         <domain includeSubdomains="true">127.0.0.1</domain>
     </domain-config>
 
-    <!-- Konfigurasi Produksi dengan SSL Pinning -->
+    <!-- Konfigurasi Produksi -->
     <domain-config cleartextTrafficPermitted="false">
         <domain includeSubdomains="true">api.sindesa-buttusawe.com</domain>
+        <domain includeSubdomains="true">sindesa-buttusawe.com</domain>
         <domain includeSubdomains="true">sindesa.buttusawe.desa.id</domain>
         <trust-anchors>
             <certificates src="system" />
