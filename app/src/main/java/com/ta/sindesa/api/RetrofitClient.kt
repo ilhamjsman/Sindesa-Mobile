@@ -17,6 +17,8 @@ object RetrofitClient {
     // URL API Server Hosting Online Resmi Sindesa
     const val BASE_URL = "https://api.sindesa-buttusawe.com/"
 
+    const val WEB_URL = "https://sindesa-buttusawe.com/"
+
     fun getProfileImageUrl(fotoPath: String?): String? {
         if (fotoPath.isNullOrEmpty()) return null
         if (fotoPath.startsWith("http://") || fotoPath.startsWith("https://")) {
@@ -30,9 +32,9 @@ object RetrofitClient {
             cleanPath = cleanPath.removePrefix("public/storage/")
         }
         return if (cleanPath.startsWith("storage/")) {
-            BASE_URL + cleanPath
+            WEB_URL + cleanPath
         } else {
-            BASE_URL + "storage/" + cleanPath
+            WEB_URL + "storage/" + cleanPath
         }
     }
 
