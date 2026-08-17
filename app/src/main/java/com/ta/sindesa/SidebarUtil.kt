@@ -27,13 +27,23 @@ object SidebarUtil {
         if (navImgProfile != null && !imageUrl.isNullOrEmpty()) {
             Thread {
                 try {
-                    val stream = java.net.URL(imageUrl).openStream()
-                    val bitmap = android.graphics.BitmapFactory.decodeStream(stream)
-                    if (bitmap != null) {
-                        activity.runOnUiThread { navImgProfile.setImageBitmap(bitmap) }
+                    val client = okhttp3.OkHttpClient.Builder()
+                        .connectTimeout(15, java.util.concurrent.TimeUnit.SECONDS)
+                        .readTimeout(15, java.util.concurrent.TimeUnit.SECONDS)
+                        .build()
+                    val request = okhttp3.Request.Builder().url(imageUrl).build()
+                    val response = client.newCall(request).execute()
+                    if (response.isSuccessful) {
+                        val bytes = response.body?.bytes()
+                        if (bytes != null && bytes.isNotEmpty()) {
+                            val bitmap = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                            if (bitmap != null) {
+                                activity.runOnUiThread { navImgProfile.setImageBitmap(bitmap) }
+                            }
+                        }
                     }
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    android.util.Log.e("SIDEBAR", "Load image failed for $imageUrl: ${e.message}")
                 }
             }.start()
         }

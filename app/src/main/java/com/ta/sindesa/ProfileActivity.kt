@@ -644,13 +644,23 @@ class ProfileActivity : AppCompatActivity() {
         if (!imageUrl.isNullOrEmpty()) {
             Thread {
                 try {
-                    val stream = java.net.URL(imageUrl).openStream()
-                    val bitmap = BitmapFactory.decodeStream(stream)
-                    if (bitmap != null) {
-                        runOnUiThread { imgProfile.setImageBitmap(bitmap) }
+                    val client = okhttp3.OkHttpClient.Builder()
+                        .connectTimeout(15, java.util.concurrent.TimeUnit.SECONDS)
+                        .readTimeout(15, java.util.concurrent.TimeUnit.SECONDS)
+                        .build()
+                    val request = okhttp3.Request.Builder().url(imageUrl).build()
+                    val response = client.newCall(request).execute()
+                    if (response.isSuccessful) {
+                        val bytes = response.body?.bytes()
+                        if (bytes != null && bytes.isNotEmpty()) {
+                            val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                            if (bitmap != null) {
+                                runOnUiThread { imgProfile.setImageBitmap(bitmap) }
+                            }
+                        }
                     }
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    android.util.Log.e("PROFILE", "Load image failed for $imageUrl: ${e.message}")
                 }
             }.start()
         }
