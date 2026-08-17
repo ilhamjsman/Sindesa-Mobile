@@ -17,25 +17,18 @@ object RetrofitClient {
     // URL API Server Hosting Online Resmi Sindesa
     const val BASE_URL = "https://api.sindesa-buttusawe.com/"
 
-    const val WEB_URL = "https://sindesa-buttusawe.com/"
-
     fun getProfileImageUrl(fotoPath: String?): String? {
         if (fotoPath.isNullOrEmpty()) return null
         if (fotoPath.startsWith("http://") || fotoPath.startsWith("https://")) {
+            // Jika mengarah ke domain storage web yang terproteksi web cookie, arahkan ke API endpoint
+            if (fotoPath.contains("/storage/profil/")) {
+                val filename = fotoPath.substringAfterLast('/')
+                return "${BASE_URL}foto_profil.php?file=${filename}"
+            }
             return fotoPath
         }
-        var cleanPath = fotoPath.removePrefix("/")
-        if (cleanPath.startsWith("storage/app/public/")) {
-            cleanPath = cleanPath.removePrefix("storage/app/public/")
-        }
-        if (cleanPath.startsWith("public/storage/")) {
-            cleanPath = cleanPath.removePrefix("public/storage/")
-        }
-        return if (cleanPath.startsWith("storage/")) {
-            WEB_URL + cleanPath
-        } else {
-            WEB_URL + "storage/" + cleanPath
-        }
+        val filename = fotoPath.substringAfterLast('/')
+        return "${BASE_URL}foto_profil.php?file=${filename}"
     }
 
     fun getInstance(context: Context): ApiService {
