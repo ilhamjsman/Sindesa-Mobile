@@ -1,0 +1,113 @@
+<svg width="375" height="812" viewBox="0 0 375 812" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="375" height="812" fill="#2d3748"/>
+  
+  <!-- Status Bar White -->
+  <g id="StatusBarWhite">
+    <rect width="375" height="44" fill="none"/>
+    <text x="28" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff">9:41</text>
+    <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#ffffff"/>
+    <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#ffffff"/>
+    <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+    <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#ffffff"/>
+    <path d="M366 21v4" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+
+  <!-- Header -->
+  <g id="PdfHeader" transform="translate(20, 52)">
+    <circle cx="18" cy="18" r="18" fill="rgba(255,255,255,0.15)"/>
+    <path d="M21 12l-6 6 6 6" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    <text x="50" y="16" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Surat_Domisili_470-12.pdf</text>
+    <text x="50" y="30" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="400" fill="#cfa03f">Resmi Desa Buttu Sawe • PDF A4</text>
+
+    <!-- Download Icon -->
+    <circle cx="320" cy="18" r="18" fill="rgba(255,255,255,0.15)"/>
+    <path d="M320 12v10M316 18l4 4 4-4M313 25h14" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- PDF Paper Canvas (A4 Aspect Ratio Sheet) -->
+  <g id="PdfSheet" transform="translate(24, 105)">
+    <rect width="327" height="610" rx="8" fill="#ffffff"/>
+    
+    <!-- Letterhead (KOP SURAT) -->
+    <!-- Logo Mock -->
+    <circle cx="35" cy="40" r="16" fill="#1a5e35"/>
+    <text x="35" y="44" font-family="serif" font-size="10" font-weight="900" fill="#ffffff" text-anchor="middle">PIN</text>
+    
+    <!-- Kop Text -->
+    <text x="175" y="26" font-family="Times, serif" font-size="11" font-weight="700" fill="#000000" text-anchor="middle">PEMERINTAH KABUPATEN PINRANG</text>
+    <text x="175" y="38" font-family="Times, serif" font-size="10" font-weight="700" fill="#000000" text-anchor="middle">KECAMATAN DUAMPANUA</text>
+    <text x="175" y="52" font-family="Times, serif" font-size="13" font-weight="900" fill="#000000" text-anchor="middle">DESA BUTTU SAWE</text>
+    <text x="175" y="63" font-family="Times, serif" font-size="7" font-weight="400" fill="#555555" text-anchor="middle">Alamat: Jl. Poros Kamali - Buttu Sawe Kode Pos 91253</text>
+    
+    <!-- Double Line Divider -->
+    <line x1="16" y1="70" x2="311" y2="70" stroke="#000000" stroke-width="2"/>
+    <line x1="16" y1="73" x2="311" y2="73" stroke="#000000" stroke-width="0.75"/>
+
+    <!-- Letter Title -->
+    <text x="163" y="92" font-family="Times, serif" font-size="12" font-weight="700" fill="#000000" text-anchor="middle" text-decoration="underline">SURAT KETERANGAN DOMISILI</text>
+    <text x="163" y="104" font-family="Times, serif" font-size="9" font-weight="400" fill="#000000" text-anchor="middle">Nomor: 470 / 12 / DS-BS / VIII / 2026</text>
+
+    <!-- Paragraph 1 -->
+    <text x="24" y="125" font-family="Times, serif" font-size="9" font-weight="400" fill="#000000">Yang bertanda tangan di bawah ini Kepala Desa Buttu Sawe,</text>
+    <text x="24" y="136" font-family="Times, serif" font-size="9" font-weight="400" fill="#000000">Kecamatan Duampanua, Kabupaten Pinrang, menerangkan:</text>
+
+    <!-- Citizen Data Table -->
+    <g transform="translate(24, 150)">
+      <text x="0" y="10" font-family="Times, serif" font-size="9" font-weight="700">Nama</text>
+      <text x="70" y="10" font-family="Times, serif" font-size="9">: AHMAD FAISAL</text>
+      
+      <text x="0" y="24" font-family="Times, serif" font-size="9" font-weight="700">NIK</text>
+      <text x="70" y="24" font-family="Times, serif" font-size="9">: 7315041208900001</text>
+      
+      <text x="0" y="38" font-family="Times, serif" font-size="9" font-weight="700">TTL</text>
+      <text x="70" y="38" font-family="Times, serif" font-size="9">: Pinrang, 12 Agustus 1990</text>
+      
+      <text x="0" y="52" font-family="Times, serif" font-size="9" font-weight="700">Alamat</text>
+      <text x="70" y="52" font-family="Times, serif" font-size="9">: Dusun Kamali, Desa Buttu Sawe</text>
+      
+      <text x="0" y="66" font-family="Times, serif" font-size="9" font-weight="700">Keperluan</text>
+      <text x="70" y="66" font-family="Times, serif" font-size="9">: Melamar Pekerjaan</text>
+    </g>
+
+    <!-- Paragraph 2 -->
+    <text x="24" y="238" font-family="Times, serif" font-size="8.5" font-weight="400" fill="#000000">Adalah benar penduduk Desa Buttu Sawe yang berdomisili pada</text>
+    <text x="24" y="248" font-family="Times, serif" font-size="8.5" font-weight="400" fill="#000000">alamat tersebut di atas. Demikian surat ini dibuat untuk digunakan.</text>
+
+    <!-- Signature Section (TTD Kades + QR Code + Official Stamp) -->
+    <g transform="translate(180, 265)">
+      <text x="50" y="12" font-family="Times, serif" font-size="9" fill="#000000" text-anchor="middle">Kamali, 17 Agustus 2026</text>
+      <text x="50" y="23" font-family="Times, serif" font-size="9" font-weight="700" fill="#000000" text-anchor="middle">KEPALA DESA BUTTU SAWE</text>
+
+      <!-- Signature Curve Mock & QR Code -->
+      <g transform="translate(15, 30)">
+        <!-- Digital QR Code -->
+        <rect width="36" height="36" fill="#f9f9f9" stroke="#1a5e35" stroke-width="1"/>
+        <rect x="4" y="4" width="8" height="8" fill="#1a5e35"/>
+        <rect x="24" y="4" width="8" height="8" fill="#1a5e35"/>
+        <rect x="4" y="24" width="8" height="8" fill="#1a5e35"/>
+        <rect x="16" y="16" width="4" height="4" fill="#1a5e35"/>
+        
+        <!-- Wet Signature Path -->
+        <path d="M42 28 Q55 10 65 24 T85 18 T95 28" fill="none" stroke="#003366" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M50 32 Q70 30 90 32" fill="none" stroke="#003366" stroke-width="1.8"/>
+      </g>
+
+      <text x="50" y="85" font-family="Times, serif" font-size="9.5" font-weight="700" fill="#000000" text-anchor="middle" text-decoration="underline">NURKHALIS, S.Pd.</text>
+      <text x="50" y="96" font-family="Times, serif" font-size="8" fill="#444444" text-anchor="middle">NIP. 19780512 200501 1 008</text>
+    </g>
+  </g>
+
+  <!-- Bottom Floating Action Bar -->
+  <g id="BottomPdfBar" transform="translate(24, 730)">
+    <rect width="327" height="52" rx="26" fill="#1a5e35" stroke="#ffffff" stroke-width="1"/>
+    <text x="163" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">⬇ UNDUH DOKUMEN PDF RESMI</text>
+  </g>
+
+  
+  <!-- Home Indicator Bar -->
+  <g id="HomeIndicator">
+    <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
+  </g>
+
+</svg>

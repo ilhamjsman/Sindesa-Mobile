@@ -1,0 +1,80 @@
+<svg width="375" height="812" viewBox="0 0 375 812" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="header-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a5e35"/>
+      <stop offset="100%" stop-color="#124124"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="375" height="812" fill="#f4f6f9"/>
+  
+  <!-- Header Top Area -->
+  <path d="M0 0 H375 V220 Q187 260 0 220 Z" fill="url(#header-grad)"/>
+  
+  <!-- Status Bar White -->
+  <g id="StatusBarWhite">
+    <rect width="375" height="44" fill="none"/>
+    <text x="28" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff">9:41</text>
+    <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#ffffff"/>
+    <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#ffffff"/>
+    <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+    <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#ffffff"/>
+    <path d="M366 21v4" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+
+  <!-- App Logo & Title in Header -->
+  <circle cx="187" cy="100" r="32" fill="#ffffff" opacity="0.95"/>
+  <text x="187" y="106" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="20" font-weight="900" fill="#1a5e35" text-anchor="middle">S</text>
+  <text x="187" y="152" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">SINDESA MOBILE</text>
+  <text x="187" y="172" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="400" fill="#cfa03f" text-anchor="middle">Desa Buttu Sawe, Kec. Duampanua</text>
+
+  <!-- Login Card -->
+  <g id="LoginCard" transform="translate(24, 210)">
+    <rect width="327" height="430" rx="20" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    
+    <text x="24" y="44" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="20" font-weight="800" fill="#1a5e35">Selamat Datang!</text>
+    <text x="24" y="66" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280">Silakan masuk dengan akun warga Anda</text>
+
+    <!-- Field 1: NIK / Email -->
+    <text x="24" y="106" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#374151">NIK / EMAIL</text>
+    <rect x="24" y="116" width="279" height="48" rx="10" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+    <text x="44" y="146" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="400" fill="#9ca3af">731504xxxxxxxxxx</text>
+
+    <!-- Field 2: Password -->
+    <text x="24" y="194" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#374151">KATA SANDI</text>
+    <rect x="24" y="204" width="279" height="48" rx="10" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+    <text x="44" y="234" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="600" fill="#374151">••••••••••••</text>
+    <!-- Eye Icon Mock -->
+    <circle cx="280" cy="228" r="6" fill="none" stroke="#9ca3af" stroke-width="1.5"/>
+
+    <!-- Lupa Password -->
+    <text x="303" y="274" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="600" fill="#cfa03f" text-anchor="end">Lupa Kata Sandi?</text>
+
+    <!-- Login Button -->
+    <rect x="24" y="295" width="279" height="50" rx="25" fill="#1a5e35"/>
+    <text x="163" y="326" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">MASUK</text>
+
+    <!-- Fingerprint Mock -->
+    <g transform="translate(143, 360)">
+      <circle cx="20" cy="20" r="20" fill="#e8f5e9"/>
+      <path d="M15 20a5 5 0 0 1 10 0v5a5 5 0 0 1-10 0z" fill="none" stroke="#1a5e35" stroke-width="1.5"/>
+    </g>
+  </g>
+
+  <!-- Bottom Register Link -->
+  <text x="187" y="680" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle">
+    Belum memiliki akun? <tspan font-weight="700" fill="#1a5e35">Daftar Sekarang</tspan>
+  </text>
+
+  <!-- Security Seal Badge -->
+  <rect x="100" y="720" width="175" height="30" rx="15" fill="#e8f5e9"/>
+  <text x="187" y="739" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#1a5e35" text-anchor="middle">🔒 Enkripsi &amp; Token Terproteksi</text>
+
+  
+  <!-- Home Indicator Bar -->
+  <g id="HomeIndicator">
+    <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
+  </g>
+
+</svg>

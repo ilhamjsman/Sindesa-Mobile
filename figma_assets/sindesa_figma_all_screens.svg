@@ -1,0 +1,1137 @@
+<svg width="1485" height="3056" viewBox="0 0 1485 3056" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="frame-shadow" x="-10" y="-10" width="395" height="832" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+    <linearGradient id="brand-header-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1a5e35"/>
+      <stop offset="50%" stop-color="#2e7d32"/>
+      <stop offset="100%" stop-color="#cfa03f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1485" height="3056" fill="#0f172a"/>
+
+  <!-- Master Header -->
+  <g id="MasterHeader" transform="translate(100, 60)">
+    <rect width="180" height="32" rx="8" fill="#1a5e35"/>
+    <text x="90" y="21" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">SINDESA MOBILE UI</text>
+    
+    <text x="0" y="70" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="32" font-weight="900" fill="#ffffff">Aplikasi Layanan Desa Buttu Sawe — Figma Design System</text>
+    <text x="0" y="100" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="500" fill="#94a3b8">Spesifikasi UI Layanan Mandiri Warga, Otentikasi Token PDP, Form Pengajuan &amp; Preview PDF Resmi</text>
+  
+    <!-- Color Tokens Palette -->
+    <g transform="translate(0, 130)">
+      <!-- Token 1 -->
+      <rect width="140" height="40" rx="8" fill="#1a5e35"/>
+      <text x="50" y="24" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#ffffff">#1a5e35 (Primary)</text>
+      
+      <!-- Token 2 -->
+      <rect x="150" width="140" height="40" rx="8" fill="#2e7d32"/>
+      <text x="200" y="24" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#ffffff">#2e7d32 (Green)</text>
+
+      <!-- Token 3 -->
+      <rect x="300" width="140" height="40" rx="8" fill="#cfa03f"/>
+      <text x="350" y="24" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#ffffff">#cfa03f (Gold Accent)</text>
+
+      <!-- Token 4 -->
+      <rect x="450" width="140" height="40" rx="8" fill="#f4f6f9"/>
+      <text x="500" y="24" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#1f2937">#f4f6f9 (Background)</text>
+
+      <!-- Token 5 -->
+      <rect x="600" width="140" height="40" rx="8" fill="#10b981"/>
+      <text x="650" y="24" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#ffffff">#10b981 (Selesai)</text>
+
+      <!-- Token 6 -->
+      <rect x="750" width="140" height="40" rx="8" fill="#3b82f6"/>
+      <text x="800" y="24" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#ffffff">#3b82f6 (Diproses)</text>
+
+      <!-- Token 7 -->
+      <rect x="900" width="140" height="40" rx="8" fill="#f59e0b"/>
+      <text x="950" y="24" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#ffffff">#f59e0b (Menunggu)</text>
+    </g>
+  </g>
+
+  <!-- Frame 1: 01. Welcome Screen -->
+  <g id="Frame_1_01_welcome_screen" transform="translate(100, 260)">
+    <!-- Frame Label -->
+    <text x="0" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#38bdf8">01. Welcome Screen</text>
+    <text x="375" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="500" fill="#64748b" text-anchor="end">375 x 812 dp</text>
+
+    <!-- Device Frame Border -->
+    <rect width="375" height="812" rx="32" fill="#000000" stroke="#334155" stroke-width="4"/>
+    
+    <!-- Screen Clipping -->
+    <g clip-path="url(#clip_screen_1)">
+      <clipPath id="clip_screen_1">
+        <rect width="375" height="812" rx="28"/>
+      </clipPath>
+      
+  <defs>
+    <filter id="card-shadow" x="-4" y="0" width="383" height="820" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.08"/>
+    </filter>
+    <linearGradient id="hero-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a5e35"/>
+      <stop offset="100%" stop-color="#124124"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="375" height="812" fill="#f9f9f9"/>
+  
+  <!-- Status Bar -->
+  <g id="StatusBar">
+    <rect width="375" height="44" fill="none"/>
+    <text x="28" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">9:41</text>
+    <!-- Cellular Signal -->
+    <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#1f2937"/>
+    <!-- Wifi -->
+    <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#1f2937"/>
+    <!-- Battery -->
+    <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+    <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#1f2937"/>
+    <path d="M366 21v4" stroke="#1f2937" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+
+  <!-- Header Toolbar -->
+  <rect y="44" width="375" height="56" fill="#ffffff"/>
+  <rect x="20" y="58" width="110" height="28" rx="6" fill="#1a5e35" opacity="0.1"/>
+  <text x="32" y="77" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#1a5e35">SINDESA</text>
+  <text x="140" y="77" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="500" fill="#6b7280">Buttu Sawe</text>
+
+  <!-- Hero Section -->
+  <rect y="100" width="375" height="230" fill="url(#hero-grad)"/>
+  
+  <!-- Cutout Circle (Village Photo Mock) -->
+  <circle cx="60" cy="215" r="75" fill="#ffffff" stroke="rgba(255,255,255,0.3)" stroke-width="6"/>
+  <circle cx="60" cy="215" r="70" fill="#2d7a46"/>
+  <path d="M20 250 C40 210, 80 210, 100 250 Z" fill="#cfa03f"/>
+  <circle cx="60" cy="195" r="22" fill="#ffffff"/>
+
+  <!-- Hero Text -->
+  <text x="150" y="180" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="19" font-weight="800" fill="#ffffff">DIGITALISASI</text>
+  <text x="150" y="204" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="19" font-weight="800" fill="#cfa03f">PELAYANAN DESA</text>
+  <text x="150" y="230" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="400" fill="#e0e0e0">Administrasi cepat, mudah &amp;</text>
+  <text x="150" y="245" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="400" fill="#e0e0e0">resmi langsung dari genggaman.</text>
+
+  <!-- Floating Buttons -->
+  <g id="FloatingButtons" transform="translate(38, 305)">
+    <!-- Login Button -->
+    <rect width="140" height="48" rx="24" fill="#ffffff" stroke="#2e7d32" stroke-width="2"/>
+    <text x="70" y="29" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="700" fill="#2e7d32" text-anchor="middle">Login</text>
+    
+    <!-- Register Button -->
+    <rect x="160" width="140" height="48" rx="24" fill="#cfa03f"/>
+    <text x="230" y="29" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Register</text>
+  </g>
+
+  <!-- Layanan Desa Title -->
+  <text x="187" y="395" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="18" font-weight="800" fill="#1a5e35" text-anchor="middle">Layanan Desa Kami</text>
+  <text x="187" y="415" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">Administrasi &amp; perizinan Desa Buttu Sawe</text>
+
+  <!-- Grid Layanan 2x2 -->
+  <g id="GridLayanan" transform="translate(20, 435)">
+    <!-- Card 1 -->
+    <rect width="160" height="110" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <circle cx="80" cy="40" r="22" fill="#e8f5e9"/>
+    <path d="M72 45c0-4 4-7 8-7s8 3 8 7M80 34a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" fill="#1a5e35"/>
+    <text x="80" y="78" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Administrasi</text>
+    <text x="80" y="94" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Kependudukan</text>
+
+    <!-- Card 2 -->
+    <rect x="175" width="160" height="110" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <circle cx="255" cy="40" r="22" fill="#fef3c7"/>
+    <path d="M248 30h14v20h-14zM252 35h6" stroke="#cfa03f" stroke-width="2" stroke-linecap="round"/>
+    <text x="255" y="78" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Layanan</text>
+    <text x="255" y="94" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Perizinan Desa</text>
+
+    <!-- Card 3 -->
+    <rect y="125" width="160" height="110" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <circle cx="80" cy="165" r="22" fill="#eff6ff"/>
+    <path d="M73 158h14v14H73zM76 163h8" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+    <text x="80" y="203" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Surat Keterangan</text>
+    <text x="80" y="219" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Umum</text>
+
+    <!-- Card 4 -->
+    <rect x="175" y="125" width="160" height="110" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <circle cx="255" cy="165" r="22" fill="#fdf2f8"/>
+    <path d="M248 165c0-4 4-6 7-6s7 2 7 6M255 156a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" fill="#db2777"/>
+    <text x="255" y="203" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Layanan</text>
+    <text x="255" y="219" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Sosial Desa</text>
+  </g>
+
+  <!-- Footer -->
+  <rect y="695" width="375" height="117" fill="#0d3320"/>
+  <text x="24" y="725" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="700" fill="#cfa03f">Hubungi Kami</text>
+  <text x="24" y="743" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="400" fill="#ffffff">Kantor Desa Buttu Sawe, Kec. Duampanua, Pinrang</text>
+  <text x="187" y="775" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="9" font-weight="400" fill="rgba(255,255,255,0.7)" text-anchor="middle">© 2026 SINDESA Desa Buttu Sawe. All rights reserved.</text>
+  
+  <!-- Home Indicator Bar -->
+  <g id="HomeIndicator">
+    <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
+  </g>
+
+
+    </g>
+  </g>
+
+  <!-- Frame 2: 02. Login Screen -->
+  <g id="Frame_2_02_login_screen" transform="translate(555, 260)">
+    <!-- Frame Label -->
+    <text x="0" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#38bdf8">02. Login Screen</text>
+    <text x="375" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="500" fill="#64748b" text-anchor="end">375 x 812 dp</text>
+
+    <!-- Device Frame Border -->
+    <rect width="375" height="812" rx="32" fill="#000000" stroke="#334155" stroke-width="4"/>
+    
+    <!-- Screen Clipping -->
+    <g clip-path="url(#clip_screen_2)">
+      <clipPath id="clip_screen_2">
+        <rect width="375" height="812" rx="28"/>
+      </clipPath>
+      
+  <defs>
+    <linearGradient id="header-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a5e35"/>
+      <stop offset="100%" stop-color="#124124"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="375" height="812" fill="#f4f6f9"/>
+  
+  <!-- Header Top Area -->
+  <path d="M0 0 H375 V220 Q187 260 0 220 Z" fill="url(#header-grad)"/>
+  
+  <!-- Status Bar White -->
+  <g id="StatusBarWhite">
+    <rect width="375" height="44" fill="none"/>
+    <text x="28" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff">9:41</text>
+    <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#ffffff"/>
+    <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#ffffff"/>
+    <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+    <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#ffffff"/>
+    <path d="M366 21v4" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+
+  <!-- App Logo & Title in Header -->
+  <circle cx="187" cy="100" r="32" fill="#ffffff" opacity="0.95"/>
+  <text x="187" y="106" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="20" font-weight="900" fill="#1a5e35" text-anchor="middle">S</text>
+  <text x="187" y="152" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">SINDESA MOBILE</text>
+  <text x="187" y="172" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="400" fill="#cfa03f" text-anchor="middle">Desa Buttu Sawe, Kec. Duampanua</text>
+
+  <!-- Login Card -->
+  <g id="LoginCard" transform="translate(24, 210)">
+    <rect width="327" height="430" rx="20" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    
+    <text x="24" y="44" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="20" font-weight="800" fill="#1a5e35">Selamat Datang!</text>
+    <text x="24" y="66" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280">Silakan masuk dengan akun warga Anda</text>
+
+    <!-- Field 1: NIK / Email -->
+    <text x="24" y="106" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#374151">NIK / EMAIL</text>
+    <rect x="24" y="116" width="279" height="48" rx="10" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+    <text x="44" y="146" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="400" fill="#9ca3af">731504xxxxxxxxxx</text>
+
+    <!-- Field 2: Password -->
+    <text x="24" y="194" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#374151">KATA SANDI</text>
+    <rect x="24" y="204" width="279" height="48" rx="10" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+    <text x="44" y="234" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="600" fill="#374151">••••••••••••</text>
+    <!-- Eye Icon Mock -->
+    <circle cx="280" cy="228" r="6" fill="none" stroke="#9ca3af" stroke-width="1.5"/>
+
+    <!-- Lupa Password -->
+    <text x="303" y="274" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="600" fill="#cfa03f" text-anchor="end">Lupa Kata Sandi?</text>
+
+    <!-- Login Button -->
+    <rect x="24" y="295" width="279" height="50" rx="25" fill="#1a5e35"/>
+    <text x="163" y="326" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">MASUK</text>
+
+    <!-- Fingerprint Mock -->
+    <g transform="translate(143, 360)">
+      <circle cx="20" cy="20" r="20" fill="#e8f5e9"/>
+      <path d="M15 20a5 5 0 0 1 10 0v5a5 5 0 0 1-10 0z" fill="none" stroke="#1a5e35" stroke-width="1.5"/>
+    </g>
+  </g>
+
+  <!-- Bottom Register Link -->
+  <text x="187" y="680" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle">
+    Belum memiliki akun? <tspan font-weight="700" fill="#1a5e35">Daftar Sekarang</tspan>
+  </text>
+
+  <!-- Security Seal Badge -->
+  <rect x="100" y="720" width="175" height="30" rx="15" fill="#e8f5e9"/>
+  <text x="187" y="739" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#1a5e35" text-anchor="middle">🔒 Enkripsi &amp; Token Terproteksi</text>
+
+  
+  <!-- Home Indicator Bar -->
+  <g id="HomeIndicator">
+    <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
+  </g>
+
+
+    </g>
+  </g>
+
+  <!-- Frame 3: 03. Register Warga -->
+  <g id="Frame_3_03_register_screen" transform="translate(1010, 260)">
+    <!-- Frame Label -->
+    <text x="0" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#38bdf8">03. Register Warga</text>
+    <text x="375" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="500" fill="#64748b" text-anchor="end">375 x 812 dp</text>
+
+    <!-- Device Frame Border -->
+    <rect width="375" height="812" rx="32" fill="#000000" stroke="#334155" stroke-width="4"/>
+    
+    <!-- Screen Clipping -->
+    <g clip-path="url(#clip_screen_3)">
+      <clipPath id="clip_screen_3">
+        <rect width="375" height="812" rx="28"/>
+      </clipPath>
+      
+  <rect width="375" height="812" fill="#f4f6f9"/>
+  
+  <g id="StatusBar">
+    <rect width="375" height="44" fill="none"/>
+    <text x="28" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">9:41</text>
+    <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#1f2937"/>
+    <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#1f2937"/>
+    <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+    <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#1f2937"/>
+    <path d="M366 21v4" stroke="#1f2937" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+
+  <!-- Header -->
+  <g id="RegisterHeader" transform="translate(20, 52)">
+    <circle cx="18" cy="18" r="18" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <path d="M21 12l-6 6 6 6" stroke="#1f2937" stroke-width="2" stroke-linecap="round"/>
+    <text x="50" y="24" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="18" font-weight="800" fill="#1f2937">Registrasi Akun Warga</text>
+  </g>
+
+  <!-- Register Card -->
+  <g id="RegisterCard" transform="translate(20, 105)">
+    <rect width="335" height="640" rx="20" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+
+    <!-- Field 1: NIK -->
+    <text x="20" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151">NOMOR INDUK KEPENDUDUKAN (NIK)</text>
+    <rect x="20" y="42" width="295" height="44" rx="10" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+    <text x="36" y="69" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="400" fill="#9ca3af">16 Digit NIK sesuai KTP</text>
+
+    <!-- Field 2: Nama Lengkap -->
+    <text x="20" y="106" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151">NAMA LENGKAP</text>
+    <rect x="20" y="116" width="295" height="44" rx="10" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+    <text x="36" y="143" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="400" fill="#9ca3af">Nama lengkap tanpa singkatan</text>
+
+    <!-- Field 3: WhatsApp / HP -->
+    <text x="20" y="180" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151">NOMOR WHATSAPP</text>
+    <rect x="20" y="190" width="295" height="44" rx="10" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+    <text x="36" y="217" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="400" fill="#9ca3af">08xxxxxxxxxx</text>
+
+    <!-- Field 4: Upload Foto KTP Asli -->
+    <text x="20" y="254" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151">FOTO KTP ASLI (VERIFIKASI PDP)</text>
+    <rect x="20" y="264" width="295" height="75" rx="12" fill="#fafafa" stroke="#cfa03f" stroke-width="1.5" stroke-dasharray="5 3"/>
+    <circle cx="167" cy="292" r="14" fill="#fef3c7"/>
+    <path d="M167 286v12M161 292l6-6 6 6" stroke="#cfa03f" stroke-width="2" stroke-linecap="round"/>
+    <text x="167" y="324" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10.5" font-weight="600" fill="#cfa03f" text-anchor="middle">Ambil Foto KTP Asli (Jelas &amp; Terbaca)</text>
+
+    <!-- Field 5: Password -->
+    <text x="20" y="360" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151">KATA SANDI</text>
+    <rect x="20" y="370" width="295" height="44" rx="10" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+    <text x="36" y="397" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="600" fill="#374151">••••••••••••</text>
+
+    <!-- Field 6: Konfirmasi Password -->
+    <text x="20" y="434" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151">KONFIRMASI KATA SANDI</text>
+    <rect x="20" y="444" width="295" height="44" rx="10" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+    <text x="36" y="471" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="600" fill="#374151">••••••••••••</text>
+
+    <!-- Button Daftar -->
+    <rect x="20" y="510" width="295" height="48" rx="24" fill="#cfa03f"/>
+    <text x="167" y="540" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">DAFTAR AKUN SEKARANG</text>
+
+    <!-- Login Link -->
+    <text x="167" y="585" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">
+      Sudah punya akun? <tspan font-weight="700" fill="#1a5e35">Masuk di sini</tspan>
+    </text>
+
+    <text x="167" y="615" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="9.5" font-weight="500" fill="#9ca3af" text-anchor="middle">Data PII terlindungi enkripsi standar UU PDP</text>
+  </g>
+
+  
+  <g id="HomeIndicator">
+    <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
+  </g>
+
+
+    </g>
+  </g>
+
+  <!-- Frame 4: 04. Dashboard Utama -->
+  <g id="Frame_4_04_dashboard_screen" transform="translate(100, 1192)">
+    <!-- Frame Label -->
+    <text x="0" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#38bdf8">04. Dashboard Utama</text>
+    <text x="375" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="500" fill="#64748b" text-anchor="end">375 x 812 dp</text>
+
+    <!-- Device Frame Border -->
+    <rect width="375" height="812" rx="32" fill="#000000" stroke="#334155" stroke-width="4"/>
+    
+    <!-- Screen Clipping -->
+    <g clip-path="url(#clip_screen_4)">
+      <clipPath id="clip_screen_4">
+        <rect width="375" height="812" rx="28"/>
+      </clipPath>
+      
+  <defs>
+    <linearGradient id="dash-card-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a5e35"/>
+      <stop offset="100%" stop-color="#124124"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="375" height="812" fill="#f4f6f9"/>
+  
+  <!-- Status Bar -->
+  <g id="StatusBar">
+    <rect width="375" height="44" fill="none"/>
+    <text x="28" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">9:41</text>
+    <!-- Cellular Signal -->
+    <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#1f2937"/>
+    <!-- Wifi -->
+    <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#1f2937"/>
+    <!-- Battery -->
+    <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+    <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#1f2937"/>
+    <path d="M366 21v4" stroke="#1f2937" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+
+  <!-- App Bar -->
+  <g id="AppBar" transform="translate(20, 52)">
+    <!-- Hamburger Button -->
+    <rect width="36" height="36" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <path d="M10 13h16M10 18h16M10 23h16" stroke="#1a5e35" stroke-width="2" stroke-linecap="round"/>
+    
+    <!-- Village Name & Location -->
+    <text x="48" y="16" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="800" fill="#1a5e35">Desa Buttu Sawe</text>
+    <text x="48" y="30" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="500" fill="#6b7280">Kec. Duampanua, Pinrang</text>
+
+    <!-- Notification Bell -->
+    <circle cx="295" cy="18" r="18" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <path d="M290 22h10l-2-3v-4a3 3 0 0 0-6 0v4z" fill="#1a5e35"/>
+    <circle cx="300" cy="10" r="4" fill="#ef4444"/>
+
+    <!-- Avatar -->
+    <circle cx="335" cy="18" r="18" fill="#cfa03f"/>
+    <text x="335" y="23" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">AF</text>
+  </g>
+
+  <!-- Welcome Citizen Card -->
+  <g id="CitizenCard" transform="translate(20, 108)">
+    <rect width="335" height="135" rx="18" fill="url(#dash-card-grad)"/>
+    <circle cx="300" cy="40" r="60" fill="rgba(255,255,255,0.05)"/>
+    <circle cx="260" cy="120" r="50" fill="rgba(207,160,63,0.1)"/>
+    
+    <text x="22" y="34" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="500" fill="#e0e0e0">Selamat Datang,</text>
+    <text x="22" y="60" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="20" font-weight="800" fill="#ffffff">Ahmad Faisal</text>
+    <text x="22" y="82" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="400" fill="#cfa03f">NIK: 7315041208900001</text>
+    
+    <!-- Verified Badge -->
+    <rect x="22" y="96" width="140" height="24" rx="12" fill="rgba(255,255,255,0.15)"/>
+    <text x="92" y="112" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">✓ Warga Terverifikasi</text>
+  </g>
+
+  <!-- Stats Row (3 Badges) -->
+  <g id="StatsRow" transform="translate(20, 255)">
+    <!-- Menunggu -->
+    <rect width="105" height="65" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="16" y="24" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#6b7280">Menunggu</text>
+    <text x="16" y="50" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="22" font-weight="800" fill="#f59e0b">1</text>
+
+    <!-- Diproses -->
+    <rect x="115" width="105" height="65" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="131" y="24" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#6b7280">Diproses</text>
+    <text x="131" y="50" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="22" font-weight="800" fill="#3b82f6">2</text>
+
+    <!-- Selesai -->
+    <rect x="230" width="105" height="65" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="246" y="24" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#6b7280">Selesai</text>
+    <text x="246" y="50" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="22" font-weight="800" fill="#10b981">5</text>
+  </g>
+
+  <!-- Layanan Surat Grid Section -->
+  <text x="20" y="348" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#1f2937">Layanan Surat Online</text>
+  <text x="355" y="348" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="end">Lihat Semua</text>
+
+  <!-- 8 Service Icons Grid -->
+  <g id="MenuGrid" transform="translate(20, 365)">
+    <!-- 1. Domisili -->
+    <g transform="translate(0, 0)">
+      <circle cx="36" cy="36" r="28" fill="#e8f5e9"/>
+      <path d="M28 42v-8l8-6 8 6v8h-5v-5h-6v5z" fill="#1a5e35"/>
+      <text x="36" y="78" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151" text-anchor="middle">Domisili</text>
+    </g>
+
+    <!-- 2. KTP -->
+    <g transform="translate(85, 0)">
+      <circle cx="36" cy="36" r="28" fill="#eff6ff"/>
+      <rect x="24" y="24" width="24" height="16" rx="3" fill="#3b82f6"/>
+      <circle cx="31" cy="30" r="2.5" fill="#ffffff"/>
+      <text x="36" y="78" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151" text-anchor="middle">KTP Baru</text>
+    </g>
+
+    <!-- 3. KK -->
+    <g transform="translate(170, 0)">
+      <circle cx="36" cy="36" r="28" fill="#fef3c7"/>
+      <path d="M28 40c0-3 3-5 6-5s6 2 6 5M34 32a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" fill="#cfa03f"/>
+      <text x="36" y="78" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151" text-anchor="middle">Kartu Keluarga</text>
+    </g>
+
+    <!-- 4. SKTM -->
+    <g transform="translate(255, 0)">
+      <circle cx="36" cy="36" r="28" fill="#fdf2f8"/>
+      <path d="M26 36h20v6H26zM36 24v12" stroke="#db2777" stroke-width="2"/>
+      <text x="36" y="78" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151" text-anchor="middle">SKTM</text>
+    </g>
+
+    <!-- 5. Usaha -->
+    <g transform="translate(0, 95)">
+      <circle cx="36" cy="36" r="28" fill="#fef3c7"/>
+      <path d="M24 30h24v14H24zM30 30v-4h12v4" fill="none" stroke="#d97706" stroke-width="2"/>
+      <text x="36" y="78" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151" text-anchor="middle">Usaha</text>
+    </g>
+
+    <!-- 6. SKCK -->
+    <g transform="translate(85, 95)">
+      <circle cx="36" cy="36" r="28" fill="#f5f3ff"/>
+      <path d="M36 24l10 4v8c0 6-10 10-10 10s-10-4-10-10v-8z" fill="#7c3aed"/>
+      <text x="36" y="78" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151" text-anchor="middle">SKCK</text>
+    </g>
+
+    <!-- 7. Kelahiran -->
+    <g transform="translate(170, 95)">
+      <circle cx="36" cy="36" r="28" fill="#ecfdf5"/>
+      <circle cx="36" cy="32" r="5" fill="#059669"/>
+      <path d="M28 42c0-4 4-6 8-6s8 2 8 6" fill="#059669"/>
+      <text x="36" y="78" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151" text-anchor="middle">Kelahiran</text>
+    </g>
+
+    <!-- 8. Kematian -->
+    <g transform="translate(255, 95)">
+      <circle cx="36" cy="36" r="28" fill="#f3f4f6"/>
+      <path d="M34 26h4v20h-4zM28 32h16v4H28z" fill="#4b5563"/>
+      <text x="36" y="78" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151" text-anchor="middle">Kematian</text>
+    </g>
+  </g>
+
+  <!-- Recent Letter Card -->
+  <g id="RecentSurat" transform="translate(20, 575)">
+    <text x="0" y="0" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="800" fill="#1f2937">Pengajuan Terakhir</text>
+    
+    <rect y="12" width="335" height="74" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <circle cx="32" cy="49" r="18" fill="#e8f5e9"/>
+    <path d="M28 53v-6l4-3 4 3v6z" fill="#1a5e35"/>
+
+    <text x="60" y="42" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="700" fill="#1f2937">Surat Keterangan Domisili</text>
+    <text x="60" y="58" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="400" fill="#6b7280">17 Agustus 2026 • 14:30 WITA</text>
+
+    <!-- Selesai Badge -->
+    <rect x="250" y="35" width="70" height="24" rx="12" fill="#d1fae5"/>
+    <text x="285" y="51" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="700" fill="#065f46" text-anchor="middle">SELESAI</text>
+  </g>
+
+  <!-- Bottom Navigation Bar -->
+  <g id="BottomNavBar" transform="translate(0, 720)">
+    <rect width="375" height="92" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    
+    <!-- Tab 1: Beranda (Active) -->
+    <g transform="translate(45, 12)">
+      <path d="M12 4L3 11v9h6v-6h6v6h6v-9z" fill="#1a5e35"/>
+      <text x="12" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="700" fill="#1a5e35" text-anchor="middle">Beranda</text>
+    </g>
+
+    <!-- Tab 2: Layanan -->
+    <g transform="translate(130, 12)">
+      <path d="M4 6h16v12H4zM8 10h8" stroke="#9ca3af" stroke-width="2"/>
+      <text x="12" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="500" fill="#9ca3af" text-anchor="middle">Layanan</text>
+    </g>
+
+    <!-- Tab 3: Riwayat -->
+    <g transform="translate(215, 12)">
+      <path d="M12 4a8 8 0 1 0 8 8h-3" stroke="#9ca3af" stroke-width="2" fill="none"/>
+      <text x="12" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="500" fill="#9ca3af" text-anchor="middle">Riwayat</text>
+    </g>
+
+    <!-- Tab 4: Profil -->
+    <g transform="translate(300, 12)">
+      <circle cx="12" cy="8" r="4" stroke="#9ca3af" stroke-width="2" fill="none"/>
+      <path d="M5 20c0-4 3.5-6 7-6s7 2 7 6" stroke="#9ca3af" stroke-width="2" fill="none"/>
+      <text x="12" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="500" fill="#9ca3af" text-anchor="middle">Profil</text>
+    </g>
+  </g>
+
+  
+  <!-- Home Indicator Bar -->
+  <g id="HomeIndicator">
+    <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
+  </g>
+
+
+    </g>
+  </g>
+
+  <!-- Frame 5: 05. Sidebar Navigation -->
+  <g id="Frame_5_05_sidebar_drawer" transform="translate(555, 1192)">
+    <!-- Frame Label -->
+    <text x="0" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#38bdf8">05. Sidebar Navigation</text>
+    <text x="375" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="500" fill="#64748b" text-anchor="end">375 x 812 dp</text>
+
+    <!-- Device Frame Border -->
+    <rect width="375" height="812" rx="32" fill="#000000" stroke="#334155" stroke-width="4"/>
+    
+    <!-- Screen Clipping -->
+    <g clip-path="url(#clip_screen_5)">
+      <clipPath id="clip_screen_5">
+        <rect width="375" height="812" rx="28"/>
+      </clipPath>
+      
+  <defs>
+    <linearGradient id="drawer-header" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a5e35"/>
+      <stop offset="100%" stop-color="#124124"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Blurred Background Base -->
+  <rect width="375" height="812" fill="rgba(0,0,0,0.55)"/>
+
+  <!-- Left Drawer Body -->
+  <rect width="300" height="812" fill="#ffffff"/>
+  
+  <!-- Status Bar White -->
+  <g id="StatusBarWhite">
+    <rect width="375" height="44" fill="none"/>
+    <text x="28" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff">9:41</text>
+    <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#ffffff"/>
+    <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#ffffff"/>
+    <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+    <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#ffffff"/>
+    <path d="M366 21v4" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+
+  <!-- Drawer Header Profile -->
+  <rect y="0" width="300" height="190" fill="url(#drawer-header)"/>
+  
+  <circle cx="55" cy="85" r="28" fill="#cfa03f" stroke="#ffffff" stroke-width="3"/>
+  <text x="55" y="91" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">AF</text>
+  
+  <text x="24" y="135" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#ffffff">Ahmad Faisal</text>
+  <text x="24" y="153" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="400" fill="#cfa03f">NIK: 7315041208900001</text>
+  <text x="24" y="170" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="400" fill="#e0e0e0">warga@sindesa-buttusawe.com</text>
+
+  <!-- Menu List -->
+  <g id="DrawerMenu" transform="translate(16, 210)">
+    <!-- Item 1: Beranda (Active) -->
+    <rect width="268" height="46" rx="10" fill="#e8f5e9"/>
+    <path d="M28 23L20 29v7h5v-5h6v5h5v-7z" fill="#1a5e35"/>
+    <text x="52" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="700" fill="#1a5e35">Beranda Utama</text>
+
+    <!-- Item 2: Layanan -->
+    <g transform="translate(0, 52)">
+      <path d="M20 15h16v14H20zM24 20h8" stroke="#4b5563" stroke-width="1.8"/>
+      <text x="52" y="26" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Layanan Pengajuan Surat</text>
+    </g>
+
+    <!-- Item 3: Riwayat -->
+    <g transform="translate(0, 104)">
+      <path d="M28 15a7 7 0 1 0 7 7h-3" stroke="#4b5563" stroke-width="1.8" fill="none"/>
+      <text x="52" y="26" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Riwayat Pengajuan</text>
+      <!-- Badge -->
+      <circle cx="245" cy="22" r="10" fill="#1a5e35"/>
+      <text x="245" y="26" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">2</text>
+    </g>
+
+    <!-- Item 4: Profil -->
+    <g transform="translate(0, 156)">
+      <circle cx="28" cy="20" r="4" stroke="#4b5563" stroke-width="1.8" fill="none"/>
+      <path d="M21 30c0-3 3.5-5 7-5s7 2 7 5" stroke="#4b5563" stroke-width="1.8" fill="none"/>
+      <text x="52" y="26" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Profil Saya</text>
+    </g>
+
+    <!-- Separator -->
+    <line x1="12" y1="216" x2="256" y2="216" stroke="#e5e7eb" stroke-width="1"/>
+
+    <!-- Item 5: Panduan -->
+    <g transform="translate(0, 228)">
+      <circle cx="28" cy="22" r="7" stroke="#4b5563" stroke-width="1.8" fill="none"/>
+      <path d="M28 19v3M28 25v1" stroke="#4b5563" stroke-width="2"/>
+      <text x="52" y="26" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Panduan &amp; Keamanan</text>
+    </g>
+
+    <!-- Item 6: Tentang -->
+    <g transform="translate(0, 280)">
+      <circle cx="28" cy="22" r="7" stroke="#4b5563" stroke-width="1.8" fill="none"/>
+      <text x="52" y="26" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Tentang Desa Buttu Sawe</text>
+    </g>
+
+    <!-- Item 7: Keluar (Logout) -->
+    <g transform="translate(0, 480)">
+      <rect width="268" height="44" rx="10" fill="#fee2e2"/>
+      <path d="M26 22h8m-3-3l3 3-3 3M23 16h-4v12h4" stroke="#dc2626" stroke-width="2" stroke-linecap="round"/>
+      <text x="52" y="27" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="700" fill="#dc2626">Keluar Akun</text>
+    </g>
+  </g>
+
+  <!-- Version Footer -->
+  <text x="150" y="770" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="400" fill="#9ca3af" text-anchor="middle">SINDESA Mobile v1.0.0 (Build 2026)</text>
+  
+  <!-- Home Indicator Bar -->
+  <g id="HomeIndicator">
+    <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
+  </g>
+
+
+    </g>
+  </g>
+
+  <!-- Frame 6: 06. Form Pengajuan -->
+  <g id="Frame_6_06_layanan_form_domisili" transform="translate(1010, 1192)">
+    <!-- Frame Label -->
+    <text x="0" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#38bdf8">06. Form Pengajuan</text>
+    <text x="375" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="500" fill="#64748b" text-anchor="end">375 x 812 dp</text>
+
+    <!-- Device Frame Border -->
+    <rect width="375" height="812" rx="32" fill="#000000" stroke="#334155" stroke-width="4"/>
+    
+    <!-- Screen Clipping -->
+    <g clip-path="url(#clip_screen_6)">
+      <clipPath id="clip_screen_6">
+        <rect width="375" height="812" rx="28"/>
+      </clipPath>
+      
+  <rect width="375" height="812" fill="#f4f6f9"/>
+  
+  <!-- Status Bar -->
+  <g id="StatusBar">
+    <rect width="375" height="44" fill="none"/>
+    <text x="28" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">9:41</text>
+    <!-- Cellular Signal -->
+    <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#1f2937"/>
+    <!-- Wifi -->
+    <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#1f2937"/>
+    <!-- Battery -->
+    <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+    <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#1f2937"/>
+    <path d="M366 21v4" stroke="#1f2937" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+
+  <!-- Header -->
+  <g id="HeaderBar" transform="translate(20, 52)">
+    <circle cx="18" cy="18" r="18" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <path d="M21 12l-6 6 6 6" stroke="#1f2937" stroke-width="2" stroke-linecap="round"/>
+    <text x="50" y="24" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="17" font-weight="800" fill="#1f2937">Pengajuan Surat Domisili</text>
+  </g>
+
+  <!-- Progress Bar Stepper -->
+  <g id="Stepper" transform="translate(20, 105)">
+    <rect width="335" height="4" rx="2" fill="#e5e7eb"/>
+    <rect width="220" height="4" rx="2" fill="#1a5e35"/>
+    <circle cx="20" cy="2" r="10" fill="#1a5e35"/>
+    <text x="20" y="5" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">1</text>
+    <circle cx="167" cy="2" r="10" fill="#1a5e35"/>
+    <text x="167" y="5" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">2</text>
+    <circle cx="315" cy="2" r="10" fill="#e5e7eb"/>
+    <text x="315" y="5" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="9" font-weight="700" fill="#9ca3af" text-anchor="middle">3</text>
+  </g>
+
+  <!-- Form Body Scroll Container -->
+  <g id="FormBody" transform="translate(20, 135)">
+    <!-- Readonly Info Box -->
+    <rect width="335" height="70" rx="12" fill="#e8f5e9" stroke="#c8e6c9" stroke-width="1"/>
+    <text x="16" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35">Data Pemohon (Otomatis)</text>
+    <text x="16" y="46" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="500" fill="#2e7d32">Ahmad Faisal • NIK: 7315041208900001</text>
+
+    <!-- Field 1: Dusun / Alamat -->
+    <text x="0" y="100" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#374151">DUSUN / ALAMAT DOMISILI</text>
+    <rect y="110" width="335" height="46" rx="10" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+    <text x="16" y="138" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="500" fill="#1f2937">Dusun Kamali RT 002 / RW 001</text>
+
+    <!-- Field 2: Keperluan -->
+    <text x="0" y="180" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#374151">KEPERLUAN SURAT</text>
+    <rect y="190" width="335" height="70" rx="10" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+    <text x="16" y="215" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="400" fill="#1f2937">Untuk kelengkapan berkas pendaftaran</text>
+    <text x="16" y="235" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="400" fill="#1f2937">pekerjaan di Kabupaten Pinrang</text>
+
+    <!-- Upload Dokumen Box (KTP & KK) -->
+    <text x="0" y="285" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#374151">LAMPIRAN FOTO KTP / KK</text>
+    <rect y="295" width="335" height="85" rx="12" fill="#fafafa" stroke="#1a5e35" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <circle cx="167" cy="325" r="16" fill="#e8f5e9"/>
+    <path d="M167 318v14M160 325l7-7 7 7" stroke="#1a5e35" stroke-width="2" stroke-linecap="round"/>
+    <text x="167" y="360" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#1a5e35" text-anchor="middle">Unggah Berkas Pendukung (JPG/PNG max 2MB)</text>
+
+    <!-- Checkbox Statement -->
+    <rect y="405" width="18" height="18" rx="4" fill="#1a5e35"/>
+    <path d="M4 9l3 3 7-7" stroke="#ffffff" stroke-width="2" stroke-linecap="round" transform="translate(0, 405)"/>
+    <text x="28" y="418" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="400" fill="#4b5563">Saya menyatakan bahwa data yang diisi adalah</text>
+    <text x="28" y="432" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#1a5e35">benar &amp; dapat dipertanggungjawabkan secara hukum.</text>
+
+    <!-- Submit Button -->
+    <rect y="460" width="335" height="50" rx="25" fill="#1a5e35"/>
+    <text x="167" y="491" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">KIRIM PENGAJUAN SURAT</text>
+  </g>
+
+  
+  <!-- Home Indicator Bar -->
+  <g id="HomeIndicator">
+    <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
+  </g>
+
+
+    </g>
+  </g>
+
+  <!-- Frame 7: 07. Riwayat Surat -->
+  <g id="Frame_7_07_riwayat_pengajuan" transform="translate(100, 2124)">
+    <!-- Frame Label -->
+    <text x="0" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#38bdf8">07. Riwayat Surat</text>
+    <text x="375" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="500" fill="#64748b" text-anchor="end">375 x 812 dp</text>
+
+    <!-- Device Frame Border -->
+    <rect width="375" height="812" rx="32" fill="#000000" stroke="#334155" stroke-width="4"/>
+    
+    <!-- Screen Clipping -->
+    <g clip-path="url(#clip_screen_7)">
+      <clipPath id="clip_screen_7">
+        <rect width="375" height="812" rx="28"/>
+      </clipPath>
+      
+  <rect width="375" height="812" fill="#f4f6f9"/>
+  
+  <!-- Status Bar -->
+  <g id="StatusBar">
+    <rect width="375" height="44" fill="none"/>
+    <text x="28" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">9:41</text>
+    <!-- Cellular Signal -->
+    <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#1f2937"/>
+    <!-- Wifi -->
+    <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#1f2937"/>
+    <!-- Battery -->
+    <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+    <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#1f2937"/>
+    <path d="M366 21v4" stroke="#1f2937" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+
+  <!-- Header -->
+  <g id="Header" transform="translate(20, 52)">
+    <circle cx="18" cy="18" r="18" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <path d="M21 12l-6 6 6 6" stroke="#1f2937" stroke-width="2" stroke-linecap="round"/>
+    <text x="50" y="24" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="18" font-weight="800" fill="#1f2937">Riwayat Pengajuan</text>
+  </g>
+
+  <!-- Filter Tabs -->
+  <g id="FilterTabs" transform="translate(20, 105)">
+    <!-- Tab 1: Semua (Active) -->
+    <rect width="75" height="34" rx="17" fill="#1a5e35"/>
+    <text x="37" y="22" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">Semua</text>
+
+    <!-- Tab 2: Proses -->
+    <rect x="85" width="85" height="34" rx="17" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="127" y="22" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="600" fill="#6b7280" text-anchor="middle">Diproses</text>
+
+    <!-- Tab 3: Selesai -->
+    <rect x="180" width="80" height="34" rx="17" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="220" y="22" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="600" fill="#6b7280" text-anchor="middle">Selesai</text>
+
+    <!-- Tab 4: Ditolak -->
+    <rect x="270" width="65" height="34" rx="17" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="302" y="22" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="600" fill="#6b7280" text-anchor="middle">Ditolak</text>
+  </g>
+
+  <!-- Card List -->
+  <g id="CardList" transform="translate(20, 155)">
+    <!-- Card 1: Selesai -->
+    <rect width="335" height="135" rx="16" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="18" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="800" fill="#1f2937">Surat Keterangan Domisili</text>
+    <text x="18" y="52" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="500" fill="#6b7280">No: 470/12/DS-BS/VIII/2026</text>
+    <text x="18" y="70" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="400" fill="#9ca3af">17 Agustus 2026 • 14:30 WITA</text>
+    
+    <!-- Status Badge -->
+    <rect x="245" y="16" width="72" height="24" rx="12" fill="#d1fae5"/>
+    <text x="281" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="700" fill="#065f46" text-anchor="middle">SELESAI</text>
+    
+    <!-- Button Preview PDF -->
+    <rect x="18" y="88" width="299" height="34" rx="17" fill="#1a5e35"/>
+    <text x="167" y="110" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">📄 Lihat &amp; Cetak Surat PDF</text>
+
+    <!-- Card 2: Diproses -->
+    <g transform="translate(0, 150)">
+      <rect width="335" height="105" rx="16" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+      <text x="18" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="800" fill="#1f2937">Surat Keterangan Usaha</text>
+      <text x="18" y="52" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="500" fill="#6b7280">No: Menunggu Penomoran</text>
+      <text x="18" y="70" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="400" fill="#9ca3af">16 Agustus 2026 • 09:15 WITA</text>
+      
+      <rect x="215" y="16" width="102" height="24" rx="12" fill="#dbeafe"/>
+      <text x="266" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="700" fill="#1e40af" text-anchor="middle">DIPROSES KADES</text>
+      
+      <text x="18" y="92" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#cfa03f">⏳ Sedang menunggu tanda tangan digital Kepala Desa</text>
+    </g>
+
+    <!-- Card 3: Menunggu Verifikasi -->
+    <g transform="translate(0, 270)">
+      <rect width="335" height="105" rx="16" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+      <text x="18" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="800" fill="#1f2937">Surat Ket. Tidak Mampu</text>
+      <text x="18" y="52" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="500" fill="#6b7280">No: -</text>
+      <text x="18" y="70" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="400" fill="#9ca3af">14 Agustus 2026 • 11:00 WITA</text>
+      
+      <rect x="235" y="16" width="82" height="24" rx="12" fill="#fef3c7"/>
+      <text x="276" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="700" fill="#92400e" text-anchor="middle">VERIFIKASI</text>
+      
+      <text x="18" y="92" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#6b7280">🔍 Sedang diverifikasi oleh Operator Desa</text>
+    </g>
+  </g>
+
+  
+  <!-- Home Indicator Bar -->
+  <g id="HomeIndicator">
+    <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
+  </g>
+
+
+    </g>
+  </g>
+
+  <!-- Frame 8: 08. Profil Akun -->
+  <g id="Frame_8_08_profil_screen" transform="translate(555, 2124)">
+    <!-- Frame Label -->
+    <text x="0" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#38bdf8">08. Profil Akun</text>
+    <text x="375" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="500" fill="#64748b" text-anchor="end">375 x 812 dp</text>
+
+    <!-- Device Frame Border -->
+    <rect width="375" height="812" rx="32" fill="#000000" stroke="#334155" stroke-width="4"/>
+    
+    <!-- Screen Clipping -->
+    <g clip-path="url(#clip_screen_8)">
+      <clipPath id="clip_screen_8">
+        <rect width="375" height="812" rx="28"/>
+      </clipPath>
+      
+  <defs>
+    <linearGradient id="prof-header" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a5e35"/>
+      <stop offset="100%" stop-color="#124124"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="375" height="812" fill="#f4f6f9"/>
+  <rect y="0" width="375" height="200" fill="url(#prof-header)"/>
+  
+  <!-- Status Bar White -->
+  <g id="StatusBarWhite">
+    <rect width="375" height="44" fill="none"/>
+    <text x="28" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff">9:41</text>
+    <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#ffffff"/>
+    <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#ffffff"/>
+    <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+    <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#ffffff"/>
+    <path d="M366 21v4" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+
+  <!-- Header Title -->
+  <text x="187" y="75" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="18" font-weight="800" fill="#ffffff" text-anchor="middle">Profil Akun Warga</text>
+
+  <!-- Profile Card Container -->
+  <g id="ProfileCard" transform="translate(20, 110)">
+    <rect width="335" height="610" rx="20" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+
+    <!-- Avatar with Edit Badge -->
+    <circle cx="167" cy="40" r="42" fill="#cfa03f" stroke="#ffffff" stroke-width="4"/>
+    <text x="167" y="49" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="24" font-weight="900" fill="#ffffff" text-anchor="middle">AF</text>
+    <!-- Camera Icon Badge -->
+    <circle cx="198" cy="68" r="14" fill="#1a5e35" stroke="#ffffff" stroke-width="2"/>
+    <path d="M194 68h8M198 64v8" stroke="#ffffff" stroke-width="2"/>
+
+    <!-- Citizen Name & Status -->
+    <text x="167" y="106" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="18" font-weight="800" fill="#1f2937" text-anchor="middle">Ahmad Faisal</text>
+    <rect x="107" y="116" width="120" height="22" rx="11" fill="#e8f5e9"/>
+    <text x="167" y="131" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="700" fill="#1a5e35" text-anchor="middle">✓ AKUN TERVERIFIKASI</text>
+
+    <!-- Personal Biodata List -->
+    <g transform="translate(20, 160)">
+      <!-- Row 1: NIK -->
+      <text x="0" y="14" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#6b7280">NOMOR INDUK KEPENDUDUKAN (NIK)</text>
+      <text x="0" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">7315041208900001</text>
+      <line x1="0" y1="44" x2="295" y2="44" stroke="#f3f4f6" stroke-width="1"/>
+
+      <!-- Row 2: Tempat Tgl Lahir -->
+      <text x="0" y="66" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#6b7280">TEMPAT, TANGGAL LAHIR</text>
+      <text x="0" y="84" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">Pinrang, 12 Agustus 1990</text>
+      <line x1="0" y1="96" x2="295" y2="96" stroke="#f3f4f6" stroke-width="1"/>
+
+      <!-- Row 3: Alamat -->
+      <text x="0" y="118" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#6b7280">ALAMAT DOMISILI</text>
+      <text x="0" y="136" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">Dusun Kamali RT 002 / RW 001</text>
+      <line x1="0" y1="148" x2="295" y2="148" stroke="#f3f4f6" stroke-width="1"/>
+
+      <!-- Row 4: No HP -->
+      <text x="0" y="170" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#6b7280">NOMOR WHATSAPP / HP</text>
+      <text x="0" y="188" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">0812-3456-7890</text>
+      <line x1="0" y1="200" x2="295" y2="200" stroke="#f3f4f6" stroke-width="1"/>
+
+      <!-- Row 5: Email -->
+      <text x="0" y="222" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#6b7280">EMAIL</text>
+      <text x="0" y="240" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">warga@sindesa-buttusawe.com</text>
+    </g>
+
+    <!-- Action Buttons -->
+    <rect x="20" y="440" width="295" height="46" rx="23" fill="#1a5e35"/>
+    <text x="167" y="468" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">EDIT BIODATA PROFIL</text>
+
+    <rect x="20" y="496" width="295" height="46" rx="23" fill="#ffffff" stroke="#cfa03f" stroke-width="1.5"/>
+    <text x="167" y="524" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#cfa03f" text-anchor="middle">UBAH KATA SANDI</text>
+  </g>
+
+  
+  <!-- Home Indicator Bar -->
+  <g id="HomeIndicator">
+    <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
+  </g>
+
+
+    </g>
+  </g>
+
+  <!-- Frame 9: 09. PDF Preview -->
+  <g id="Frame_9_09_pdf_preview_screen" transform="translate(1010, 2124)">
+    <!-- Frame Label -->
+    <text x="0" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#38bdf8">09. PDF Preview</text>
+    <text x="375" y="-18" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="500" fill="#64748b" text-anchor="end">375 x 812 dp</text>
+
+    <!-- Device Frame Border -->
+    <rect width="375" height="812" rx="32" fill="#000000" stroke="#334155" stroke-width="4"/>
+    
+    <!-- Screen Clipping -->
+    <g clip-path="url(#clip_screen_9)">
+      <clipPath id="clip_screen_9">
+        <rect width="375" height="812" rx="28"/>
+      </clipPath>
+      
+  <rect width="375" height="812" fill="#2d3748"/>
+  
+  <!-- Status Bar White -->
+  <g id="StatusBarWhite">
+    <rect width="375" height="44" fill="none"/>
+    <text x="28" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff">9:41</text>
+    <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#ffffff"/>
+    <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#ffffff"/>
+    <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+    <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#ffffff"/>
+    <path d="M366 21v4" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+
+  <!-- Header -->
+  <g id="PdfHeader" transform="translate(20, 52)">
+    <circle cx="18" cy="18" r="18" fill="rgba(255,255,255,0.15)"/>
+    <path d="M21 12l-6 6 6 6" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    <text x="50" y="16" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Surat_Domisili_470-12.pdf</text>
+    <text x="50" y="30" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="400" fill="#cfa03f">Resmi Desa Buttu Sawe • PDF A4</text>
+
+    <!-- Download Icon -->
+    <circle cx="320" cy="18" r="18" fill="rgba(255,255,255,0.15)"/>
+    <path d="M320 12v10M316 18l4 4 4-4M313 25h14" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- PDF Paper Canvas (A4 Aspect Ratio Sheet) -->
+  <g id="PdfSheet" transform="translate(24, 105)">
+    <rect width="327" height="610" rx="8" fill="#ffffff"/>
+    
+    <!-- Letterhead (KOP SURAT) -->
+    <!-- Logo Mock -->
+    <circle cx="35" cy="40" r="16" fill="#1a5e35"/>
+    <text x="35" y="44" font-family="serif" font-size="10" font-weight="900" fill="#ffffff" text-anchor="middle">PIN</text>
+    
+    <!-- Kop Text -->
+    <text x="175" y="26" font-family="Times, serif" font-size="11" font-weight="700" fill="#000000" text-anchor="middle">PEMERINTAH KABUPATEN PINRANG</text>
+    <text x="175" y="38" font-family="Times, serif" font-size="10" font-weight="700" fill="#000000" text-anchor="middle">KECAMATAN DUAMPANUA</text>
+    <text x="175" y="52" font-family="Times, serif" font-size="13" font-weight="900" fill="#000000" text-anchor="middle">DESA BUTTU SAWE</text>
+    <text x="175" y="63" font-family="Times, serif" font-size="7" font-weight="400" fill="#555555" text-anchor="middle">Alamat: Jl. Poros Kamali - Buttu Sawe Kode Pos 91253</text>
+    
+    <!-- Double Line Divider -->
+    <line x1="16" y1="70" x2="311" y2="70" stroke="#000000" stroke-width="2"/>
+    <line x1="16" y1="73" x2="311" y2="73" stroke="#000000" stroke-width="0.75"/>
+
+    <!-- Letter Title -->
+    <text x="163" y="92" font-family="Times, serif" font-size="12" font-weight="700" fill="#000000" text-anchor="middle" text-decoration="underline">SURAT KETERANGAN DOMISILI</text>
+    <text x="163" y="104" font-family="Times, serif" font-size="9" font-weight="400" fill="#000000" text-anchor="middle">Nomor: 470 / 12 / DS-BS / VIII / 2026</text>
+
+    <!-- Paragraph 1 -->
+    <text x="24" y="125" font-family="Times, serif" font-size="9" font-weight="400" fill="#000000">Yang bertanda tangan di bawah ini Kepala Desa Buttu Sawe,</text>
+    <text x="24" y="136" font-family="Times, serif" font-size="9" font-weight="400" fill="#000000">Kecamatan Duampanua, Kabupaten Pinrang, menerangkan:</text>
+
+    <!-- Citizen Data Table -->
+    <g transform="translate(24, 150)">
+      <text x="0" y="10" font-family="Times, serif" font-size="9" font-weight="700">Nama</text>
+      <text x="70" y="10" font-family="Times, serif" font-size="9">: AHMAD FAISAL</text>
+      
+      <text x="0" y="24" font-family="Times, serif" font-size="9" font-weight="700">NIK</text>
+      <text x="70" y="24" font-family="Times, serif" font-size="9">: 7315041208900001</text>
+      
+      <text x="0" y="38" font-family="Times, serif" font-size="9" font-weight="700">TTL</text>
+      <text x="70" y="38" font-family="Times, serif" font-size="9">: Pinrang, 12 Agustus 1990</text>
+      
+      <text x="0" y="52" font-family="Times, serif" font-size="9" font-weight="700">Alamat</text>
+      <text x="70" y="52" font-family="Times, serif" font-size="9">: Dusun Kamali, Desa Buttu Sawe</text>
+      
+      <text x="0" y="66" font-family="Times, serif" font-size="9" font-weight="700">Keperluan</text>
+      <text x="70" y="66" font-family="Times, serif" font-size="9">: Melamar Pekerjaan</text>
+    </g>
+
+    <!-- Paragraph 2 -->
+    <text x="24" y="238" font-family="Times, serif" font-size="8.5" font-weight="400" fill="#000000">Adalah benar penduduk Desa Buttu Sawe yang berdomisili pada</text>
+    <text x="24" y="248" font-family="Times, serif" font-size="8.5" font-weight="400" fill="#000000">alamat tersebut di atas. Demikian surat ini dibuat untuk digunakan.</text>
+
+    <!-- Signature Section (TTD Kades + QR Code + Official Stamp) -->
+    <g transform="translate(180, 265)">
+      <text x="50" y="12" font-family="Times, serif" font-size="9" fill="#000000" text-anchor="middle">Kamali, 17 Agustus 2026</text>
+      <text x="50" y="23" font-family="Times, serif" font-size="9" font-weight="700" fill="#000000" text-anchor="middle">KEPALA DESA BUTTU SAWE</text>
+
+      <!-- Signature Curve Mock & QR Code -->
+      <g transform="translate(15, 30)">
+        <!-- Digital QR Code -->
+        <rect width="36" height="36" fill="#f9f9f9" stroke="#1a5e35" stroke-width="1"/>
+        <rect x="4" y="4" width="8" height="8" fill="#1a5e35"/>
+        <rect x="24" y="4" width="8" height="8" fill="#1a5e35"/>
+        <rect x="4" y="24" width="8" height="8" fill="#1a5e35"/>
+        <rect x="16" y="16" width="4" height="4" fill="#1a5e35"/>
+        
+        <!-- Wet Signature Path -->
+        <path d="M42 28 Q55 10 65 24 T85 18 T95 28" fill="none" stroke="#003366" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M50 32 Q70 30 90 32" fill="none" stroke="#003366" stroke-width="1.8"/>
+      </g>
+
+      <text x="50" y="85" font-family="Times, serif" font-size="9.5" font-weight="700" fill="#000000" text-anchor="middle" text-decoration="underline">NURKHALIS, S.Pd.</text>
+      <text x="50" y="96" font-family="Times, serif" font-size="8" fill="#444444" text-anchor="middle">NIP. 19780512 200501 1 008</text>
+    </g>
+  </g>
+
+  <!-- Bottom Floating Action Bar -->
+  <g id="BottomPdfBar" transform="translate(24, 730)">
+    <rect width="327" height="52" rx="26" fill="#1a5e35" stroke="#ffffff" stroke-width="1"/>
+    <text x="163" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">⬇ UNDUH DOKUMEN PDF RESMI</text>
+  </g>
+
+  
+  <!-- Home Indicator Bar -->
+  <g id="HomeIndicator">
+    <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
+  </g>
+
+
+    </g>
+  </g>
+
+</svg>
