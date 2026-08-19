@@ -1,75 +1,74 @@
 <svg width="375" height="812" viewBox="0 0 375 812" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bold { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 800; }
+    .semi { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 600; }
+    .regular { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 400; }
+  </style>
+
   <rect width="375" height="812" fill="#f4f6f9"/>
+
+  <!-- Status Bar -->
+  <rect width="375" height="44" fill="#ffffff"/>
+  <text x="24" y="28" class="bold" font-size="14" fill="#1f2937">9:41</text>
+  <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#1f2937"/>
+  <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#1f2937"/>
+  <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+  <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#1f2937"/>
+  <path d="M366 21v4" stroke="#1f2937" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Toolbar with Logo & 'Masuk' Link -->
+  <rect y="44" width="375" height="56" fill="#ffffff"/>
+  <text x="20" y="78" class="bold" font-size="18" fill="#1a5e35">SINDESA</text>
+  <text x="355" y="78" class="bold" font-size="14" fill="#1a5e35" text-anchor="end">Masuk</text>
+
+  <!-- Banner Background (#1a5e35, height 180) -->
+  <rect y="100" width="375" height="150" fill="#1a5e35"/>
+  <text x="187" y="145" class="bold" font-size="20" fill="#ffffff" text-anchor="middle">Pendaftaran Akun Warga</text>
+  <text x="187" y="170" class="regular" font-size="12" fill="#E0E0E0" text-anchor="middle">Lengkapi formulir sesuai KTP dan KK Anda.</text>
+
+  <!-- Card 1: Data Kependudukan Utama (Overlaps banner by -24dp at y=200) -->
+  <rect x="16" y="200" width="343" height="560" rx="16" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
   
-  <g id="StatusBar">
-    <rect width="375" height="44" fill="none"/>
-    <text x="28" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">9:41</text>
-    <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#1f2937"/>
-    <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#1f2937"/>
-    <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#1f2937" stroke-width="1.5"/>
-    <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#1f2937"/>
-    <path d="M366 21v4" stroke="#1f2937" stroke-width="1.5" stroke-linecap="round"/>
-  </g>
+  <text x="36" y="235" class="bold" font-size="15" fill="#1a5e35">Data Kependudukan Utama</text>
 
+  <!-- Field 1: Nama Lengkap -->
+  <rect x="36" y="250" width="303" height="46" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+  <text x="50" y="278" class="regular" font-size="13" fill="#9ca3af">Nama Lengkap (Sesuai KTP)</text>
 
-  <!-- Header -->
-  <g id="RegisterHeader" transform="translate(20, 52)">
-    <circle cx="18" cy="18" r="18" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
-    <path d="M21 12l-6 6 6 6" stroke="#1f2937" stroke-width="2" stroke-linecap="round"/>
-    <text x="50" y="24" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="18" font-weight="800" fill="#1f2937">Registrasi Akun Warga</text>
-  </g>
+  <!-- Field 2: NIK (16 Digit) -->
+  <rect x="36" y="306" width="303" height="46" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+  <text x="50" y="334" class="regular" font-size="13" fill="#9ca3af">NIK (16 Digit)</text>
 
-  <!-- Register Card -->
-  <g id="RegisterCard" transform="translate(20, 105)">
-    <rect width="335" height="640" rx="20" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- Field 3: Nomor Kartu Keluarga -->
+  <rect x="36" y="362" width="303" height="46" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+  <text x="50" y="390" class="regular" font-size="13" fill="#9ca3af">Nomor Kartu Keluarga</text>
 
-    <!-- Field 1: NIK -->
-    <text x="20" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151">NOMOR INDUK KEPENDUDUKAN (NIK)</text>
-    <rect x="20" y="42" width="295" height="44" rx="10" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
-    <text x="36" y="69" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="400" fill="#9ca3af">16 Digit NIK sesuai KTP</text>
+  <!-- Field 4: Dropdown Agama & Jenis Kelamin -->
+  <rect x="36" y="418" width="145" height="46" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+  <text x="50" y="446" class="regular" font-size="13" fill="#374151">Agama</text>
+  <path d="M165 442l4 4 4-4" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/>
 
-    <!-- Field 2: Nama Lengkap -->
-    <text x="20" y="106" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151">NAMA LENGKAP</text>
-    <rect x="20" y="116" width="295" height="44" rx="10" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
-    <text x="36" y="143" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="400" fill="#9ca3af">Nama lengkap tanpa singkatan</text>
+  <rect x="194" y="418" width="145" height="46" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+  <text x="208" y="446" class="regular" font-size="13" fill="#374151">Jenis Kelamin</text>
+  <path d="M323 442l4 4 4-4" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/>
 
-    <!-- Field 3: WhatsApp / HP -->
-    <text x="20" y="180" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151">NOMOR WHATSAPP</text>
-    <rect x="20" y="190" width="295" height="44" rx="10" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
-    <text x="36" y="217" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="400" fill="#9ca3af">08xxxxxxxxxx</text>
+  <!-- Field 5: WhatsApp / HP -->
+  <rect x="36" y="474" width="303" height="46" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+  <text x="50" y="502" class="regular" font-size="13" fill="#9ca3af">Nomor Telepon / WA</text>
 
-    <!-- Field 4: Upload Foto KTP Asli -->
-    <text x="20" y="254" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151">FOTO KTP ASLI (VERIFIKASI PDP)</text>
-    <rect x="20" y="264" width="295" height="75" rx="12" fill="#fafafa" stroke="#cfa03f" stroke-width="1.5" stroke-dasharray="5 3"/>
-    <circle cx="167" cy="292" r="14" fill="#fef3c7"/>
-    <path d="M167 286v12M161 292l6-6 6 6" stroke="#cfa03f" stroke-width="2" stroke-linecap="round"/>
-    <text x="167" y="324" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10.5" font-weight="600" fill="#cfa03f" text-anchor="middle">Ambil Foto KTP Asli (Jelas &amp; Terbaca)</text>
+  <!-- Field 6: Foto KTP Asli Box -->
+  <rect x="36" y="530" width="303" height="60" rx="10" fill="#fafafa" stroke="#cfa03f" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <circle cx="56" cy="560" r="14" fill="#fef3c7"/>
+  <path d="M56 554v12M50 560l6-6 6 6" stroke="#cfa03f" stroke-width="2" stroke-linecap="round"/>
+  <text x="80" y="556" class="bold" font-size="12" fill="#333333">Foto KTP (Maks 2MB)</text>
+  <text x="80" y="572" class="regular" font-size="10" fill="#cfa03f">Pilih Foto Kamera / Galeri</text>
 
-    <!-- Field 5: Password -->
-    <text x="20" y="360" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151">KATA SANDI</text>
-    <rect x="20" y="370" width="295" height="44" rx="10" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
-    <text x="36" y="397" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="600" fill="#374151">••••••••••••</text>
+  <!-- Button: DAFTAR SEKARANG (#cfa03f, cornerRadius 30dp) -->
+  <rect x="36" y="610" width="303" height="56" rx="28" fill="#cfa03f"/>
+  <text x="187" y="645" class="bold" font-size="15" fill="#ffffff" text-anchor="middle">DAFTAR SEKARANG</text>
 
-    <!-- Field 6: Konfirmasi Password -->
-    <text x="20" y="434" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="700" fill="#374151">KONFIRMASI KATA SANDI</text>
-    <rect x="20" y="444" width="295" height="44" rx="10" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
-    <text x="36" y="471" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="600" fill="#374151">••••••••••••</text>
+  <text x="187" y="695" class="regular" font-size="11" fill="#757575" text-anchor="middle">Dengan mendaftar, Anda menyetujui kebijakan privasi desa.</text>
 
-    <!-- Button Daftar -->
-    <rect x="20" y="510" width="295" height="48" rx="24" fill="#cfa03f"/>
-    <text x="167" y="540" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">DAFTAR AKUN SEKARANG</text>
-
-    <!-- Login Link -->
-    <text x="167" y="585" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">
-      Sudah punya akun? <tspan font-weight="700" fill="#1a5e35">Masuk di sini</tspan>
-    </text>
-
-    <text x="167" y="615" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="9.5" font-weight="500" fill="#9ca3af" text-anchor="middle">Data PII terlindungi enkripsi standar UU PDP</text>
-  </g>
-
-  
-  <g id="HomeIndicator">
-    <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
-  </g>
-
+  <!-- Home Indicator -->
+  <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
 </svg>

@@ -1,84 +1,69 @@
 <svg width="375" height="812" viewBox="0 0 375 812" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="prof-header" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1a5e35"/>
-      <stop offset="100%" stop-color="#124124"/>
-    </linearGradient>
-  </defs>
+  <style>
+    .bold { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 800; }
+    .semi { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 600; }
+    .regular { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 400; }
+  </style>
 
   <rect width="375" height="812" fill="#f4f6f9"/>
-  <rect y="0" width="375" height="200" fill="url(#prof-header)"/>
+
+  <!-- Status Bar -->
+  <rect width="375" height="44" fill="#ffffff"/>
+  <text x="24" y="28" class="bold" font-size="14" fill="#1f2937">9:41</text>
+  <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#1f2937"/>
+  <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#1f2937"/>
+  <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+  <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#1f2937"/>
+  <path d="M366 21v4" stroke="#1f2937" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Toolbar: Title "Pengaturan Profil" -->
+  <rect y="44" width="375" height="56" fill="#ffffff"/>
+  <path d="M20 64h18M20 72h18M20 80h18" stroke="#1a5e35" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="54" y="79" class="bold" font-size="18" fill="#1f2937">Pengaturan Profil</text>
+
+  <!-- CARD 1: Avatar & Info Dasar (MaterialCardView cornerRadius 16dp) -->
+  <rect x="16" y="112" width="343" height="180" rx="16" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
   
-  <!-- Status Bar White -->
-  <g id="StatusBarWhite">
-    <rect width="375" height="44" fill="none"/>
-    <text x="28" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff">9:41</text>
-    <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#ffffff"/>
-    <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#ffffff"/>
-    <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#ffffff" stroke-width="1.5"/>
-    <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#ffffff"/>
-    <path d="M366 21v4" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-  </g>
-
-
-  <!-- Header Title -->
-  <text x="187" y="75" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="18" font-weight="800" fill="#ffffff" text-anchor="middle">Profil Akun Warga</text>
-
-  <!-- Profile Card Container -->
-  <g id="ProfileCard" transform="translate(20, 110)">
-    <rect width="335" height="610" rx="20" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
-
-    <!-- Avatar with Edit Badge -->
-    <circle cx="167" cy="40" r="42" fill="#cfa03f" stroke="#ffffff" stroke-width="4"/>
-    <text x="167" y="49" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="24" font-weight="900" fill="#ffffff" text-anchor="middle">AF</text>
-    <!-- Camera Icon Badge -->
-    <circle cx="198" cy="68" r="14" fill="#1a5e35" stroke="#ffffff" stroke-width="2"/>
-    <path d="M194 68h8M198 64v8" stroke="#ffffff" stroke-width="2"/>
-
-    <!-- Citizen Name & Status -->
-    <text x="167" y="106" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="18" font-weight="800" fill="#1f2937" text-anchor="middle">Ahmad Faisal</text>
-    <rect x="107" y="116" width="120" height="22" rx="11" fill="#e8f5e9"/>
-    <text x="167" y="131" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="700" fill="#1a5e35" text-anchor="middle">✓ AKUN TERVERIFIKASI</text>
-
-    <!-- Personal Biodata List -->
-    <g transform="translate(20, 160)">
-      <!-- Row 1: NIK -->
-      <text x="0" y="14" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#6b7280">NOMOR INDUK KEPENDUDUKAN (NIK)</text>
-      <text x="0" y="32" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">7315041208900001</text>
-      <line x1="0" y1="44" x2="295" y2="44" stroke="#f3f4f6" stroke-width="1"/>
-
-      <!-- Row 2: Tempat Tgl Lahir -->
-      <text x="0" y="66" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#6b7280">TEMPAT, TANGGAL LAHIR</text>
-      <text x="0" y="84" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">Pinrang, 12 Agustus 1990</text>
-      <line x1="0" y1="96" x2="295" y2="96" stroke="#f3f4f6" stroke-width="1"/>
-
-      <!-- Row 3: Alamat -->
-      <text x="0" y="118" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#6b7280">ALAMAT DOMISILI</text>
-      <text x="0" y="136" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">Dusun Kamali RT 002 / RW 001</text>
-      <line x1="0" y1="148" x2="295" y2="148" stroke="#f3f4f6" stroke-width="1"/>
-
-      <!-- Row 4: No HP -->
-      <text x="0" y="170" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#6b7280">NOMOR WHATSAPP / HP</text>
-      <text x="0" y="188" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">0812-3456-7890</text>
-      <line x1="0" y1="200" x2="295" y2="200" stroke="#f3f4f6" stroke-width="1"/>
-
-      <!-- Row 5: Email -->
-      <text x="0" y="222" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="600" fill="#6b7280">EMAIL</text>
-      <text x="0" y="240" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">warga@sindesa-buttusawe.com</text>
-    </g>
-
-    <!-- Action Buttons -->
-    <rect x="20" y="440" width="295" height="46" rx="23" fill="#1a5e35"/>
-    <text x="167" y="468" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">EDIT BIODATA PROFIL</text>
-
-    <rect x="20" y="496" width="295" height="46" rx="23" fill="#ffffff" stroke="#cfa03f" stroke-width="1.5"/>
-    <text x="167" y="524" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#cfa03f" text-anchor="middle">UBAH KATA SANDI</text>
-  </g>
-
+  <circle cx="187" cy="165" r="40" fill="#cfa03f"/>
+  <text x="187" y="173" class="bold" font-size="22" fill="#ffffff" text-anchor="middle">AF</text>
   
-  <!-- Home Indicator Bar -->
-  <g id="HomeIndicator">
-    <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
-  </g>
+  <!-- Camera FAB (#1a5e35, size 36dp) -->
+  <circle cx="218" cy="192" r="14" fill="#1a5e35"/>
+  <circle cx="218" cy="192" r="6" fill="#ffffff"/>
 
+  <text x="187" y="235" class="bold" font-size="18" fill="#333333" text-anchor="middle">Ahmad Faisal</text>
+  <text x="187" y="255" class="regular" font-size="13" fill="#757575" text-anchor="middle">warga@email.com</text>
+
+  <!-- CARD 2: Data Kependudukan -->
+  <rect x="16" y="304" width="343" height="340" rx="16" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="32" y="334" class="bold" font-size="15" fill="#1a5e35">Data Kependudukan</text>
+
+  <!-- NIK OutlinedBox -->
+  <rect x="32" y="348" width="311" height="44" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+  <text x="44" y="375" class="semi" font-size="13" fill="#1f2937">7315041208900001</text>
+  <text x="42" y="344" class="regular" font-size="10" fill="#6b7280">NIK</text>
+
+  <!-- No. Kartu Keluarga -->
+  <rect x="32" y="404" width="311" height="44" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+  <text x="44" y="431" class="semi" font-size="13" fill="#1f2937">7315040101010001</text>
+  <text x="42" y="400" class="regular" font-size="10" fill="#6b7280">No. Kartu Keluarga</text>
+
+  <!-- Nama Lengkap -->
+  <rect x="32" y="460" width="311" height="44" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+  <text x="44" y="487" class="semi" font-size="13" fill="#1f2937">Ahmad Faisal</text>
+
+  <!-- No Handphone -->
+  <rect x="32" y="516" width="311" height="44" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+  <text x="44" y="543" class="semi" font-size="13" fill="#1f2937">0812-3456-7890</text>
+
+  <!-- Alamat Lengkap -->
+  <rect x="32" y="572" width="311" height="54" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+  <text x="44" y="596" class="semi" font-size="12" fill="#1f2937">Dusun Kamali RT 002 / RW 001, Desa Buttu Sawe</text>
+
+  <!-- Tombol SIMPAN PERUBAHAN (#cfa03f, height 56dp, cornerRadius 12dp) -->
+  <rect x="16" y="660" width="343" height="56" rx="12" fill="#cfa03f"/>
+  <text x="187" y="694" class="bold" font-size="15" fill="#ffffff" text-anchor="middle">SIMPAN PERUBAHAN</text>
+
+  <!-- Home Indicator -->
+  <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
 </svg>

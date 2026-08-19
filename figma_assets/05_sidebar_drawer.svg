@@ -1,98 +1,63 @@
 <svg width="375" height="812" viewBox="0 0 375 812" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="drawer-header" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1a5e35"/>
-      <stop offset="100%" stop-color="#124124"/>
-    </linearGradient>
-  </defs>
+  <style>
+    .bold { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 800; }
+    .semi { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 600; }
+    .regular { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 400; }
+  </style>
 
-  <!-- Blurred Background Base -->
+  <!-- Dark Backdrop Overlay (Right Side) -->
   <rect width="375" height="812" fill="rgba(0,0,0,0.55)"/>
 
-  <!-- Left Drawer Body -->
-  <rect width="300" height="812" fill="#ffffff"/>
-  
+  <!-- Left Drawer Body (Width 280dp, Background #11442b / dark green texture) -->
+  <rect width="280" height="812" fill="#11442b"/>
+
   <!-- Status Bar White -->
-  <g id="StatusBarWhite">
-    <rect width="375" height="44" fill="none"/>
-    <text x="28" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#ffffff">9:41</text>
-    <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#ffffff"/>
-    <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#ffffff"/>
-    <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#ffffff" stroke-width="1.5"/>
-    <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#ffffff"/>
-    <path d="M366 21v4" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-  </g>
+  <text x="24" y="28" class="bold" font-size="14" fill="#ffffff">9:41</text>
+  <path d="M225 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#ffffff"/>
 
+  <!-- Logo Sidebar -->
+  <text x="140" y="75" class="bold" font-size="20" fill="#ffffff" text-anchor="middle">SINDESA</text>
 
-  <!-- Drawer Header Profile -->
-  <rect y="0" width="300" height="190" fill="url(#drawer-header)"/>
+  <!-- Info Profil Box (Click to edit) -->
+  <rect x="16" y="95" width="248" height="64" rx="12" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="48" cy="127" r="20" fill="#cfa03f"/>
+  <text x="48" y="132" class="bold" font-size="13" fill="#ffffff" text-anchor="middle">AF</text>
   
-  <circle cx="55" cy="85" r="28" fill="#cfa03f" stroke="#ffffff" stroke-width="3"/>
-  <text x="55" y="91" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">AF</text>
-  
-  <text x="24" y="135" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#ffffff">Ahmad Faisal</text>
-  <text x="24" y="153" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="400" fill="#cfa03f">NIK: 7315041208900001</text>
-  <text x="24" y="170" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="400" fill="#e0e0e0">warga@sindesa-buttusawe.com</text>
+  <text x="78" y="122" class="bold" font-size="14" fill="#ffffff">Ahmad Faisal</text>
+  <text x="78" y="140" class="regular" font-size="11" fill="rgba(255,255,255,0.7)">NIK: 7315041208900001</text>
 
-  <!-- Menu List -->
-  <g id="DrawerMenu" transform="translate(16, 210)">
-    <!-- Item 1: Beranda (Active) -->
-    <rect width="268" height="46" rx="10" fill="#e8f5e9"/>
-    <path d="M28 23L20 29v7h5v-5h6v5h5v-7z" fill="#1a5e35"/>
-    <text x="52" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="700" fill="#1a5e35">Beranda Utama</text>
+  <!-- Menu Links List -->
+  <!-- Beranda (Active, color #cfa03f) -->
+  <text x="24" y="195" class="bold" font-size="15" fill="#cfa03f">Beranda</text>
 
-    <!-- Item 2: Layanan -->
-    <g transform="translate(0, 52)">
-      <path d="M20 15h16v14H20zM24 20h8" stroke="#4b5563" stroke-width="1.8"/>
-      <text x="52" y="26" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Layanan Pengajuan Surat</text>
-    </g>
+  <!-- Riwayat Surat -->
+  <text x="24" y="235" class="semi" font-size="14" fill="#E0E0E0">Riwayat Surat</text>
 
-    <!-- Item 3: Riwayat -->
-    <g transform="translate(0, 104)">
-      <path d="M28 15a7 7 0 1 0 7 7h-3" stroke="#4b5563" stroke-width="1.8" fill="none"/>
-      <text x="52" y="26" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Riwayat Pengajuan</text>
-      <!-- Badge -->
-      <circle cx="245" cy="22" r="10" fill="#1a5e35"/>
-      <text x="245" y="26" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">2</text>
-    </g>
+  <!-- Section: BUAT SURAT BARU -->
+  <text x="24" y="280" class="bold" font-size="11" fill="rgba(255,255,255,0.6)">BUAT SURAT BARU</text>
 
-    <!-- Item 4: Profil -->
-    <g transform="translate(0, 156)">
-      <circle cx="28" cy="20" r="4" stroke="#4b5563" stroke-width="1.8" fill="none"/>
-      <path d="M21 30c0-3 3.5-5 7-5s7 2 7 5" stroke="#4b5563" stroke-width="1.8" fill="none"/>
-      <text x="52" y="26" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Profil Saya</text>
-    </g>
+  <!-- 1. Adm. Kependudukan -->
+  <text x="24" y="315" class="semi" font-size="14" fill="#E0E0E0">Adm. Kependudukan</text>
+  <text x="40" y="340" class="regular" font-size="12" fill="#cfa03f">• Pengantar KTP</text>
+  <text x="40" y="362" class="regular" font-size="12" fill="#cfa03f">• Pengantar KK</text>
+  <text x="40" y="384" class="regular" font-size="12" fill="#cfa03f">• Akta Kelahiran</text>
+  <text x="40" y="406" class="regular" font-size="12" fill="#cfa03f">• Keterangan Pindah</text>
 
-    <!-- Separator -->
-    <line x1="12" y1="216" x2="256" y2="216" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- 2. Keterangan Umum -->
+  <text x="24" y="445" class="semi" font-size="14" fill="#E0E0E0">Keterangan Umum</text>
+  <text x="40" y="470" class="regular" font-size="12" fill="#cfa03f">• Keterangan Domisili</text>
+  <text x="40" y="492" class="regular" font-size="12" fill="#cfa03f">• Keterangan Usaha</text>
+  <text x="40" y="514" class="regular" font-size="12" fill="#cfa03f">• Pengantar SKCK</text>
 
-    <!-- Item 5: Panduan -->
-    <g transform="translate(0, 228)">
-      <circle cx="28" cy="22" r="7" stroke="#4b5563" stroke-width="1.8" fill="none"/>
-      <path d="M28 19v3M28 25v1" stroke="#4b5563" stroke-width="2"/>
-      <text x="52" y="26" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Panduan &amp; Keamanan</text>
-    </g>
+  <!-- 3. Layanan Perizinan -->
+  <text x="24" y="555" class="semi" font-size="14" fill="#E0E0E0">Layanan Perizinan</text>
+  <text x="40" y="580" class="regular" font-size="12" fill="#cfa03f">• Izin Keramaian</text>
 
-    <!-- Item 6: Tentang -->
-    <g transform="translate(0, 280)">
-      <circle cx="28" cy="22" r="7" stroke="#4b5563" stroke-width="1.8" fill="none"/>
-      <text x="52" y="26" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Tentang Desa Buttu Sawe</text>
-    </g>
+  <!-- 4. Sosial & Ekonomi -->
+  <text x="24" y="620" class="semi" font-size="14" fill="#E0E0E0">Sosial &amp; Ekonomi</text>
+  <text x="40" y="645" class="regular" font-size="12" fill="#cfa03f">• Ket. Tidak Mampu (SKTM)</text>
 
-    <!-- Item 7: Keluar (Logout) -->
-    <g transform="translate(0, 480)">
-      <rect width="268" height="44" rx="10" fill="#fee2e2"/>
-      <path d="M26 22h8m-3-3l3 3-3 3M23 16h-4v12h4" stroke="#dc2626" stroke-width="2" stroke-linecap="round"/>
-      <text x="52" y="27" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="700" fill="#dc2626">Keluar Akun</text>
-    </g>
-  </g>
-
-  <!-- Version Footer -->
-  <text x="150" y="770" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="400" fill="#9ca3af" text-anchor="middle">SINDESA Mobile v1.0.0 (Build 2026)</text>
-  
-  <!-- Home Indicator Bar -->
-  <g id="HomeIndicator">
-    <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
-  </g>
-
+  <!-- Tombol Keluar (Logout Button #33F44336 with #F44336 stroke) -->
+  <rect x="20" y="720" width="240" height="46" rx="8" fill="rgba(244,67,54,0.2)" stroke="#F44336" stroke-width="1"/>
+  <text x="140" y="748" class="bold" font-size="14" fill="#FFCDD2" text-anchor="middle">Keluar</text>
 </svg>

@@ -1,108 +1,88 @@
 <svg width="375" height="812" viewBox="0 0 375 812" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <filter id="card-shadow" x="-4" y="0" width="383" height="820" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.08"/>
-    </filter>
-    <linearGradient id="hero-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1a5e35"/>
-      <stop offset="100%" stop-color="#124124"/>
-    </linearGradient>
-  </defs>
+  <style>
+    .bold { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 800; }
+    .semi { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 600; }
+    .regular { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 400; }
+  </style>
 
   <!-- Background -->
   <rect width="375" height="812" fill="#f9f9f9"/>
-  
+
   <!-- Status Bar -->
-  <g id="StatusBar">
-    <rect width="375" height="44" fill="none"/>
-    <text x="28" y="28" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="14" font-weight="700" fill="#1f2937">9:41</text>
-    <!-- Cellular Signal -->
-    <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#1f2937"/>
-    <!-- Wifi -->
-    <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#1f2937"/>
-    <!-- Battery -->
-    <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#1f2937" stroke-width="1.5"/>
-    <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#1f2937"/>
-    <path d="M366 21v4" stroke="#1f2937" stroke-width="1.5" stroke-linecap="round"/>
-  </g>
+  <rect width="375" height="44" fill="#ffffff"/>
+  <text x="24" y="28" class="bold" font-size="14" fill="#1f2937">9:41</text>
+  <path d="M312 24h3v6h-3zm5-2h3v8h-3zm5-3h3v11h-3zm5-3h3v14h-3z" fill="#1f2937"/>
+  <path d="M335 17a12 12 0 0 1 12 0l-6 8z" fill="#1f2937"/>
+  <rect x="345" y="18" width="20" height="10" rx="3" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+  <rect x="347" y="20" width="13" height="6" rx="1.5" fill="#1f2937"/>
+  <path d="M366 21v4" stroke="#1f2937" stroke-width="1.5" stroke-linecap="round"/>
 
-
-  <!-- Header Toolbar -->
+  <!-- Toolbar (White with Logo) -->
   <rect y="44" width="375" height="56" fill="#ffffff"/>
-  <rect x="20" y="58" width="110" height="28" rx="6" fill="#1a5e35" opacity="0.1"/>
-  <text x="32" y="77" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="16" font-weight="800" fill="#1a5e35">SINDESA</text>
-  <text x="140" y="77" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="500" fill="#6b7280">Buttu Sawe</text>
+  <text x="24" y="79" class="bold" font-size="20" fill="#1a5e35">SINDESA</text>
+  <line x1="0" y1="100" x2="375" y2="100" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- Hero Section -->
-  <rect y="100" width="375" height="230" fill="url(#hero-grad)"/>
-  
-  <!-- Cutout Circle (Village Photo Mock) -->
-  <circle cx="60" cy="215" r="75" fill="#ffffff" stroke="rgba(255,255,255,0.3)" stroke-width="6"/>
-  <circle cx="60" cy="215" r="70" fill="#2d7a46"/>
-  <path d="M20 250 C40 210, 80 210, 100 250 Z" fill="#cfa03f"/>
-  <circle cx="60" cy="195" r="22" fill="#ffffff"/>
+  <!-- Hero Background (#1a5e35, height 250) -->
+  <rect y="100" width="375" height="230" fill="#1a5e35"/>
 
-  <!-- Hero Text -->
-  <text x="150" y="180" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="19" font-weight="800" fill="#ffffff">DIGITALISASI</text>
-  <text x="150" y="204" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="19" font-weight="800" fill="#cfa03f">PELAYANAN DESA</text>
-  <text x="150" y="230" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="400" fill="#e0e0e0">Administrasi cepat, mudah &amp;</text>
-  <text x="150" y="245" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="11" font-weight="400" fill="#e0e0e0">resmi langsung dari genggaman.</text>
+  <!-- Circular Village Image Mockup (Left) -->
+  <circle cx="50" cy="205" r="70" fill="#ffffff" stroke="rgba(255,255,255,0.3)" stroke-width="6"/>
+  <circle cx="50" cy="205" r="64" fill="#2d7a46"/>
+  <path d="M10 240 C30 200, 70 200, 90 240 Z" fill="#cfa03f"/>
+  <circle cx="50" cy="185" r="20" fill="#ffffff"/>
 
-  <!-- Floating Buttons -->
-  <g id="FloatingButtons" transform="translate(38, 305)">
-    <!-- Login Button -->
-    <rect width="140" height="48" rx="24" fill="#ffffff" stroke="#2e7d32" stroke-width="2"/>
-    <text x="70" y="29" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="700" fill="#2e7d32" text-anchor="middle">Login</text>
-    
-    <!-- Register Button -->
-    <rect x="160" width="140" height="48" rx="24" fill="#cfa03f"/>
-    <text x="230" y="29" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Register</text>
-  </g>
+  <!-- Hero Text (Right) -->
+  <text x="145" y="180" class="bold" font-size="18" fill="#ffffff">DIGITALISASI</text>
+  <text x="145" y="202" class="bold" font-size="18" fill="#ffffff">PELAYANAN DESA</text>
+  <text x="145" y="226" class="regular" font-size="11" fill="#E0E0E0">Mewujudkan administrasi digital</text>
+  <text x="145" y="240" class="regular" font-size="11" fill="#E0E0E0">yang cepat dan mudah diakses.</text>
 
-  <!-- Layanan Desa Title -->
-  <text x="187" y="395" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="18" font-weight="800" fill="#1a5e35" text-anchor="middle">Layanan Desa Kami</text>
-  <text x="187" y="415" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="400" fill="#6b7280" text-anchor="middle">Administrasi &amp; perizinan Desa Buttu Sawe</text>
+  <!-- Login & Register Floating Buttons (Overlap at y=305) -->
+  <!-- Button Login -->
+  <rect x="38" y="305" width="140" height="48" rx="24" fill="#ffffff" stroke="#2e7d32" stroke-width="2"/>
+  <text x="108" y="335" class="bold" font-size="15" fill="#2e7d32" text-anchor="middle">Login</text>
 
-  <!-- Grid Layanan 2x2 -->
-  <g id="GridLayanan" transform="translate(20, 435)">
-    <!-- Card 1 -->
-    <rect width="160" height="110" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
-    <circle cx="80" cy="40" r="22" fill="#e8f5e9"/>
-    <path d="M72 45c0-4 4-7 8-7s8 3 8 7M80 34a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" fill="#1a5e35"/>
-    <text x="80" y="78" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Administrasi</text>
-    <text x="80" y="94" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Kependudukan</text>
+  <!-- Button Register -->
+  <rect x="196" y="305" width="140" height="48" rx="24" fill="#cfa03f"/>
+  <text x="266" y="335" class="bold" font-size="15" fill="#ffffff" text-anchor="middle">Register</text>
 
-    <!-- Card 2 -->
-    <rect x="175" width="160" height="110" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
-    <circle cx="255" cy="40" r="22" fill="#fef3c7"/>
-    <path d="M248 30h14v20h-14zM252 35h6" stroke="#cfa03f" stroke-width="2" stroke-linecap="round"/>
-    <text x="255" y="78" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Layanan</text>
-    <text x="255" y="94" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Perizinan Desa</text>
+  <!-- Section Title: Layanan Desa Kami -->
+  <text x="187" y="388" class="bold" font-size="19" fill="#1a5e35" text-anchor="middle">Layanan Desa Kami</text>
+  <text x="187" y="408" class="regular" font-size="12" fill="#757575" text-anchor="middle">Kebutuhan administrasi &amp; perizinan di Desa Buttu Sawe.</text>
 
-    <!-- Card 3 -->
-    <rect y="125" width="160" height="110" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
-    <circle cx="80" cy="165" r="22" fill="#eff6ff"/>
-    <path d="M73 158h14v14H73zM76 163h8" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
-    <text x="80" y="203" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Surat Keterangan</text>
-    <text x="80" y="219" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Umum</text>
+  <!-- 4 Cards Grid (2x2) -->
+  <!-- Card 1: Kependudukan -->
+  <rect x="20" y="425" width="160" height="115" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <circle cx="100" cy="460" r="20" fill="#e8f5e9"/>
+  <path d="M93 468c0-3.5 3.5-6 7-6s7 2.5 7 6M100 458a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" fill="#1a5e35"/>
+  <text x="100" y="498" class="bold" font-size="12" fill="#1a5e35" text-anchor="middle">Administrasi</text>
+  <text x="100" y="514" class="bold" font-size="12" fill="#1a5e35" text-anchor="middle">Kependudukan</text>
 
-    <!-- Card 4 -->
-    <rect x="175" y="125" width="160" height="110" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
-    <circle cx="255" cy="165" r="22" fill="#fdf2f8"/>
-    <path d="M248 165c0-4 4-6 7-6s7 2 7 6M255 156a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" fill="#db2777"/>
-    <text x="255" y="203" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Layanan</text>
-    <text x="255" y="219" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="12" font-weight="700" fill="#1a5e35" text-anchor="middle">Sosial Desa</text>
-  </g>
+  <!-- Card 2: Perizinan -->
+  <rect x="195" y="425" width="160" height="115" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <circle cx="275" cy="460" r="20" fill="#e8f5e9"/>
+  <rect x="267" y="452" width="16" height="16" rx="2" fill="#1a5e35"/>
+  <text x="275" y="498" class="bold" font-size="12" fill="#1a5e35" text-anchor="middle">Layanan</text>
+  <text x="275" y="514" class="bold" font-size="12" fill="#1a5e35" text-anchor="middle">Perizinan Desa</text>
 
-  <!-- Footer -->
-  <rect y="695" width="375" height="117" fill="#0d3320"/>
-  <text x="24" y="725" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="13" font-weight="700" fill="#cfa03f">Hubungi Kami</text>
-  <text x="24" y="743" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="10" font-weight="400" fill="#ffffff">Kantor Desa Buttu Sawe, Kec. Duampanua, Pinrang</text>
-  <text x="187" y="775" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="9" font-weight="400" fill="rgba(255,255,255,0.7)" text-anchor="middle">© 2026 SINDESA Desa Buttu Sawe. All rights reserved.</text>
-  
-  <!-- Home Indicator Bar -->
-  <g id="HomeIndicator">
-    <rect x="120" y="798" width="135" height="4" rx="2" fill="#1f2937" opacity="0.3"/>
-  </g>
+  <!-- Card 3: Surat Keterangan Umum -->
+  <rect x="20" y="552" width="160" height="115" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <circle cx="100" cy="587" r="20" fill="#e8f5e9"/>
+  <path d="M94 582h12v12H94zM97 586h6" stroke="#1a5e35" stroke-width="2"/>
+  <text x="100" y="625" class="bold" font-size="12" fill="#1a5e35" text-anchor="middle">Surat Keterangan</text>
+  <text x="100" y="641" class="bold" font-size="12" fill="#1a5e35" text-anchor="middle">Umum</text>
 
+  <!-- Card 4: Layanan Sosial -->
+  <rect x="195" y="552" width="160" height="115" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <circle cx="275" cy="587" r="20" fill="#e8f5e9"/>
+  <path d="M268 592c0-3.5 3.5-5.5 7-5.5s7 2 7 5.5M275 583a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" fill="#1a5e35"/>
+  <text x="275" y="625" class="bold" font-size="12" fill="#1a5e35" text-anchor="middle">Layanan</text>
+  <text x="275" y="641" class="bold" font-size="12" fill="#1a5e35" text-anchor="middle">Sosial Desa</text>
+
+  <!-- Footer (#0d3320) -->
+  <rect y="685" width="375" height="127" fill="#0d3320"/>
+  <text x="24" y="715" class="bold" font-size="14" fill="#cfa03f">Hubungi Kami</text>
+  <text x="24" y="734" class="regular" font-size="11" fill="#ffffff">Kantor Desa Buttu Sawe, Kec. Duampanua, Kab. Pinrang</text>
+  <text x="24" y="750" class="regular" font-size="10" fill="#e0e0e0">email: layanan@desabuttusawe.id • WA: 0812-3456-7890</text>
+  <text x="187" y="780" class="regular" font-size="9" fill="rgba(255,255,255,0.6)" text-anchor="middle">© 2026 SINDESA Desa Buttu Sawe. All rights reserved.</text>
 </svg>
