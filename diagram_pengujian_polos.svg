@@ -1,0 +1,254 @@
+<svg width="1200" height="980" viewBox="0 0 1200 980" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font-family: 'Times New Roman', Times, serif; font-size: 20px; font-weight: bold; fill: #000000; }
+    .header-box-title { font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #000000; text-anchor: middle; }
+    .node-title { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #000000; }
+    .node-text { font-family: Arial, sans-serif; font-size: 11px; fill: #000000; line-height: 1.4; }
+    .oval-text { font-family: Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #000000; text-anchor: middle; }
+    .loop-text { font-family: Arial, sans-serif; font-size: 11px; fill: #000000; text-anchor: middle; }
+  </style>
+
+  <!-- Background White -->
+  <rect width="1200" height="980" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="45" class="title">3.3.4 Pengujian Aplikasi</text>
+
+  <!-- Markers for Arrows -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#000000"/>
+    </marker>
+  </defs>
+
+  <!-- ========================================================================= -->
+  <!-- KOLOM 1: ANALISIS STATIC APK (MobSF) -->
+  <!-- ========================================================================= -->
+  <!-- Outer Dashed Container -->
+  <rect x="40" y="70" width="340" height="740" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-dasharray="6 4"/>
+  
+  <!-- Header 1 -->
+  <rect x="55" y="85" width="310" height="44" fill="#f2f2f2" stroke="#000000" stroke-width="1.5"/>
+  <text x="210" y="103" class="header-box-title">1) Analisis Static APK</text>
+  <text x="210" y="120" class="header-box-title">Menggunakan MobSF</text>
+
+  <!-- Mulai 1 -->
+  <rect x="160" y="145" width="100" height="30" rx="15" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="210" y="164" class="oval-text">Mulai</text>
+
+  <!-- Arrow Mulai -> Input 1 -->
+  <line x1="210" y1="175" x2="210" y2="195" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Input 1 -->
+  <rect x="65" y="195" width="290" height="52" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="80" y="215" class="node-title">Input</text>
+  <text x="80" y="233" class="node-text">• File APK aplikasi Sindesa</text>
+
+  <!-- Arrow Input 1 -> Proses 1 -->
+  <line x1="210" y1="247" x2="210" y2="267" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Proses Analisis Static 1 -->
+  <rect x="65" y="267" width="290" height="52" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="80" y="287" class="node-title">Proses Analisis Static</text>
+  <text x="80" y="305" class="node-text">• oleh MobSF</text>
+
+  <!-- Arrow Proses 1 -> Pemeriksaan 1 -->
+  <line x1="210" y1="319" x2="210" y2="339" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Pemeriksaan Static Analysis 1 -->
+  <rect x="65" y="339" width="290" height="175" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="80" y="358" class="node-title">Pemeriksaan Static Analysis</text>
+  <text x="80" y="375" class="node-text">• Informasi Aplikasi</text>
+  <text x="80" y="390" class="node-text">• Permission (Dangerous Permission)</text>
+  <text x="80" y="405" class="node-text">• Keamanan Kode (Code Analysis)</text>
+  <text x="80" y="420" class="node-text">• Kriptografi (Weak Crypto)</text>
+  <text x="80" y="435" class="node-text">• Keamanan Jaringan</text>
+  <text x="80" y="450" class="node-text">• Konfigurasi Manifest</text>
+  <text x="80" y="465" class="node-text">• SSL Bypass</text>
+  <text x="80" y="480" class="node-text">• Root Detection</text>
+  <text x="80" y="495" class="node-text">• Malware/Domain Check &amp; Risk Score</text>
+
+  <!-- Arrow Pemeriksaan 1 -> Output 1 -->
+  <line x1="210" y1="514" x2="210" y2="534" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Output 1 -->
+  <rect x="65" y="534" width="290" height="68" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="80" y="554" class="node-title">Output</text>
+  <text x="80" y="571" class="node-text">Laporan Hasil Analisis Static</text>
+  <text x="80" y="587" class="node-text">(Security Score, Temuan Kerentanan, Risk Level)</text>
+
+  <!-- Arrow Output 1 -> Tindak Lanjut 1 -->
+  <line x1="210" y1="602" x2="210" y2="622" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Tindak Lanjut 1 -->
+  <rect x="65" y="622" width="290" height="60" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="80" y="642" class="node-title">Tindak Lanjut (Jika Diperlukan)</text>
+  <text x="80" y="659" class="node-text">Perbaikan/Hardening pada aplikasi</text>
+  <text x="80" y="673" class="node-text">berdasarkan temuan</text>
+
+  <!-- Arrow Tindak Lanjut 1 -> Selesai 1 -->
+  <line x1="210" y1="682" x2="210" y2="702" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Selesai 1 -->
+  <rect x="135" y="702" width="150" height="30" rx="15" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="210" y="721" class="oval-text">Selesai (Static Analysis)</text>
+
+
+  <!-- ========================================================================= -->
+  <!-- KOLOM 2: ANALISIS DYNAMIC API (OWASP ZAP) -->
+  <!-- ========================================================================= -->
+  <!-- Outer Dashed Container -->
+  <rect x="430" y="70" width="340" height="740" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-dasharray="6 4"/>
+
+  <!-- Header 2 -->
+  <rect x="445" y="85" width="310" height="44" fill="#f2f2f2" stroke="#000000" stroke-width="1.5"/>
+  <text x="600" y="103" class="header-box-title">2) Analisis Dynamic API</text>
+  <text x="600" y="120" class="header-box-title">Menggunakan OWASP ZAP</text>
+
+  <!-- Mulai 2 -->
+  <rect x="550" y="145" width="100" height="30" rx="15" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="600" y="164" class="oval-text">Mulai</text>
+
+  <!-- Arrow Mulai -> Input 2 -->
+  <line x1="600" y1="175" x2="600" y2="195" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Input 2 -->
+  <rect x="455" y="195" width="290" height="52" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="470" y="215" class="node-title">Input</text>
+  <text x="470" y="233" class="node-text">• Endpoint API aplikasi Sindesa (Base URL)</text>
+
+  <!-- Arrow Input 2 -> Konfigurasi 2 -->
+  <line x1="600" y1="247" x2="600" y2="267" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Konfigurasi OWASP ZAP 2 -->
+  <rect x="455" y="267" width="290" height="72" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="470" y="286" class="node-title">Konfigurasi OWASP ZAP</text>
+  <text x="470" y="303" class="node-text">• Set Target</text>
+  <text x="470" y="318" class="node-text">• Konfigurasi Proxy (Intercept ON)</text>
+  <text x="470" y="332" class="node-text">• Verifikasi koneksi</text>
+
+  <!-- Arrow Konfigurasi 2 -> Proses Pemindaian 2 -->
+  <line x1="600" y1="339" x2="600" y2="359" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Proses Pemindaian 2 -->
+  <rect x="455" y="359" width="290" height="56" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="470" y="378" class="node-title">Proses Pemindaian (Scanning)</text>
+  <text x="470" y="395" class="node-text">• Automated Scan</text>
+  <text x="470" y="409" class="node-text">• Active Scan</text>
+
+  <!-- Arrow Proses Pemindaian 2 -> Hasil Pemindaian 2 -->
+  <line x1="600" y1="415" x2="600" y2="435" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Hasil Pemindaian (Alert Kerentanan) 2 -->
+  <rect x="455" y="435" width="290" height="120" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="470" y="454" class="node-title">Hasil Pemindaian (Alert Kerentanan)</text>
+  <text x="470" y="471" class="node-text">Informasi:</text>
+  <text x="470" y="487" class="node-text">• Nama Kerentanan</text>
+  <text x="470" y="502" class="node-text">• Risk Level (High, Medium, Low)</text>
+  <text x="470" y="517" class="node-text">• Deskripsi</text>
+  <text x="470" y="532" class="node-text">• Lokasi / Endpoint</text>
+
+  <!-- Arrow Hasil Pemindaian 2 -> Output 2 -->
+  <line x1="600" y1="555" x2="600" y2="575" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Output 2 -->
+  <rect x="455" y="575" width="290" height="56" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="470" y="595" class="node-title">Output</text>
+  <text x="470" y="612" class="node-text">Laporan Hasil Analisis Dynamic</text>
+  <text x="470" y="625" class="node-text">Jumlah Alert &amp; Risk Level</text>
+
+  <!-- Arrow Output 2 -> Selesai 2 -->
+  <line x1="600" y1="631" x2="600" y2="702" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Selesai 2 -->
+  <rect x="520" y="702" width="160" height="30" rx="15" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="600" y="721" class="oval-text">Selesai (Dynamic Analysis)</text>
+
+
+  <!-- ========================================================================= -->
+  <!-- KOLOM 3: EVALUASI HASIL PENGUJIAN -->
+  <!-- ========================================================================= -->
+  <!-- Outer Dashed Container -->
+  <rect x="820" y="70" width="340" height="740" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-dasharray="6 4"/>
+
+  <!-- Header 3 -->
+  <rect x="835" y="85" width="310" height="44" fill="#f2f2f2" stroke="#000000" stroke-width="1.5"/>
+  <text x="990" y="112" class="header-box-title">3) Evaluasi Hasil Pengujian</text>
+
+  <!-- Mulai 3 -->
+  <rect x="940" y="145" width="100" height="30" rx="15" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="990" y="164" class="oval-text">Mulai</text>
+
+  <!-- Arrow Mulai -> Kumpulkan Hasil 3 -->
+  <line x1="990" y1="175" x2="990" y2="195" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Kumpulkan Hasil 3 -->
+  <rect x="845" y="195" width="290" height="68" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="860" y="215" class="node-title">Kumpulkan Hasil</text>
+  <text x="860" y="233" class="node-text">• Hasil Static Analysis (MobSF)</text>
+  <text x="860" y="249" class="node-text">• Hasil Dynamic Analysis (OWASP ZAP)</text>
+
+  <!-- Arrow Kumpulkan Hasil 3 -> Perbandingan 3 -->
+  <line x1="990" y1="263" x2="990" y2="283" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Perbandingan 3 -->
+  <rect x="845" y="283" width="290" height="72" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="860" y="303" class="node-title">Perbandingan (Sebelum &amp; Sesudah Perbaikan)</text>
+  <text x="860" y="321" class="node-text">• Security Score (MobSF)</text>
+  <text x="860" y="337" class="node-text">• Jumlah Alert per Risk Level (OWASP ZAP)</text>
+
+  <!-- Arrow Perbandingan 3 -> Interpretasi 3 -->
+  <line x1="990" y1="355" x2="990" y2="375" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Interpretasi & Evaluasi 3 -->
+  <rect x="845" y="375" width="290" height="90" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="860" y="395" class="node-title">Interpretasi &amp; Evaluasi</text>
+  <text x="860" y="413" class="node-text">• Mengidentifikasi kerentanan kritis</text>
+  <text x="860" y="429" class="node-text">• Menilai efektivitas perbaikan keamanan</text>
+  <text x="860" y="445" class="node-text">• Menganalisis perubahan skor &amp; jumlah alert</text>
+
+  <!-- Arrow Interpretasi 3 -> Kesimpulan 3 -->
+  <line x1="990" y1="465" x2="990" y2="485" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Kesimpulan 3 -->
+  <rect x="845" y="485" width="290" height="72" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="860" y="505" class="node-title">Kesimpulan</text>
+  <text x="860" y="523" class="node-text">• Kondisi keamanan aplikasi</text>
+  <text x="860" y="539" class="node-text">• Rekomendasi perbaikan lebih lanjut</text>
+
+  <!-- Arrow Kesimpulan 3 -> Selesai 3 -->
+  <line x1="990" y1="557" x2="990" y2="702" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Selesai 3 -->
+  <rect x="920" y="702" width="140" height="30" rx="15" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="990" y="721" class="oval-text">Selesai (Evaluasi)</text>
+
+
+  <!-- ========================================================================= -->
+  <!-- HORIZONTAL CONNECTIONS BETWEEN COLUMNS -->
+  <!-- ========================================================================= -->
+  <!-- Kolom 1 -> Kolom 2 -->
+  <line x1="380" y1="426" x2="430" y2="426" stroke="#000000" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <!-- Kolom 2 -> Kolom 3 -->
+  <line x1="770" y1="426" x2="820" y2="426" stroke="#000000" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+
+  <!-- ========================================================================= -->
+  <!-- FEEDBACK LOOP CONTAINER (BOTTOM) -->
+  <!-- ========================================================================= -->
+  <!-- Line from Selesai 3 down to Feedback Box -->
+  <line x1="990" y1="732" x2="990" y2="880" stroke="#000000" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <line x1="990" y1="880" x2="710" y2="880" stroke="#000000" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+
+  <!-- Feedback Box -->
+  <rect x="420" y="855" width="290" height="50" rx="6" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="565" y="876" class="loop-text">Ulangi pengujian setelah perbaikan</text>
+  <text x="565" y="894" class="loop-text">hingga hasil memenuhi kriteria keamanan</text>
+
+  <!-- Line from Feedback Box to Tindak Lanjut in Column 1 -->
+  <line x1="420" y1="880" x2="310" y2="880" stroke="#000000" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <line x1="310" y1="880" x2="310" y2="700" stroke="#000000" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <line x1="310" y1="700" x2="310" y2="685" stroke="#000000" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+
+</svg>
