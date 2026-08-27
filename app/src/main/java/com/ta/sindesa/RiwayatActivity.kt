@@ -152,8 +152,15 @@ class RiwayatActivity : AppCompatActivity() {
                         tvEmpty.text = body?.message ?: "Data riwayat tidak ditemukan"
                         tvEmpty.visibility = android.view.View.VISIBLE
                     }
+                } else if (response.code() == 401) {
+                    sessionManager.logout()
+                    Toast.makeText(this@RiwayatActivity, "Sesi Anda telah berakhir. Silakan login kembali.", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this@RiwayatActivity, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
                 } else {
-                    tvEmpty.text = "Server Error: ${response.code()}"
+                    tvEmpty.text = "Gagal memuat data (Kode: ${response.code()})"
                     tvEmpty.visibility = android.view.View.VISIBLE
                 }
             }

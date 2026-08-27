@@ -157,6 +157,13 @@ class DashboardActivity : AppCompatActivity() {
                             // Update Layanan Sering Digunakan
                             updateSeringDigunakan(stats.seringDigunakan)
                         }
+                    } else if (response.code() == 401) {
+                        sessionManager.logout()
+                        Toast.makeText(this@DashboardActivity, "Sesi Anda telah berakhir. Silakan login kembali.", Toast.LENGTH_LONG).show()
+                        val intent = Intent(this@DashboardActivity, WelcomeActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                        finish()
                     }
                 }
 
