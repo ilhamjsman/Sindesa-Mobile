@@ -23,22 +23,31 @@ import okhttp3.Request
 import java.util.concurrent.TimeUnit
 
 /**
- * Activity untuk menampilkan preview surat PDF menggunakan WebView.
- *
- * PDF diunduh dari server lokal, di-encode ke base64, lalu ditampilkan
- * menggunakan HTML embed di WebView. Ini memungkinkan preview PDF 
- * tanpa memerlukan koneksi internet ke Google Docs Viewer.
- *
- * User bisa melihat suratnya terlebih dahulu sebelum memutuskan
- * untuk mendownload file PDF-nya.
+ * =========================================================================================
+ * PdfPreviewActivity.kt — Pratinjau (Preview) & Unduh Dokumen PDF Surat Resmi
+ * =========================================================================================
+ * 
+ * FUNGSI UTAMA:
+ * 1. Menampilkan pratinjau dokumen surat PDF resmi di dalam aplikasi sebelum diunduh.
+ * 2. Mengunduh data PDF secara aman dari API backend menggunakan OkHttp dengan Bearer Token.
+ * 3. Mengubah aliran biner PDF menjadi format Base64 dan merendernya via pustaka PDF.js di WebView.
+ * 4. Menyediakan tombol "Unduh PDF" untuk menyimpan file resmi ke folder Download perangkat HP.
+ * 5. Menerapkan proteksi keamanan:
+ *    - Whitelist Hostname: Mencegah serangan SSRF (Server-Side Request Forgery).
+ *    - Pengerasan WebView: Mematikan allowFileAccess & allowContentAccess untuk mencegah pencurian data lokal.
+ * =========================================================================================
  */
 class PdfPreviewActivity : AppCompatActivity() {
 
+    // =====================================================================================
+    // 1. DEKLARASI WIDGET TAMPILAN
+    // =====================================================================================
     private lateinit var webView: WebView
     private lateinit var layoutLoading: android.widget.LinearLayout
     private lateinit var layoutError: android.widget.LinearLayout
     private lateinit var tvErrorMessage: android.widget.TextView
 
+    // Parameter URL PDF dan Judul Surat yang dikirim via Intent
     private var pdfUrl: String = ""
     private var suratTitle: String = "Surat"
 
@@ -46,6 +55,9 @@ class PdfPreviewActivity : AppCompatActivity() {
         const val EXTRA_PDF_URL = "extra_pdf_url"
         const val EXTRA_SURAT_TITLE = "extra_surat_title"
 
+        /**
+         * Helper statis untuk membuat Intent navigasi ke PdfPreviewActivity dengan parameter lengkap.
+         */
         fun createIntent(context: Context, pdfUrl: String, suratTitle: String): Intent {
             return Intent(context, PdfPreviewActivity::class.java).apply {
                 putExtra(EXTRA_PDF_URL, pdfUrl)
@@ -59,7 +71,9 @@ class PdfPreviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pdf_preview)
 
-        // Get data from intent
+        // ---------------------------------------------------------------------------------
+        // Mengambil data URL dan Judul Surat dari Intent
+        // ---------------------------------------------------------------------------------
         pdfUrl = intent.getStringExtra(EXTRA_PDF_URL) ?: ""
         suratTitle = intent.getStringExtra(EXTRA_SURAT_TITLE) ?: "Surat"
 
@@ -69,7 +83,9 @@ class PdfPreviewActivity : AppCompatActivity() {
             return
         }
 
-        // Setup Views
+        // ---------------------------------------------------------------------------------
+        // Binding Komponen View Layout
+        // ---------------------------------------------------------------------------------
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbarPreview)
         webView = findViewById(R.id.webViewPdf)
         layoutLoading = findViewById(R.id.layoutLoading)
@@ -78,23 +94,28 @@ class PdfPreviewActivity : AppCompatActivity() {
         val btnDownload = findViewById<MaterialButton>(R.id.btnDownload)
         val btnRetry = findViewById<MaterialButton>(R.id.btnRetry)
 
-        // Setup Toolbar
+        // Setup Judul Toolbar dan Navigasi Kembali
         toolbar.title = "Preview: $suratTitle"
         toolbar.setNavigationOnClickListener { finish() }
 
-        // Setup WebView
+        // ---------------------------------------------------------------------------------
+        // KEAMANAN WEBVIEW: SECURE BY DESIGN (Pencegahan Eksploitasi File Lokal)
+        // ---------------------------------------------------------------------------------
         webView.settings.apply {
-            javaScriptEnabled = true
+            javaScriptEnabled = true            // Diperlukan untuk merender PDF.js
             loadWithOverviewMode = true
             useWideViewPort = true
-            builtInZoomControls = true
+            builtInZoomControls = true         // Memungkinkan warga memperbesar (zoom in/out) surat
             displayZoomControls = false
             domStorageEnabled = true
             setSupportZoom(true)
-            allowFileAccess = false
-            allowContentAccess = false
+            
+            // KEAMANAN KRITIS: Nonaktifkan akses langsung ke filesystem internal Android
+            allowFileAccess = false            // Mencegah file:// traversal di WebView
+            allowContentAccess = false         // Mencegah akses Content Provider yang tidak sah
         }
 
+        // Listener status pemuatan halaman pada WebView
         webView.webViewClient = object : WebViewClient() {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
@@ -102,6 +123,7 @@ class PdfPreviewActivity : AppCompatActivity() {
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
+                // Sembunyikan indikator loading saat surat selesai digambar
                 layoutLoading.visibility = android.view.View.GONE
                 webView.visibility = android.view.View.VISIBLE
             }
@@ -113,22 +135,22 @@ class PdfPreviewActivity : AppCompatActivity() {
             ) {
                 super.onReceivedError(view, request, error)
                 if (request?.isForMainFrame == true) {
-                    showError("Gagal memuat preview surat.\nPastikan HP dan laptop terhubung WiFi yang sama.")
+                    showError("Gagal memuat preview surat.\nPastikan koneksi internet terhubung stabil.")
                 }
             }
         }
 
         webView.webChromeClient = WebChromeClient()
 
-        // Load PDF
+        // Memulai proses pengunduhan dan rendering PDF
         loadPdfPreview()
 
-        // Download Button
+        // Tombol Unduh PDF
         btnDownload.setOnClickListener {
             downloadPdf()
         }
 
-        // Retry Button
+        // Tombol Coba Lagi jika terjadi kegagalan jaringan
         btnRetry.setOnClickListener {
             layoutError.visibility = android.view.View.GONE
             layoutLoading.visibility = android.view.View.VISIBLE
@@ -136,13 +158,12 @@ class PdfPreviewActivity : AppCompatActivity() {
         }
     }
 
+    // =====================================================================================
+    // 2. KEAMANAN DOMAIN WHITELIST: ANTI-SSRF (isAuthorizedHost)
+    // =====================================================================================
     /**
-     * Mengunduh PDF dari server lokal dan menampilkannya di WebView.
-     * 
-     * Karena server berjalan di jaringan lokal (Laragon), kita tidak bisa 
-     * menggunakan Google Docs Viewer. Sebagai gantinya, PDF diunduh via 
-     * OkHttp, di-encode ke Base64, lalu ditampilkan menggunakan PDF.js 
-     * (via CDN) di dalam WebView.
+     * Memastikan URL PDF HANYA berasal dari domain resmi SINDESA.
+     * Mencegah eksploitasi di mana URL dialihkan ke server luar peretas.
      */
     private fun isAuthorizedHost(urlStr: String): Boolean {
         return try {
@@ -151,6 +172,8 @@ class PdfPreviewActivity : AppCompatActivity() {
             val allowedHosts = listOf(
                 com.ta.sindesa.api.RetrofitClient.HOSTNAME.lowercase(),
                 "api.sindesa-buttusawe.com",
+                "sindesa-buttusawe.com",
+                "www.sindesa-buttusawe.com",
                 "sindesa.buttusawe.desa.id",
                 "10.0.2.2",
                 "127.0.0.1",
@@ -162,35 +185,32 @@ class PdfPreviewActivity : AppCompatActivity() {
         }
     }
 
+    // =====================================================================================
+    // 3. METODE MEMUAT & MERENDER PDF (loadPdfPreview)
+    // =====================================================================================
+    /**
+     * Alur Eksekusi:
+     * 1. Validasi domain URL.
+     * 2. Ambil token otentikasi Bearer dari SessionManager.
+     * 3. Kirim request HTTP GET di background thread via OkHttp.
+     * 4. Periksa apakah respon berupa file PDF atau pesan error JSON.
+     * 5. Encode biner PDF ke string Base64.
+     * 6. Pasang string Base64 ke dalam template HTML PDF.js untuk dirender di WebView.
+     */
     private fun loadPdfPreview() {
         layoutLoading.visibility = android.view.View.VISIBLE
         layoutError.visibility = android.view.View.GONE
-        // Validasi Hostname (Guideline §3: Pencegahan SSRF / Remote Asset Injection)
-        val uri = try { Uri.parse(pdfUrl) } catch (_: Exception) { null }
-        val host = uri?.host?.lowercase() ?: ""
-        val isAllowedHost = host == "api.sindesa-buttusawe.com" ||
-                host == "sindesa-buttusawe.com" ||
-                host == "www.sindesa-buttusawe.com" ||
-                host == "sindesa.buttusawe.desa.id" ||
-                host == "localhost" ||
-                host == "127.0.0.1" ||
-                host.startsWith("192.168.") ||
-                host.startsWith("10.")
 
-        if (!isAllowedHost) {
-            showError("Akses Ditolak: Domain PDF ($host) tidak terdaftar dalam whitelist resmi SINDESA.")
+        // Validasi Whitelist Hostname
+        if (!isAuthorizedHost(pdfUrl)) {
+            showError("Akses Ditolak: Domain URL ($pdfUrl) tidak terdaftar dalam whitelist resmi SINDESA.")
             return
         }
 
         val sessionManager = SessionManager(this)
         val token = sessionManager.getToken()
 
-        if (!isAuthorizedHost(pdfUrl)) {
-            showError("Host URL tidak diizinkan: $pdfUrl. Hanya domain resmi Sindesa yang diperbolehkan.")
-            return
-        }
-
-        // Download PDF in background thread, then render in WebView
+        // Eksekusi pengambilan file di Background Thread agar tidak membekukan UI utama
         Thread {
             try {
                 val client = OkHttpClient.Builder()
@@ -200,12 +220,14 @@ class PdfPreviewActivity : AppCompatActivity() {
 
                 val requestBuilder = Request.Builder().url(pdfUrl)
                 if (!token.isNullOrEmpty()) {
+                    // Menyertakan token otentikasi agar backend memvalidasi kepemilikan surat
                     requestBuilder.addHeader("Authorization", "Bearer $token")
                 }
                 val request = requestBuilder.build()
 
                 val response = client.newCall(request).execute()
 
+                // Cek status respon HTTP
                 if (!response.isSuccessful) {
                     val errorBody = response.body?.string() ?: "Unknown error"
                     runOnUiThread {
@@ -216,8 +238,8 @@ class PdfPreviewActivity : AppCompatActivity() {
 
                 val contentType = response.header("Content-Type") ?: ""
                 
+                // Jika server mengirim JSON error dan bukan file PDF
                 if (contentType.contains("application/json")) {
-                    // Server returned an error JSON, not PDF
                     val errorBody = response.body?.string() ?: "Unknown error"
                     runOnUiThread {
                         showError("Surat belum bisa dipreview:\n$errorBody")
@@ -233,11 +255,13 @@ class PdfPreviewActivity : AppCompatActivity() {
                     return@Thread
                 }
 
+                // Konversi biner PDF ke Base64 String
                 val base64Pdf = Base64.encodeToString(pdfBytes, Base64.DEFAULT)
 
-                // Build HTML with embedded PDF viewer using PDF.js
+                // Bangun template HTML PDF.js
                 val html = buildPdfViewerHtml(base64Pdf)
 
+                // Render HTML ke WebView di UI Thread
                 runOnUiThread {
                     webView.loadDataWithBaseURL(
                         null,
@@ -250,14 +274,11 @@ class PdfPreviewActivity : AppCompatActivity() {
 
             } catch (e: java.net.SocketTimeoutException) {
                 runOnUiThread {
-                    showError("Waktu habis (Timeout).\n\n" +
-                            "1. Pastikan Laragon sudah berjalan.\n" +
-                            "2. HP & Laptop harus di WiFi yang sama.\n" +
-                            "3. Cek IP: ${com.ta.sindesa.api.RetrofitClient.HOSTNAME}")
+                    showError("Koneksi Waktu Habis (Timeout).\nPeriksa koneksi internet Anda.")
                 }
             } catch (e: java.net.ConnectException) {
                 runOnUiThread {
-                    showError("Koneksi ditolak.\nPastikan Laragon sudah berjalan di port 8080.")
+                    showError("Koneksi Ditolak ke Server Hosting.")
                 }
             } catch (e: Exception) {
                 runOnUiThread {
@@ -268,9 +289,12 @@ class PdfPreviewActivity : AppCompatActivity() {
         }.start()
     }
 
+    // =====================================================================================
+    // 4. TEMPLATE HTML DENGAN PDF.JS VIEWER (buildPdfViewerHtml)
+    // =====================================================================================
     /**
-     * Membuat HTML yang menggunakan PDF.js dari CDN untuk render PDF.
-     * PDF data di-embed sebagai base64 di dalam halaman HTML.
+     * Membangun dokumen HTML mandiri yang menggunakan PDF.js untuk menggambar lembar surat
+     * ke elemen <canvas> secara pixel-perfect.
      */
     private fun buildPdfViewerHtml(base64Pdf: String): String {
         return """
@@ -282,7 +306,7 @@ class PdfPreviewActivity : AppCompatActivity() {
             <style>
                 * { margin: 0; padding: 0; box-sizing: border-box; }
                 body { 
-                    background: #f0f0f0; 
+                    background: #2d3748; 
                     display: flex; 
                     flex-direction: column; 
                     align-items: center;
@@ -291,23 +315,17 @@ class PdfPreviewActivity : AppCompatActivity() {
                 canvas { 
                     display: block; 
                     margin: 8px auto; 
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
                     max-width: 100%;
                     background: white;
+                    border-radius: 4px;
                 }
                 .page-info {
                     text-align: center;
                     padding: 8px;
-                    color: #666;
+                    color: #cbd5e1;
                     font-family: sans-serif;
-                    font-size: 14px;
-                }
-                .loading-text {
-                    text-align: center;
-                    padding: 40px;
-                    color: #666;
-                    font-family: sans-serif;
-                    font-size: 16px;
+                    font-size: 13px;
                 }
             </style>
         </head>
@@ -315,6 +333,7 @@ class PdfPreviewActivity : AppCompatActivity() {
             <div id="page-info" class="page-info"></div>
             <div id="pdf-container"></div>
             <script>
+                // Decode data Base64 kembali ke Binary
                 var pdfData = atob('${base64Pdf.replace("\n", "").replace("\r", "")}');
                 
                 var pdfjsLib = window['pdfjs-dist/build/pdf'];
@@ -323,10 +342,9 @@ class PdfPreviewActivity : AppCompatActivity() {
                 var loadingTask = pdfjsLib.getDocument({data: pdfData});
                 loadingTask.promise.then(function(pdf) {
                     var totalPages = pdf.numPages;
-                    document.getElementById('page-info').innerText = 'Total: ' + totalPages + ' halaman';
+                    document.getElementById('page-info').innerText = 'Dokumen Resmi SINDESA • ' + totalPages + ' Halaman';
                     
                     var container = document.getElementById('pdf-container');
-                    
                     for (var i = 1; i <= totalPages; i++) {
                         renderPage(pdf, i, container);
                     }
@@ -336,7 +354,7 @@ class PdfPreviewActivity : AppCompatActivity() {
                 
                 function renderPage(pdf, pageNum, container) {
                     pdf.getPage(pageNum).then(function(page) {
-                        var scale = 2.0;
+                        var scale = 2.0; // Skala rendering tajam HD
                         var viewport = page.getViewport({scale: scale});
                         
                         var canvas = document.createElement('canvas');
@@ -368,14 +386,20 @@ class PdfPreviewActivity : AppCompatActivity() {
         tvErrorMessage.text = message
     }
 
+    // =====================================================================================
+    // 5. METODE MENGUNDUH SURAT KE STORAGE HP (downloadPdf)
+    // =====================================================================================
+    /**
+     * Memanfaatkan DownloadManager resmi Android untuk mengunduh dan menyimpan surat PDF ke folder Downloads.
+     */
     private fun downloadPdf() {
         try {
             val sessionManager = SessionManager(this)
             val token = sessionManager.getToken()
 
             val request = DownloadManager.Request(Uri.parse(pdfUrl))
-                .setTitle("Surat - $suratTitle")
-                .setDescription("Mengunduh surat...")
+                .setTitle("Surat Resmi SINDESA - $suratTitle")
+                .setDescription("Mengunduh dokumen surat resmi desa...")
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
                 .setDestinationInExternalPublicDir(
                     Environment.DIRECTORY_DOWNLOADS,
@@ -393,12 +417,12 @@ class PdfPreviewActivity : AppCompatActivity() {
 
             Toast.makeText(
                 this,
-                "📥 Mengunduh surat...\nCek folder Downloads setelah selesai.",
+                "📥 Mengunduh surat...\nCek folder Downloads pada file manager HP Anda.",
                 Toast.LENGTH_LONG
             ).show()
         } catch (e: Exception) {
-            // Fallback: open in browser
-            Toast.makeText(this, "Membuka di browser untuk download...", Toast.LENGTH_SHORT).show()
+            // Fallback jika DownloadManager gagal: Buka via browser eksternal
+            Toast.makeText(this, "Membuka di browser untuk unduh...", Toast.LENGTH_SHORT).show()
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(pdfUrl))
             startActivity(intent)
         }

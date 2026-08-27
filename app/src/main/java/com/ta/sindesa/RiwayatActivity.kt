@@ -19,8 +19,28 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * =========================================================================================
+ * RiwayatActivity.kt — Halaman Riwayat Pengajuan Surat Warga
+ * =========================================================================================
+ * 
+ * FUNGSI UTAMA:
+ * 1. Menampilkan seluruh daftar pengajuan surat yang pernah diajukan oleh akun warga yang aktif.
+ * 2. Pencarian cepat (Live Search) berdasarkan nama surat atau status.
+ * 3. Pengurutan data (Sorting: Terbaru, Terlama, Berdasarkan Status).
+ * 4. Melihat detail pengajuan via BottomSheet Dialog (Status, Nomor Surat, Metode TTD, Alasan Penolakan).
+ * 5. Tombol aksi:
+ *    - Preview & Cetak Dokumen PDF (Jika status sudah "Selesai").
+ *    - Edit Pengajuan (Jika status masih "Menunggu Verifikasi").
+ *    - Batalkan / Hapus Pengajuan (Jika status masih "Menunggu Verifikasi").
+ * 6. Keamanan Secure by Design (FLAG_SECURE, Token Autentikasi, Penanganan Sesi Kadaluarsa).
+ * =========================================================================================
+ */
 class RiwayatActivity : AppCompatActivity() {
 
+    // =====================================================================================
+    // 1. DEKLARASI VARIABEL TAMPILAN & PENGELOLA DATA
+    // =====================================================================================
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var sessionManager: SessionManager
     private lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
@@ -33,13 +53,18 @@ class RiwayatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // SECURE BY DESIGN: Mencegah screenshot dan screen recording (M1 - Improper Platform Usage)
+        // ---------------------------------------------------------------------------------
+        // KEAMANAN 1: FLAG_SECURE (Mencegah Screenshot & Perekaman Layar)
+        // ---------------------------------------------------------------------------------
+        // Melindungi data riwayat dan nomor surat pribadi agar tidak bocor via tangkapan layar.
         window.setFlags(
             android.view.WindowManager.LayoutParams.FLAG_SECURE,
             android.view.WindowManager.LayoutParams.FLAG_SECURE
         )
 
-        // SECURE BY DESIGN: Deteksi Root & Emulator (M8 & M9)
+        // ---------------------------------------------------------------------------------
+        // KEAMANAN 2: DETEKSI ROOT & EMULATOR
+        // ---------------------------------------------------------------------------------
         if (com.ta.sindesa.utils.SecurityUtil.isDeviceRooted() || com.ta.sindesa.utils.SecurityUtil.isRunningOnEmulator()) {
             com.ta.sindesa.utils.SecurityUtil.showSecurityWarning(this)
             return
@@ -47,6 +72,9 @@ class RiwayatActivity : AppCompatActivity() {
 
         sessionManager = SessionManager(this)
 
+        // ---------------------------------------------------------------------------------
+        // KEAMANAN 3: VALIDASI STATUS LOGIN
+        // ---------------------------------------------------------------------------------
         if (!sessionManager.isLoggedIn()) {
             Toast.makeText(this, "Akses ditolak. Silakan login terlebih dahulu.", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
@@ -58,7 +86,9 @@ class RiwayatActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_riwayat)
 
-        // Setup UI Components
+        // =================================================================================
+        // 2. SETUP VIEW & WIDGET UI
+        // =================================================================================
         drawerLayout = findViewById(R.id.drawerLayout)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         recyclerView = findViewById(R.id.rvRiwayat)
@@ -68,23 +98,26 @@ class RiwayatActivity : AppCompatActivity() {
         etSearch = findViewById(R.id.etSearch)
         val btnSort = findViewById<ImageButton>(R.id.btnSort)
 
-        // Setup Toolbar & Sidebar
+        // Konfigurasi Toolbar & Menu Samping
         toolbar.setNavigationOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
         SidebarUtil.initSidebar(this, drawerLayout)
 
-        // Setup RecyclerView
+        // Konfigurasi RecyclerView (Daftar List Surat)
         adapter = RiwayatAdapter(emptyList())
         recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        // Listener klik tombol Detail
+        // Listener saat item surat atau tombol "Detail" diklik
         adapter.setOnDetailClickListener { riwayat ->
             showDetailRiwayat(riwayat)
         }
 
-        // Setup Search Logic
+        // =================================================================================
+        // 3. FITUR PENCARIAN REALTIME (LIVE SEARCH)
+        // =================================================================================
+        // Memfilter isi daftar secara langsung setiap kali huruf diketikkan di kotak pencarian
         etSearch.addTextChangedListener(object : android.text.TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -93,13 +126,15 @@ class RiwayatActivity : AppCompatActivity() {
             override fun afterTextChanged(s: android.text.Editable?) {}
         })
 
+        // Tombol Filter & Urutkan
         btnSort.setOnClickListener {
             showSortDialog()
         }
 
-        // Load Data from API
+        // Memuat data riwayat dari Server API
         loadRiwayatData()
 
+        // Menangani tombol Back pada perangkat
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -113,12 +148,19 @@ class RiwayatActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Refresh data saat kembali dari edit atau activity lain
+        // Otomatis refresh data saat kembali dari layar formulir atau pratinjau surat
         if (::adapter.isInitialized) {
             loadRiwayatData()
         }
     }
 
+    // =====================================================================================
+    // 4. METODE MEMUAT DATA RIWAYAT DARI SERVER (loadRiwayatData)
+    // =====================================================================================
+    /**
+     * Memanggil endpoint get_riwayat.php menggunakan Retrofit.
+     * Menggunakan Token Bearer untuk menjamin data yang ditarik hanya milik user tersebut (Anti-IDOR).
+     */
     private fun loadRiwayatData() {
         val nik = sessionManager.getNikUser()
         if (nik.isNullOrEmpty()) {
@@ -127,6 +169,7 @@ class RiwayatActivity : AppCompatActivity() {
             return
         }
         
+        // Tampilkan animasi loading & sembunyikan list sementara
         progressBar.visibility = android.view.View.VISIBLE
         recyclerView.visibility = android.view.View.GONE
         tvEmpty.visibility = android.view.View.GONE
@@ -137,6 +180,8 @@ class RiwayatActivity : AppCompatActivity() {
                 response: Response<RiwayatResponse>
             ) {
                 progressBar.visibility = android.view.View.GONE
+                
+                // KASUS 1: Respon Berhasil (HTTP 200)
                 if (response.isSuccessful) {
                     val body = response.body()
                     if (body?.success == true) {
@@ -152,14 +197,18 @@ class RiwayatActivity : AppCompatActivity() {
                         tvEmpty.text = body?.message ?: "Data riwayat tidak ditemukan"
                         tvEmpty.visibility = android.view.View.VISIBLE
                     }
-                } else if (response.code() == 401) {
+                } 
+                // KASUS 2: Sesi Kadaluarsa (HTTP 401 Unauthorized)
+                else if (response.code() == 401) {
                     sessionManager.logout()
                     Toast.makeText(this@RiwayatActivity, "Sesi Anda telah berakhir. Silakan login kembali.", Toast.LENGTH_LONG).show()
                     val intent = Intent(this@RiwayatActivity, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
-                } else {
+                } 
+                // KASUS 3: Respon Error Lainnya
+                else {
                     tvEmpty.text = "Gagal memuat data (Kode: ${response.code()})"
                     tvEmpty.visibility = android.view.View.VISIBLE
                 }
@@ -170,25 +219,9 @@ class RiwayatActivity : AppCompatActivity() {
                 
                 val host = RetrofitClient.HOSTNAME
                 val errorMessage = when (t) {
-                    is com.google.gson.JsonSyntaxException -> {
-                        "Respon Server Bukan JSON.\n\n" +
-                        "Penyebab: PHP mengirim teks biasa/error PHP.\n" +
-                        "Cek: Logcat 'API_DEBUG' untuk melihat teks tersebut."
-                    }
-                    is java.net.SocketTimeoutException -> {
-                        "Waktu Habis (Timeout).\n\n" +
-                        "1. Matikan FIREWALL di Windows (Penting!)\n" +
-                        "2. Pastikan Laragon/XAMPP sudah RUNNING.\n" +
-                        "3. HP & Laptop harus di 1 WiFi yang sama.\n" +
-                        "Target: http://$host:8080"
-                    }
-                    is java.net.ConnectException -> "Koneksi Ditolak. Pastikan Port 8080 di Laragon sudah aktif."
-                    is java.io.EOFException -> {
-                        "Server mengembalikan respons kosong.\n\n" +
-                        "1. Pastikan HP & Laptop di WiFi yang SAMA.\n" +
-                        "2. Coba matikan lalu nyalakan WiFi di HP.\n" +
-                        "3. Pastikan Laragon sudah RUNNING."
-                    }
+                    is com.google.gson.JsonSyntaxException -> "Respon server tidak valid (Bukan JSON)."
+                    is java.net.SocketTimeoutException -> "Koneksi RTO (Timeout). Periksa koneksi internet Anda."
+                    is java.net.ConnectException -> "Gagal terhubung ke server hosting ($host)."
                     else -> "Kesalahan: ${t.localizedMessage}"
                 }
 
@@ -206,14 +239,18 @@ class RiwayatActivity : AppCompatActivity() {
         })
     }
 
+    // =====================================================================================
+    // 5. METODE MENAMPILKAN DETAIL RIWAYAT (showDetailRiwayat)
+    // =====================================================================================
     /**
-     * Menampilkan Detail Riwayat menggunakan BottomSheet
+     * Membuka BottomSheet Dialog berisi informasi lengkap status pengajuan surat.
      */
     private fun showDetailRiwayat(riwayat: RiwayatData) {
         val bottomSheetDialog = com.google.android.material.bottomsheet.BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.layout_detail_riwayat, null)
         bottomSheetDialog.setContentView(view)
 
+        // Binding komponen dialog
         val tvJenis: android.widget.TextView = view.findViewById(R.id.detailJenisSurat)
         val tvTanggal: android.widget.TextView = view.findViewById(R.id.detailTanggal)
         val tvNomorSurat: android.widget.TextView = view.findViewById(R.id.detailNomorSurat)
@@ -229,7 +266,7 @@ class RiwayatActivity : AppCompatActivity() {
         tvJenis.text = riwayat.jenisSurat
         tvTanggal.text = "Diajukan pada: ${riwayat.tanggal}"
 
-        // Tampilkan Nomor Surat jika ada
+        // Tampilkan Nomor Surat jika admin sudah menerbitkan nomor
         if (!riwayat.nomorSurat.isNullOrEmpty()) {
             tvNomorSurat.text = "No. Surat: ${riwayat.nomorSurat}"
             tvNomorSurat.visibility = android.view.View.VISIBLE
@@ -237,7 +274,7 @@ class RiwayatActivity : AppCompatActivity() {
 
         tvStatus.text = riwayat.status
 
-        // Warna badge status berdasarkan status_raw
+        // Pewarnaan Badge Status (Hijau = Selesai, Merah = Ditolak, Kuning = Kades, Biru = Menunggu)
         val statusRaw = riwayat.statusRaw ?: riwayat.status.lowercase()
         when {
             statusRaw.contains("selesai") -> {
@@ -254,12 +291,11 @@ class RiwayatActivity : AppCompatActivity() {
             }
         }
 
-        // === TAMPILKAN METODE TANDA TANGAN (jika surat sudah selesai) ===
+        // TAMPILKAN METODE TANDA TANGAN (Digital QR / Konvensional Basah) jika surat selesai
         if (statusRaw.contains("selesai") && !riwayat.metodeTtdLabel.isNullOrEmpty()) {
             layoutMetodeTtd.visibility = android.view.View.VISIBLE
             tvMetodeTtd.text = riwayat.metodeTtdLabel
 
-            // Warna badge berdasarkan metode TTD
             val ttdColor = when (riwayat.metodeTtd?.lowercase()) {
                 "digital" -> "#059669"
                 "konvensional" -> "#D97706"
@@ -269,13 +305,13 @@ class RiwayatActivity : AppCompatActivity() {
             tvMetodeTtd.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor(ttdColor))
         }
 
-        // === TAMPILKAN ALASAN PENOLAKAN (jika ditolak) ===
+        // TAMPILKAN ALASAN PENOLAKAN jika status ditolak oleh Operator/Kades
         if (statusRaw.contains("ditolak") && !riwayat.pesanPenolakan.isNullOrEmpty()) {
             layoutPenolakan.visibility = android.view.View.VISIBLE
             tvPesanPenolakan.text = riwayat.pesanPenolakan
         }
 
-        // Keterangan umum
+        // Deskripsi Keterangan
         tvKet.text = if (riwayat.keterangan.isNullOrEmpty() || riwayat.keterangan == "-") {
             when {
                 statusRaw.contains("menunggu") -> "Surat Anda sedang menunggu verifikasi dari Operator Desa."
@@ -288,12 +324,13 @@ class RiwayatActivity : AppCompatActivity() {
             riwayat.keterangan
         }
 
-        // === TOMBOL PREVIEW & DOWNLOAD PDF (jika surat selesai) ===
+        // =================================================================================
+        // TOMBOL 1: PREVIEW SURAT PDF (Hanya jika status SELESAI)
+        // =================================================================================
         if (statusRaw.contains("selesai")) {
             btnDownloadPdf.visibility = android.view.View.VISIBLE
             btnDownloadPdf.text = "📄  PREVIEW SURAT"
             btnDownloadPdf.setOnClickListener {
-                // Buka preview PDF di dalam aplikasi
                 val pdfUrl = com.ta.sindesa.api.RetrofitClient.BASE_URL + "cetak_surat.php?id=${riwayat.id}"
                 val intent = PdfPreviewActivity.createIntent(
                     this,
@@ -304,7 +341,9 @@ class RiwayatActivity : AppCompatActivity() {
             }
         }
 
-        // === TOMBOL EDIT & HAPUS (hanya jika status masih menunggu verifikasi) ===
+        // =================================================================================
+        // TOMBOL 2: EDIT & HAPUS SURAT (Hanya jika status masih MENUNGGU VERIFIKASI)
+        // =================================================================================
         val statusRawClean = (riwayat.statusRaw ?: riwayat.status).lowercase().trim().replace(" ", "_").replace("-", "_")
         val isMenunggu = statusRawClean == "menunggu_verifikasi" || statusRawClean == "menunggu" || statusRawClean.contains("menunggu")
 
@@ -330,6 +369,7 @@ class RiwayatActivity : AppCompatActivity() {
 
             val parentLayout = btnClose.parent as android.view.ViewGroup
 
+            // A. Tombol Edit
             if (targetClass != null) {
                 val btnEdit = com.google.android.material.button.MaterialButton(this).apply {
                     text = "✏️  EDIT PENGAJUAN"
@@ -351,6 +391,7 @@ class RiwayatActivity : AppCompatActivity() {
                 parentLayout.addView(btnEdit, parentLayout.indexOfChild(btnClose))
             }
 
+            // B. Tombol Batalkan / Hapus
             val btnDelete = com.google.android.material.button.MaterialButton(this).apply {
                 text = "🗑️  BATALKAN / HAPUS SURAT"
                 layoutParams = android.widget.LinearLayout.LayoutParams(
@@ -376,6 +417,9 @@ class RiwayatActivity : AppCompatActivity() {
         bottomSheetDialog.show()
     }
 
+    // =====================================================================================
+    // 6. METODE KONFIRMASI & HAPUS PENGAJUAN SURAT
+    // =====================================================================================
     private fun confirmAndDeletePengajuan(riwayat: RiwayatData) {
         AlertDialog.Builder(this)
             .setTitle("Hapus Pengajuan Surat")
@@ -387,6 +431,10 @@ class RiwayatActivity : AppCompatActivity() {
             .show()
     }
 
+    /**
+     * Mengeksekusi penghapusan surat ke endpoint delete_pengajuan.php.
+     * Dilindungi otorisasi kepemilikan data di server (Anti-IDOR).
+     */
     private fun executeDeletePengajuan(id: Int) {
         val progressBar = findViewById<android.widget.ProgressBar>(R.id.progressBar)
         progressBar?.visibility = android.view.View.VISIBLE
@@ -400,7 +448,7 @@ class RiwayatActivity : AppCompatActivity() {
                 if (response.isSuccessful && response.body()?.success == true) {
                     val msg = response.body()?.message ?: "Pengajuan surat berhasil dibatalkan"
                     Toast.makeText(this@RiwayatActivity, msg, Toast.LENGTH_LONG).show()
-                    loadRiwayatData()
+                    loadRiwayatData() // Reload list setelah hapus
                 } else {
                     val errorMsg = response.body()?.message ?: "Gagal membatalkan pengajuan (HTTP ${response.code()})"
                     Toast.makeText(this@RiwayatActivity, errorMsg, Toast.LENGTH_LONG).show()
@@ -414,9 +462,9 @@ class RiwayatActivity : AppCompatActivity() {
         })
     }
 
-    /**
-     * Menampilkan Dialog untuk memilih urutan data riwayat
-     */
+    // =====================================================================================
+    // 7. METODE FILTER & SORTING DATA
+    // =====================================================================================
     private fun showSortDialog() {
         val options = arrayOf("Terbaru", "Terlama", "Status: Selesai", "Status: Diproses", "Status: Ditolak")
         
@@ -427,7 +475,6 @@ class RiwayatActivity : AppCompatActivity() {
                 Toast.makeText(this, "Mengurutkan berdasarkan: $selectedOption", Toast.LENGTH_SHORT).show()
                 
                 adapter.sort(which)
-                
                 dialog.dismiss()
             }
             .show()

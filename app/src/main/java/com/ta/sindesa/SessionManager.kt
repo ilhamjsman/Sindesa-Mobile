@@ -5,11 +5,34 @@ import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 
+/**
+ * =========================================================================================
+ * SessionManager.kt — Pengelola Penyimpanan Sesi Terenkripsi di Perangkat Android
+ * =========================================================================================
+ * 
+ * FUNGSI UTAMA:
+ * 1. Menyimpan status login, token otentikasi Bearer, dan biodata pengguna di penyimpanan lokal HP.
+ * 2. Menerapkan enkripsi tingkat militer (AES-256-GCM) dengan MasterKey hardware Android Keystore.
+ * 3. Menjamin data pribadi warga (NIK, No KK, Alamat, Token) TIDAK DAPAT DIBACA sebagai teks biasa,
+ *    bahkan jika perangkat Android mengalami physical tampering atau di-root.
+ * 4. Memenuhi standar OWASP MASVS-STORAGE (M2 - Insecure Data Storage).
+ * =========================================================================================
+ */
 class SessionManager(context: Context) {
+
+    // =====================================================================================
+    // 1. MEMBUAT KUNCI MASTER TERENKRIPSI DARI ANDROID KEYSTORE
+    // =====================================================================================
     private val masterKey = MasterKey.Builder(context)
         .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
         .build()
 
+    // =====================================================================================
+    // 2. INISIALISASI ENCRYPTED SHAREDPREFERENCES
+    // =====================================================================================
+    // Nama file preferensi: "SINDESA_SECURE_SESSION"
+    // Kunci Preferensi dienkripsi dengan AES-256-SIV
+    // Nilai Preferensi dienkripsi dengan AES-256-GCM
     private val sharedPref: SharedPreferences = EncryptedSharedPreferences.create(
         context,
         "SINDESA_SECURE_SESSION",
@@ -18,6 +41,9 @@ class SessionManager(context: Context) {
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
     )
 
+    // =====================================================================================
+    // 3. MENYIMPAN DATA SESI & BIODATA LENGKAP WARGA
+    // =====================================================================================
     fun setLoggedIn(
         isLoggedIn: Boolean, 
         userId: Int? = null,
@@ -79,16 +105,34 @@ class SessionManager(context: Context) {
         }
     }
 
+    // =====================================================================================
+    // 4. GETTER UNTUK MEMBACA DATA SESI DARI ENCRYPTED STORAGE
+    // =====================================================================================
+    /** Memeriksa apakah user sedang dalam status login aktif */
     fun isLoggedIn(): Boolean = sharedPref.getBoolean("is_logged_in", false)
 
+    /** Mengambil User ID */
     fun getUserId(): Int = sharedPref.getInt("user_id", 0)
+
+    /** Mengambil Nama Lengkap Warga */
     fun getNamaUser(): String? = sharedPref.getString("nama_user", "Warga")
+
+    /** Mengambil NIK (16 Digit) */
     fun getNikUser(): String? = sharedPref.getString("nik_user", null)
+
+    /** Mengambil Alamat Email */
     fun getEmailUser(): String? = sharedPref.getString("email_user", null)
+
+    /** Mengambil Token Otentikasi Bearer API */
     fun getToken(): String? = sharedPref.getString("auth_token", null)
+
+    /** Mengambil URL / Nama file Foto Profil */
     fun getFotoProfil(): String? = sharedPref.getString("foto_profil", null)
+
+    /** Mengambil Status Akun ("active" / "inactive" / "menunggu_verifikasi") */
     fun getStatus(): String? = sharedPref.getString("status", "inactive")
     
+    // Biodata Pendukung
     fun getNoKk(): String? = sharedPref.getString("no_kk", null)
     fun getAgama(): String? = sharedPref.getString("agama", null)
     fun getJenisKelamin(): String? = sharedPref.getString("jenis_kelamin", null)
@@ -109,6 +153,9 @@ class SessionManager(context: Context) {
     fun getKelurahanDesaCode(): String? = sharedPref.getString("kelurahan_desa_code", null)
     fun getNoHp(): String? = sharedPref.getString("no_hp", null)
 
+    // =====================================================================================
+    // 5. MENGHAPUS SESI SAAT LOGOUT ATAU SESI EXPIRED (logout)
+    // =====================================================================================
     fun logout() {
         sharedPref.edit().clear().apply()
     }

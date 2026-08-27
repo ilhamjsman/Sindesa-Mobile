@@ -30,22 +30,43 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
+/**
+ * =========================================================================================
+ * ProfileActivity.kt — Halaman Pengaturan & Pembaruan Biodata Profil Warga
+ * =========================================================================================
+ * 
+ * FUNGSI UTAMA:
+ * 1. Menampilkan data identitas kependudukan warga secara lengkap (NIK, KK, Nama, TTL, Alamat, dll).
+ * 2. Mengubah/mengunggah Foto Profil dari Galeri HP atau Kamera secara langsung.
+ * 3. Fitur Dropdown Wilayah Bertingkat (Cascading Region: Provinsi -> Kota -> Kecamatan -> Desa).
+ * 4. Fitur Pembaruan Kata Sandi (Password Baru).
+ * 5. Mengirimkan pembaruan data secara aman ke endpoint update_profil.php via Multipart Form.
+ * 6. Menerapkan pengamanan Secure by Design (FLAG_SECURE, Deteksi Root, Validasi Sesi).
+ * =========================================================================================
+ */
 class ProfileActivity : AppCompatActivity() {
 
+    // =====================================================================================
+    // 1. DEKLARASI VARIABEL TAMPILAN & KODE WILAYAH
+    // =====================================================================================
     private lateinit var imgProfile: ImageView
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var sessionManager: SessionManager
     private var selectedImageUri: Uri? = null
 
+    // Variabel penyimpan kode wilayah administrasi Indonesia
     private var selectedProvinceCode: String = ""
     private var selectedCityCode: String = ""
     private var selectedDistrictCode: String = ""
     private var selectedVillageCode: String = ""
 
+    // -------------------------------------------------------------------------------------
+    // Launcher 1: Pemilih Gambar dari Galeri HP
+    // -------------------------------------------------------------------------------------
     private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         if (uri != null) {
             try {
+                // Konversi URI galeri ke file fisik sementara untuk diproses
                 val correctedFile = FileUtils.uriToFile(this@ProfileActivity, uri)
                 selectedImageUri = Uri.fromFile(correctedFile)
                 imgProfile.setImageURI(selectedImageUri)
@@ -58,6 +79,9 @@ class ProfileActivity : AppCompatActivity() {
 
     private var cameraImageUri: Uri? = null
 
+    // -------------------------------------------------------------------------------------
+    // Launcher 2: Pengambilan Foto langsung via Kamera
+    // -------------------------------------------------------------------------------------
     private val takePictureLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
         if (success) {
             cameraImageUri?.let { uri ->
@@ -73,6 +97,9 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+    // -------------------------------------------------------------------------------------
+    // Launcher 3: Meminta Izin Akses Kamera (Camera Permission Request)
+    // -------------------------------------------------------------------------------------
     private val requestCameraPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
         if (isGranted) {
             launchCamera()
@@ -81,6 +108,9 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Membuka aplikasi kamera bawaan HP menggunakan FileProvider yang aman (Anti-FileUriExposedException).
+     */
     private fun launchCamera() {
         try {
             val cameraPhotosDir = java.io.File(cacheDir, "camera_photos")
@@ -103,13 +133,17 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // SECURE BY DESIGN: Mencegah screenshot dan screen recording (M2 - Insecure Data Storage)
+        // ---------------------------------------------------------------------------------
+        // KEAMANAN 1: FLAG_SECURE (Mencegah Screenshot Biodata)
+        // ---------------------------------------------------------------------------------
         window.setFlags(
             android.view.WindowManager.LayoutParams.FLAG_SECURE,
             android.view.WindowManager.LayoutParams.FLAG_SECURE
         )
 
-        // SECURE BY DESIGN: Deteksi Root & Emulator (M8 & M9)
+        // ---------------------------------------------------------------------------------
+        // KEAMANAN 2: DETEKSI ROOT & EMULATOR
+        // ---------------------------------------------------------------------------------
         if (com.ta.sindesa.utils.SecurityUtil.isDeviceRooted() || com.ta.sindesa.utils.SecurityUtil.isRunningOnEmulator()) {
             Toast.makeText(this, "Aplikasi tidak dapat berjalan di lingkungan tidak aman", Toast.LENGTH_LONG).show()
             finish()
@@ -118,10 +152,9 @@ class ProfileActivity : AppCompatActivity() {
 
         sessionManager = SessionManager(this)
 
-        // ==========================================
-        // SECURE BY DESIGN: 1. Pengecekan Sesi Valid
-        // ==========================================
-        // Memastikan hanya warga yang sedang login yang bisa membuka halaman profil.
+        // ---------------------------------------------------------------------------------
+        // KEAMANAN 3: VALIDASI STATUS LOGIN
+        // ---------------------------------------------------------------------------------
         if (!sessionManager.isLoggedIn()) {
             Toast.makeText(this, "Akses ditolak. Silakan login terlebih dahulu.", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, WelcomeActivity::class.java)
@@ -133,7 +166,9 @@ class ProfileActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_profile)
 
-        // 1. Inisialisasi Komponen UI
+        // =================================================================================
+        // 2. BINDING KOMPONEN FORMULIR
+        // =================================================================================
         drawerLayout = findViewById(R.id.drawerLayout)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         imgProfile = findViewById(R.id.imgProfile)
@@ -159,7 +194,7 @@ class ProfileActivity : AppCompatActivity() {
         val etKecamatanProfil = findViewById<AutoCompleteTextView>(R.id.etKecamatanProfil)
         val etDesaProfil = findViewById<AutoCompleteTextView>(R.id.etDesaProfil)
 
-        // Region Selection Logic
+        // Memuat daftar Provinsi awal
         loadProvinces(etProvinsiProfil, etKotaProfil, etKecamatanProfil, etDesaProfil)
 
         etProvinsiProfil.setOnClickListener { etProvinsiProfil.showDropDown() }
@@ -167,30 +202,22 @@ class ProfileActivity : AppCompatActivity() {
         etKecamatanProfil.setOnClickListener { etKecamatanProfil.showDropDown() }
         etDesaProfil.setOnClickListener { etDesaProfil.showDropDown() }
 
-        // ==========================================
-        // SETUP DROPDOWN ADAPTERS (Jenis Kelamin, Agama, Status Perkawinan)
-        // ==========================================
+        // =================================================================================
+        // 3. MENYIAPKAN PILIHAN DROPDOWN STATIS
+        // =================================================================================
         val jenisKelaminOptions = arrayOf("Laki-laki", "Perempuan")
         val agamaOptions = arrayOf("Islam", "Kristen", "Katolik", "Hindu", "Buddha", "Konghucu")
         val statusPerkawinanOptions = arrayOf("Belum Kawin", "Kawin", "Cerai Hidup", "Cerai Mati")
 
-        spinJenisKelaminProfil.setAdapter(
-            ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, jenisKelaminOptions)
-        )
-        spinAgamaProfil.setAdapter(
-            ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, agamaOptions)
-        )
-        spinStatusPerkawinanProfil.setAdapter(
-            ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, statusPerkawinanOptions)
-        )
+        spinJenisKelaminProfil.setAdapter(ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, jenisKelaminOptions))
+        spinAgamaProfil.setAdapter(ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, agamaOptions))
+        spinStatusPerkawinanProfil.setAdapter(ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, statusPerkawinanOptions))
 
-        // ==========================================
-        // SETUP TANGGAL LAHIR DATE PICKER
-        // ==========================================
+        // =================================================================================
+        // 4. PEMILIH TANGGAL LAHIR (DATE PICKER DIALOG)
+        // =================================================================================
         etTanggalLahirProfil.setOnClickListener {
             val calendar = Calendar.getInstance()
-
-            // Coba parse tanggal yang sudah ada
             val currentText = etTanggalLahirProfil.text.toString()
             if (currentText.isNotEmpty()) {
                 try {
@@ -199,7 +226,7 @@ class ProfileActivity : AppCompatActivity() {
                         calendar.set(parts[0].toInt(), parts[1].toInt() - 1, parts[2].toInt())
                     }
                 } catch (e: Exception) {
-                    // Gunakan tanggal hari ini jika parsing gagal
+                    // Gunakan tanggal saat ini jika parsing gagal
                 }
             }
 
@@ -215,11 +242,9 @@ class ProfileActivity : AppCompatActivity() {
             ).show()
         }
 
-        // ==========================================
-        // BINDING DATA KE UI DARI SESSION MANAGER (Data Awal)
-        // ==========================================
-        
-        // Bind btnCamera and etPasswordProfil
+        // =================================================================================
+        // 5. TOMBOL PILIH FOTO PROFIL (KAMERA ATAU GALERI)
+        // =================================================================================
         btnCamera.setOnClickListener {
             val options = arrayOf("Pilih dari Galeri", "Ambil Foto (Kamera)")
             androidx.appcompat.app.AlertDialog.Builder(this)
@@ -240,10 +265,10 @@ class ProfileActivity : AppCompatActivity() {
         }
         val etPasswordProfil = findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.etPasswordProfil)
 
-        // Load profile picture if exists
+        // Muat gambar profil jika sudah ada di sesi
         loadProfileImage(sessionManager.getFotoProfil())
 
-        // Isi data awal dari session (sebagai placeholder sebelum API selesai)
+        // Mengisi form dengan data dari Session lokal sementara menunggu respon API
         tvNamaProfil.text = sessionManager.getNamaUser()
         tvEmailProfil.text = sessionManager.getEmailUser() ?: "-"
         
@@ -279,11 +304,9 @@ class ProfileActivity : AppCompatActivity() {
         if (selectedCityCode.isNotEmpty()) loadDistricts(selectedCityCode, etKecamatanProfil, etDesaProfil)
         if (selectedDistrictCode.isNotEmpty()) loadVillages(selectedDistrictCode, etDesaProfil)
 
-        // ==========================================
-        // LOAD DATA TERBARU DARI SERVER (override session data)
-        // ==========================================
-        // Ini penting agar field seperti no_hp yang mungkin sudah diupdate 
-        // via web dashboard tetap muncul di aplikasi mobile.
+        // =================================================================================
+        // 6. MEMUAT DATA TERBARU LANGSUNG DARI SERVER (get_profil.php)
+        // =================================================================================
         val nik = sessionManager.getNikUser()
         if (!nik.isNullOrEmpty()) {
             com.ta.sindesa.api.RetrofitClient.getInstance(this).getProfil().enqueue(
@@ -295,7 +318,7 @@ class ProfileActivity : AppCompatActivity() {
                         if (response.isSuccessful && response.body()?.success == true) {
                             val user = response.body()?.data?.user ?: return
 
-                            // Update UI dengan data terbaru dari server
+                            // Pasang data fresh dari server ke formulir
                             tvNamaProfil.text = user.nama
                             tvEmailProfil.text = user.email ?: "-"
 
@@ -329,7 +352,7 @@ class ProfileActivity : AppCompatActivity() {
                                 findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.etKkProfil).setText(user.noKk)
                             }
 
-                            // Update session juga agar konsisten
+                            // Perbarui penyimpanan lokal EncryptedSharedPreferences (AES-256)
                             sessionManager.setLoggedIn(
                                 true,
                                 userId = user.id,
@@ -367,26 +390,21 @@ class ProfileActivity : AppCompatActivity() {
                         }
                     }
 
-                    override fun onFailure(
-                        call: retrofit2.Call<com.ta.sindesa.models.LoginResponse>,
-                        t: Throwable
-                    ) {
-                        // Silently fail - data dari session sudah ditampilkan sebagai fallback
+                    override fun onFailure(call: retrofit2.Call<com.ta.sindesa.models.LoginResponse>, t: Throwable) {
                         android.util.Log.e("PROFILE", "Gagal load profil dari server: ${t.message}")
                     }
                 }
             )
         }
 
-        // 2. Buka Sidebar saat menu hamburger diklik
         toolbar.setNavigationOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
-
-        // Initialize Sidebar using Utility
         SidebarUtil.initSidebar(this, drawerLayout)
 
-        // 4. Save Profile Changes
+        // =================================================================================
+        // 7. MENYIMPAN PERUBAHAN BIODATA KE SERVER (update_profil.php)
+        // =================================================================================
         val btnSimpanProfil = findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSimpanProfil)
         btnSimpanProfil.setOnClickListener {
             val nikSave = sessionManager.getNikUser() ?: return@setOnClickListener
@@ -414,6 +432,7 @@ class ProfileActivity : AppCompatActivity() {
             btnSimpanProfil.isEnabled = false
             btnSimpanProfil.text = "MENYIMPAN..."
 
+            // Membungkus setiap field ke RequestBody
             val rbNik = nikSave.toRequestBody("text/plain".toMediaTypeOrNull())
             val rbNewNik = newNik.toRequestBody("text/plain".toMediaTypeOrNull())
             val rbNoKk = noKk.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -435,6 +454,7 @@ class ProfileActivity : AppCompatActivity() {
             val rbKelurahanDesa = kelurahanDesa.toRequestBody("text/plain".toMediaTypeOrNull())
             val rbPassword = password.toRequestBody("text/plain".toMediaTypeOrNull())
 
+            // Menyiapkan Multipart Foto Profil jika ada gambar baru yang dipilih
             var partFotoProfil: MultipartBody.Part? = null
             if (selectedImageUri != null) {
                 try {
@@ -447,14 +467,13 @@ class ProfileActivity : AppCompatActivity() {
                         }
                         val requestFile = file.asRequestBody(mimeType.toMediaTypeOrNull())
                         partFotoProfil = MultipartBody.Part.createFormData("foto_profil", file.name, requestFile)
-                    } else {
-                        android.util.Log.e("PROFILE", "File foto kosong atau tidak ditemukan: ${file.absolutePath}")
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
 
+            // Kirim data ke API Backend
             com.ta.sindesa.api.RetrofitClient.getInstance(this).updateProfil(
                 rbNewNik, rbNoKk, rbNama, rbEmail, rbNoHp, rbTempatLahir, rbTanggalLahir, rbJenisKelamin, rbAgama,
                 rbStatusPerkawinan, rbPekerjaan, rbKewarganegaraan, rbAlamatLengkap, rbRtRw,
@@ -467,6 +486,7 @@ class ProfileActivity : AppCompatActivity() {
                         
                         val newFotoProfil = response.body()?.fotoProfilUpdate ?: sessionManager.getFotoProfil()
                         
+                        // Perbarui data lokal
                         sessionManager.setLoggedIn(
                             isLoggedIn = true,
                             userId = sessionManager.getUserId(),
@@ -502,7 +522,7 @@ class ProfileActivity : AppCompatActivity() {
                         SidebarUtil.refreshSidebarProfile(this@ProfileActivity)
                         Toast.makeText(this@ProfileActivity, "Profil berhasil diperbarui", Toast.LENGTH_SHORT).show()
                         
-                        etPasswordProfil.setText("") // Kosongkan password setelah sukses
+                        etPasswordProfil.setText("") // Kosongkan field kata sandi setelah sukses
                     } else {
                         val serverMsg = response.body()?.message ?: "Gagal memperbarui profil"
                         Toast.makeText(this@ProfileActivity, serverMsg, Toast.LENGTH_SHORT).show()
@@ -517,14 +537,11 @@ class ProfileActivity : AppCompatActivity() {
             })
         }
 
-        // CARA MODERN 2: Mengganti onBackPressed untuk menangani tombol kembali HP
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                // Jika sidebar sedang terbuka, tutup sidebarnya
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     drawerLayout.closeDrawer(GravityCompat.START)
                 } else {
-                    // Jika tidak, matikan pencegatan ini dan biarkan aplikasi kembali ke halaman sebelumnya (Dashboard)
                     isEnabled = false
                     onBackPressedDispatcher.onBackPressed()
                 }
@@ -532,6 +549,9 @@ class ProfileActivity : AppCompatActivity() {
         })
     }
 
+    // =====================================================================================
+    // 8. HELPER WILAYAH BERTINGKAT (CASCADING REGION)
+    // =====================================================================================
     private fun loadProvinces(spProv: AutoCompleteTextView, spKota: AutoCompleteTextView, spKec: AutoCompleteTextView, spKel: AutoCompleteTextView) {
         com.ta.sindesa.api.RetrofitClient.getInstance(this).getProvinces().enqueue(object : Callback<List<Region>> {
             override fun onResponse(call: Call<List<Region>>, response: Response<List<Region>>) {
@@ -543,7 +563,6 @@ class ProfileActivity : AppCompatActivity() {
                         val selected = provinces[position]
                         selectedProvinceCode = selected.code
                         
-                        // Reset and Load Cities
                         selectedCityCode = ""
                         spKota.setText("", false)
                         spKota.isEnabled = true
@@ -577,7 +596,6 @@ class ProfileActivity : AppCompatActivity() {
                         val selected = cities[position]
                         selectedCityCode = selected.code
                         
-                        // Reset and Load Districts
                         selectedDistrictCode = ""
                         spKec.setText("", false)
                         spKec.isEnabled = true
@@ -607,7 +625,6 @@ class ProfileActivity : AppCompatActivity() {
                         val selected = districts[position]
                         selectedDistrictCode = selected.code
                         
-                        // Reset and Load Villages
                         selectedVillageCode = ""
                         spKel.setText("", false)
                         spKel.isEnabled = true
@@ -639,6 +656,9 @@ class ProfileActivity : AppCompatActivity() {
         })
     }
 
+    // =====================================================================================
+    // 9. HELPER MEMUAT FOTO PROFIL DARI ENDPOINT RESMI
+    // =====================================================================================
     private fun loadProfileImage(fotoPath: String?) {
         val imageUrl = com.ta.sindesa.api.RetrofitClient.getProfileImageUrl(fotoPath)
         if (!imageUrl.isNullOrEmpty()) {

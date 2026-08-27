@@ -12,20 +12,39 @@ import com.ta.sindesa.api.RetrofitClient
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 
+/**
+ * =========================================================================================
+ * MainActivity.kt — Halaman Formulir Masuk (Login) Aplikasi SINDESA
+ * =========================================================================================
+ * 
+ * FUNGSI UTAMA:
+ * 1. Menerima kredensial pengguna (NIK 16-Digit atau Email dan Kata Sandi).
+ * 2. Validasi format masukan sebelum dikirim ke jaringan (Client-Side Sanitization).
+ * 3. Mengirimkan request otentikasi ke endpoint API login_warga.php via Retrofit.
+ * 4. Menyimpan sesi hasil login terenkripsi (AES-256) ke SessionManager.
+ * 5. Auto-Login: Jika sesi valid masih tersimpan, langsung diarahkan ke DashboardActivity.
+ * 6. Keamanan: FLAG_SECURE (Anti-Screenshot) & Deteksi Root/Emulator.
+ * =========================================================================================
+ */
 class MainActivity : AppCompatActivity() {
 
+    // Pengelola penyimpanan lokal terenkripsi
     private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // SECURE BY DESIGN: Mencegah screenshot dan screen recording (M1 - Improper Platform Usage)
+        // ---------------------------------------------------------------------------------
+        // KEAMANAN 1: FLAG_SECURE (Mencegah Screenshot Kata Sandi & NIK)
+        // ---------------------------------------------------------------------------------
         window.setFlags(
             android.view.WindowManager.LayoutParams.FLAG_SECURE,
             android.view.WindowManager.LayoutParams.FLAG_SECURE
         )
 
-        // SECURE BY DESIGN: Deteksi Root & Emulator (M8 & M9)
+        // ---------------------------------------------------------------------------------
+        // KEAMANAN 2: DETEKSI ROOT & EMULATOR
+        // ---------------------------------------------------------------------------------
         if (com.ta.sindesa.utils.SecurityUtil.isDeviceRooted() || com.ta.sindesa.utils.SecurityUtil.isRunningOnEmulator()) {
             Toast.makeText(this, "Aplikasi tidak dapat berjalan di lingkungan tidak aman", Toast.LENGTH_LONG).show()
             finish()
@@ -34,9 +53,11 @@ class MainActivity : AppCompatActivity() {
 
         sessionManager = SessionManager(this)
 
-        // ==========================================
-        // SECURE BY DESIGN: 1. Auto-Login (Session Check)
-        // ==========================================
+        // ---------------------------------------------------------------------------------
+        // KEAMANAN 3: AUTO-LOGIN (PENGECEKAN SESI AKTIF)
+        // ---------------------------------------------------------------------------------
+        // Jika warga sebelumnya sudah berhasil login dan sesinya masih aktif,
+        // lewati halaman login dan langsung buka Dashboard.
         if (sessionManager.isLoggedIn()) {
             val intent = Intent(this, DashboardActivity::class.java)
             startActivity(intent)
@@ -46,23 +67,23 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        // ==========================================
-        // BINDING VIEW
-        // ==========================================
+        // =================================================================================
+        // 2. BINDING KOMPONEN VIEW DARI XML
+        // =================================================================================
         val etEmailNik = findViewById<TextInputEditText>(R.id.etEmailNik)
         val etPassword = findViewById<TextInputEditText>(R.id.etPassword)
         val btnLogin = findViewById<MaterialButton>(R.id.btnLogin)
         val tvRegister = findViewById<TextView>(R.id.tvRegister)
         val tvForgotPassword = findViewById<TextView>(R.id.tvForgotPassword)
 
-        // ==========================================
-        // LOGIKA TOMBOL LOGIN
-        // ==========================================
+        // =================================================================================
+        // 3. LOGIKA VALIDASI & PROSES LOGIN (btnLogin.setOnClickListener)
+        // =================================================================================
         btnLogin.setOnClickListener {
             val emailNik = etEmailNik.text.toString().trim()
             val password = etPassword.text.toString().trim()
 
-            // 1. Validasi Input Kosong
+            // VALIDASI 1: Cek Input Kosong
             if (emailNik.isEmpty()) {
                 etEmailNik.error = "NIK / Email tidak boleh kosong"
                 etEmailNik.requestFocus()
@@ -75,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // 2. Validasi Format Sederhana
+            // VALIDASI 2: Cek Format NIK (16 Digit Angka) jika bukan format Email
             if (!Patterns.EMAIL_ADDRESS.matcher(emailNik).matches()) {
                 if (emailNik.length != 16 || !emailNik.all { it.isDigit() }) {
                     etEmailNik.error = "Jika menggunakan NIK, harus 16 digit angka"
@@ -84,7 +105,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            // 3. Proses Login ke Server via Retrofit (Lokal Laragon)
+            // PROSES 3: Mengirim Permintaan Login ke Server API
             btnLogin.isEnabled = false
             btnLogin.text = "Memproses..."
 
@@ -103,7 +124,7 @@ class MainActivity : AppCompatActivity() {
                             val user = loginResponse.data?.user
                             val token = loginResponse.data?.token
                             
-                            // SECURE BY DESIGN: Simpan Sesi (Encrypted) termasuk Token & User ID
+                            // SIMPAN SESI AMAN (ENCRYPTED) KE SESSION MANAGER
                             sessionManager.setLoggedIn(
                                 isLoggedIn = true, 
                                 userId = user?.id,
@@ -130,14 +151,15 @@ class MainActivity : AppCompatActivity() {
                                 status = user?.status
                             )
 
-                            Toast.makeText(this@MainActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "Login Berhasil! Selamat datang.", Toast.LENGTH_SHORT).show()
 
+                            // Navigasi ke Dashboard dan bersihkan task tumpukan login
                             val intent = Intent(this@MainActivity, DashboardActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
                             finish()
                         } else {
-                            Toast.makeText(this@MainActivity, loginResponse?.message ?: "Login Gagal", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, loginResponse?.message ?: "Login Gagal: Periksa kembali NIK/Password Anda", Toast.LENGTH_SHORT).show()
                         }
                     } else {
                         Toast.makeText(this@MainActivity, "Server Error: ${response.code()}", Toast.LENGTH_SHORT).show()
@@ -150,30 +172,14 @@ class MainActivity : AppCompatActivity() {
                     
                     val host = RetrofitClient.HOSTNAME
                     val errorMessage = when (t) {
-                        is com.google.gson.JsonSyntaxException -> {
-                            "Respon Server Bukan JSON.\n\n" +
-                            "Penyebab: PHP mengirim teks biasa/error PHP.\n" +
-                            "Cek: Logcat 'API_DEBUG' untuk melihat teks tersebut."
-                        }
-                        is java.net.SocketTimeoutException -> {
-                            "Waktu Habis (Timeout).\n\n" +
-                            "1. Matikan FIREWALL di Windows (Penting!)\n" +
-                            "2. Pastikan Laragon/XAMPP sudah RUNNING.\n" +
-                            "3. HP & Laptop harus di 1 WiFi yang sama.\n" +
-                            "Target: http://$host:8080"
-                        }
-                        is java.net.ConnectException -> "Koneksi Ditolak. Pastikan Port 8080 di Laragon sudah aktif."
-                        is java.io.EOFException -> {
-                        "Server mengembalikan respons kosong.\n\n" +
-                        "1. Pastikan HP & Laptop di WiFi yang SAMA.\n" +
-                        "2. Coba matikan lalu nyalakan WiFi di HP.\n" +
-                        "3. Pastikan Laragon sudah RUNNING."
-                    }
-                    else -> "Kesalahan: ${t.localizedMessage}"
+                        is com.google.gson.JsonSyntaxException -> "Respon server tidak valid."
+                        is java.net.SocketTimeoutException -> "Koneksi Waktu Habis (Timeout). Periksa koneksi internet."
+                        is java.net.ConnectException -> "Gagal terhubung ke host ($host)."
+                        else -> "Kesalahan Jaringan: ${t.localizedMessage}"
                     }
 
                     AlertDialog.Builder(this@MainActivity)
-                        .setTitle("Gagal Terhubung ke Server")
+                        .setTitle("Gagal Masuk")
                         .setMessage(errorMessage)
                         .setPositiveButton("Tutup", null)
                         .show()
@@ -183,18 +189,16 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
-        // ==========================================
-        // ROUTING MENU LAIN
-        // ==========================================
+        // =================================================================================
+        // 4. ROUTING KE PENDAFTARAN AKUN (REGISTER) & LUPA KATA SANDI
+        // =================================================================================
         tvRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
 
         tvForgotPassword.setOnClickListener {
-            Toast.makeText(this, "Fitur Lupa Password", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Silakan hubungi Operator Kantor Desa untuk reset password.", Toast.LENGTH_LONG).show()
         }
     }
 }
-
-
